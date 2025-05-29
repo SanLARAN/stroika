@@ -3,388 +3,909 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Строительная компания</title>
+<title>НАЗВАНИЕ - Строительная компания</title>
 <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#2563eb',secondary:'#f59e0b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
 <style>
 :where([class^="ri-"])::before { content: "\f3c2"; }
 body {
-font-family: 'Inter', sans-serif;
+font-family: 'Montserrat', sans-serif;
+scroll-behavior: smooth;
 }
-.parallax-bg {
-background-attachment: fixed;
+.hero-section {
+position: relative;
+height: 100vh;
+min-height: 700px;
 background-position: center;
-background-repeat: no-repeat;
 background-size: cover;
+background-repeat: no-repeat;
+transition: background-image 1s ease-in-out;
+}
+.hero-overlay {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
+}
+.counter-item {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.counter-item.visible {
+opacity: 1;
+transform: translateY(0);
+}
+.service-card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.service-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+.back-to-top {
+position: fixed;
+bottom: 30px;
+right: 30px;
+z-index: 99;
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.3s, visibility 0.3s;
+}
+.back-to-top.visible {
+opacity: 1;
+visibility: visible;
+}
+.navbar {
+transition: background-color 0.3s ease;
+}
+.navbar.scrolled {
+background-color: rgba(17, 24, 39, 0.95);
+box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+.project-item {
+transition: transform 0.3s ease;
+}
+.project-item:hover {
+transform: scale(1.03);
+}
+input:focus, textarea:focus {
+outline: none;
+border-color: #2563eb;
+}
+.social-icon {
+transition: transform 0.3s ease, color 0.3s ease;
+}
+.social-icon:hover {
+transform: translateY(-3px);
+color: #2563eb;
 }
 </style>
-<script>tailwind.config={theme:{extend:{colors:{primary:'#0ea5e9',secondary:'#7c3aed'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
 </head>
-<body class="bg-white">
-<!-- Header -->
-<header class="w-full bg-black text-white py-4 px-6 flex justify-between items-center">
-<div class="text-2xl font-['Pacifico'] text-white">logo</div>
-<nav class="hidden md:flex space-x-8">
-<a href="#" class="hover:text-primary transition-colors">Главная</a>
-<a href="#" class="hover:text-primary transition-colors">О нас</a>
-<a href="#" class="hover:text-primary transition-colors">Услуги</a>
-<a href="#" class="hover:text-primary transition-colors">Проекты</a>
-<a href="#" class="hover:text-primary transition-colors">Контакты</a>
+<body>
+<!-- Навигационное меню -->
+<nav id="navbar" class="navbar fixed w-full z-50 py-4 px-6 md:px-12">
+<div class="container mx-auto flex justify-between items-center">
+<a href="#" class="flex items-center">
+<img src="logo.png" alt="СтройМастер" class="h-10">
+</a>
+<div class="hidden md:flex space-x-8">
+<a href="#about" class="text-white hover:text-primary transition-colors">О компании</a>
+<a href="#services" class="text-white hover:text-primary transition-colors">Услуги</a>
+<a href="#projects" class="text-white hover:text-primary transition-colors">Проекты</a>
+<a href="#contact" class="text-white hover:text-primary transition-colors">Контакты</a>
+</div>
+<div class="hidden md:flex items-center">
+<button class="flex items-center space-x-2 bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-phone-line"></i>
+</div>
+<span>Связаться</span>
+</button>
+</div>
+<div class="md:hidden">
+<button id="mobile-menu-button" class="text-white">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-menu-line ri-lg"></i>
+</div>
+</button>
+</div>
+</div>
+<!-- Мобильное меню -->
+<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-gray-900 py-4 px-6">
+<div class="flex flex-col space-y-4">
+<a href="#about" class="text-white hover:text-primary transition-colors">О компании</a>
+<a href="#services" class="text-white hover:text-primary transition-colors">Услуги</a>
+<a href="#projects" class="text-white hover:text-primary transition-colors">Проекты</a>
+<a href="#contact" class="text-white hover:text-primary transition-colors">Контакты</a>
+<button class="flex items-center justify-center space-x-2 bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-phone-line"></i>
+</div>
+<span>Обратный звонок</span>
+</button>
+</div>
+</div>
 </nav>
-<div class="flex items-center space-x-4">
-<div class="text-sm">RU | <span class="text-gray-400">ENG</span></div>
-<button class="!rounded-button bg-primary hover:bg-primary/90 px-4 py-2 text-white whitespace-nowrap">Заказать звонок</button>
-</div>
-</header>
-<!-- Hero Section with Parallax -->
-<section class="relative h-[800px] overflow-hidden">
-<div class="absolute inset-0 z-0" style="background-image: url('https://static.readdy.ai/image/22ff719a809cef4952e5631642609b9e/d186f2396bfc14005e8b6442626a25fa.png'); background-size: cover; background-position: center;"></div>
-<div class="absolute inset-0 z-10 flex items-center justify-center">
-<div class="container mx-auto px-6 text-center">
-<h1 class="text-6xl md:text-7xl font-bold text-white mb-6 max-w-4xl mx-auto" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.3)">Строительство и реконструкция зданий</h1>
-<p class="text-2xl text-white/90 mb-8 max-w-3xl mx-auto" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.3)">Профессиональные решения для вашей недвижимости с гарантией качества и соблюдением сроков</p>
-<div class="flex flex-wrap gap-4 justify-center">
-<button class="!rounded-button bg-primary hover:bg-primary/90 px-8 py-4 text-white text-lg font-medium whitespace-nowrap">Обсудить проект</button>
-<button class="!rounded-button bg-transparent border-2 border-white hover:bg-white/10 px-8 py-4 text-white text-lg font-medium whitespace-nowrap">Узнать больше</button>
-</div>
-</div>
-</div>
-<div class="absolute inset-0 z-20 parallax-overlay" style="background-image: url('https://static.readdy.ai/image/22ff719a809cef4952e5631642609b9e/0b043856cd99b4b6033a37ad1818e20a.png'); background-size: cover; background-position: center; opacity: 0.8; transform: translateY(0);"></div>
-</section>
-<!-- Services Section -->
-<section class="py-16 bg-black">
-<div class="container mx-auto px-6">
-<h2 class="text-4xl font-bold text-white mb-12">Наши услуги</h2>
-<div class="grid grid-cols-12 gap-6">
-<!-- Service Card 1 -->
-<div class="col-span-12 md:col-span-8 bg-white rounded-lg overflow-hidden">
-<div class="flex h-full">
-<div class="p-8 flex-1">
-<h3 class="text-2xl font-semibold mb-4">Строительство домов под ключ</h3>
-<p class="text-gray-600 mb-6 text-lg">Берем на себя все этапы работ, чтобы вы получили готовый объект без лишних хлопот. От проектирования до финальной отделки - мы создаем дом вашей мечты.</p>
-<button class="!rounded-button bg-black text-white px-8 py-3 hover:bg-gray-800 whitespace-nowrap text-lg">Подробнее</button>
-</div>
-<div class="relative w-2/5">
-<img src="https://static.readdy.ai/image/22ff719a809cef4952e5631642609b9e/8c566461fb58a5a6787d69af2de28080.png" alt="Строительство домов" class="absolute inset-0 w-full h-full object-cover object-center">
-</div>
-</div>
-</div>
-<!-- Service Card 2 -->
-<div class="col-span-12 md:col-span-4 bg-gradient-to-br from-purple-600 to-purple-800 rounded-lg overflow-hidden text-white">
-<div class="flex h-full">
-<div class="p-6 flex-1">
-<h3 class="text-xl font-semibold mb-3">Капитальный ремонт</h3>
-<p class="text-white/90 mb-4">Возвращаем зданиям и помещениям первозданный вид или создаем современные интерьеры.</p>
-</div>
-<div class="relative w-1/3">
-<img src="https://readdy.ai/api/search-image?query=professional%2520construction%2520tools%2520set%25203d%2520render%2520on%2520transparent%2520background%252C%2520minimalist%2520design%252C%2520high%2520quality%252C%2520renovation%2520tools&width=400&height=600&seq=tools123&orientation=portrait" alt="Капитальный ремонт" class="absolute inset-0 w-full h-full object-cover object-center">
-</div>
-</div>
-</div>
-<!-- Service Card 3 -->
-<div class="col-span-12 md:col-span-6 bg-white rounded-lg overflow-hidden">
-<div class="flex h-full">
-<div class="p-6 flex-1">
-<h3 class="text-xl font-semibold mb-3">Реконструкция и перепланировка</h3>
-<p class="text-gray-600 mb-4">Помогаем преобразить существующие здания, сделать их удобнее, современнее и красивее.</p>
-</div>
-<div class="relative w-2/5">
-<img src="https://readdy.ai/api/search-image?query=3d%2520building%2520reconstruction%2520visualization%2520on%2520transparent%2520background%252C%2520architectural%2520concept%252C%2520high%2520quality%252C%2520professional%2520look&width=500&height=700&seq=reconstruction123&orientation=portrait" alt="Реконструкция" class="absolute inset-0 w-full h-full object-cover object-center">
-</div>
-</div>
-</div>
-<!-- Service Card 4 -->
-<div class="col-span-12 md:col-span-6 bg-gradient-to-br from-blue-500 to-blue-700 rounded-lg overflow-hidden text-white">
-<div class="flex h-full">
-<div class="p-6 flex-1">
-<h3 class="text-xl font-semibold mb-3">Проектирование и архитектура</h3>
-<p class="text-white/90 mb-4">Разрабатываем уникальные проекты, учитывая ваши пожелания и особенности.</p>
-</div>
-<div class="relative w-2/5">
-<img src="https://readdy.ai/api/search-image?query=3d%2520architectural%2520blueprint%2520visualization%2520on%2520transparent%2520background%252C%2520modern%2520design%252C%2520high%2520quality%252C%2520professional%2520look&width=500&height=700&seq=blueprint123&orientation=portrait" alt="Проектирование" class="absolute inset-0 w-full h-full object-cover object-center">
-</div>
-</div>
-</div>
-<!-- Service Card 5 -->
-<div class="col-span-12 md:col-span-7 bg-gradient-to-br from-teal-400 to-teal-600 rounded-lg overflow-hidden text-white">
-<div class="flex h-full">
-<div class="p-6 flex-1">
-<h3 class="text-xl font-semibold mb-3">Ландшафтные работы</h3>
-<p class="text-white/90 mb-4">Создаем уютные и эстетичные пространства на вашем участке: от газона до сложных композиций.</p>
-</div>
-<div class="relative w-2/5">
-<img src="https://static.readdy.ai/image/22ff719a809cef4952e5631642609b9e/a07fdf660d0c1bcb3f0e3cf62fafcb79.png" alt="Ландшафтные работы" class="absolute inset-0 w-full h-full object-cover object-center">
-</div>
-</div>
-</div>
-<!-- Service Card 6 -->
-<div class="col-span-12 md:col-span-5 bg-white rounded-lg overflow-hidden">
-<div class="flex h-full">
-<div class="p-6 flex-1">
-<h3 class="text-xl font-semibold mb-3">Инженерные системы</h3>
-<p class="text-gray-600 mb-4">Проектируем и устанавливаем современные системы отопления, вентиляции, водоснабжения и электроснабжения.</p>
-<button class="!rounded-button bg-black text-white px-6 py-2 hover:bg-gray-800 whitespace-nowrap">Подробнее</button>
-</div>
-<div class="relative w-2/5">
-<img src="https://readdy.ai/api/search-image?query=3d%2520engineering%2520systems%2520visualization%2520on%2520transparent%2520background%252C%2520hvac%2520components%252C%2520modern%2520design%252C%2520high%2520quality%252C%2520professional%2520look&width=500&height=700&seq=engineering123&orientation=portrait" alt="Инженерные системы" class="absolute inset-0 w-full h-full object-cover object-center">
-</div>
-</div>
-</div>
+<!-- Hero Section -->
+<section id="hero" class="hero-section" style="background-image: url('art33.jpg')">
+<div class="hero-overlay"></div>
+<div class="container mx-auto h-full flex items-center">
+<div class="w-full max-w-3xl px-6 md:px-0 relative z-10">
+<h1 id="hero-title" class="text-4xl md:text-6xl font-bold text-white mb-6 opacity-0">Строим будущее с надежным фундаментом</h1>
+<p id="hero-subtitle" class="text-xl md:text-2xl text-gray-200 mb-8 opacity-0">Профессиональные строительные решения любой сложности с гарантией качества</p>
+<button id="hero-button" class="bg-primary text-white px-8 py-4 text-lg !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors opacity-0">
+Заказать консультацию
+</button>
 </div>
 </div>
 </section>
-<!-- Advantages Section -->
-<section class="py-16 bg-white">
-<div class="container mx-auto px-6">
-<h2 class="text-4xl font-bold text-black mb-4">Почему выбирают нас</h2>
-<p class="text-gray-600 mb-12 max-w-3xl">Мы предлагаем комплексный подход к строительству и реконструкции, гарантируя высокое качество на каждом этапе работ</p>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-<!-- Advantage 1 -->
-<div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-lg">
-<div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mb-4">
-<i class="ri-time-line text-white text-2xl"></i>
+<!-- О компании -->
+<section id="about" class="py-20 bg-white">
+<div class="container mx-auto px-6 md:px-12">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">О нашей компании</h2>
+<p class="text-lg text-gray-600 max-w-3xl mx-auto">Более 15 лет мы создаем пространства, в которых хочется жить и работать. Наша миссия — строить качественно, надежно и в срок.</p>
 </div>
-<h3 class="text-xl font-semibold mb-2">Точно в срок</h3>
-<p class="text-gray-600">Соблюдаем установленные сроки выполнения проектов без компромиссов по качеству.</p>
-</div>
-<!-- Advantage 2 -->
-<div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-lg">
-<div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-<i class="ri-shield-check-line text-white text-2xl"></i>
-</div>
-<h3 class="text-xl font-semibold mb-2">Гарантия качества</h3>
-<p class="text-gray-600">Предоставляем гарантию на все виды выполненных работ от 3 до 5 лет.</p>
-</div>
-<!-- Advantage 3 -->
-<div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-lg">
-<div class="w-16 h-16 bg-black rounded-full flex items-center justify-center mb-4">
-<i class="ri-team-line text-white text-2xl"></i>
-</div>
-<h3 class="text-xl font-semibold mb-2">Опытная команда</h3>
-<p class="text-gray-600">Наши специалисты имеют более 15 лет опыта в строительной отрасли.</p>
-</div>
-<!-- Advantage 4 -->
-<div class="bg-gradient-to-br from-gray-100 to-gray-200 p-6 rounded-lg">
-<div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center mb-4">
-<i class="ri-money-dollar-circle-line text-white text-2xl"></i>
-</div>
-<h3 class="text-xl font-semibold mb-2">Прозрачные цены</h3>
-<p class="text-gray-600">Фиксированная стоимость работ без скрытых платежей и дополнительных расходов.</p>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+<div class="counter-item bg-white p-8 rounded-lg shadow-lg text-center">
+<div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-building-line ri-2x"></i>
 </div>
 </div>
+<h3 class="text-4xl font-bold text-gray-900 mb-2"><span class="counter" data-target="156">0</span></h3>
+<p class="text-gray-600">Завершенных проектов</p>
 </div>
-</section>
-<!-- Projects Section -->
-<section class="py-16 bg-gradient-to-b from-gray-100 to-white">
-<div class="container mx-auto px-6">
-<h2 class="text-4xl font-bold text-black mb-4">Наши проекты</h2>
-<p class="text-gray-600 mb-12 max-w-3xl">Реализованные объекты демонстрируют наш профессионализм и внимание к деталям</p>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-<!-- Project 1 -->
-<div class="bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="relative h-64">
-<img src="https://readdy.ai/api/search-image?query=modern%2520residential%2520building%2520exterior%252C%2520contemporary%2520architecture%252C%2520professional%2520photography%252C%2520high%2520quality%252C%2520clean%2520lines%252C%2520minimalist%2520design&width=600&height=400&seq=project1&orientation=landscape" alt="Жилой комплекс" class="absolute inset-0 w-full h-full object-cover object-top">
-</div>
-<div class="p-6">
-<h3 class="text-xl font-semibold mb-2">Жилой комплекс "Панорама"</h3>
-<p class="text-gray-600 mb-4">Многоквартирный жилой комплекс с подземным паркингом и благоустроенной территорией.</p>
-<div class="flex justify-between items-center">
-<span class="text-sm text-gray-500">Москва, 2024</span>
-<button class="!rounded-button bg-black text-white px-4 py-1.5 text-sm hover:bg-gray-800 whitespace-nowrap">Подробнее</button>
+<div class="counter-item bg-white p-8 rounded-lg shadow-lg text-center">
+<div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-team-line ri-2x"></i>
 </div>
 </div>
+<h3 class="text-4xl font-bold text-gray-900 mb-2"><span class="counter" data-target="85">0</span></h3>
+<p class="text-gray-600">Профессиональных сотрудников</p>
 </div>
-<!-- Project 2 -->
-<div class="bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="relative h-64">
-<img src="https://readdy.ai/api/search-image?query=modern%2520office%2520building%2520exterior%252C%2520corporate%2520architecture%252C%2520glass%2520facade%252C%2520professional%2520photography%252C%2520high%2520quality%252C%2520business%2520center&width=600&height=400&seq=project2&orientation=landscape" alt="Бизнес-центр" class="absolute inset-0 w-full h-full object-cover object-top">
-</div>
-<div class="p-6">
-<h3 class="text-xl font-semibold mb-2">Бизнес-центр "Меркурий"</h3>
-<p class="text-gray-600 mb-4">Современный офисный центр класса А с панорамным остеклением и инновационными инженерными системами.</p>
-<div class="flex justify-between items-center">
-<span class="text-sm text-gray-500">Санкт-Петербург, 2023</span>
-<button class="!rounded-button bg-black text-white px-4 py-1.5 text-sm hover:bg-gray-800 whitespace-nowrap">Подробнее</button>
+<div class="counter-item bg-white p-8 rounded-lg shadow-lg text-center">
+<div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-user-smile-line ri-2x"></i>
 </div>
 </div>
+<h3 class="text-4xl font-bold text-gray-900 mb-2"><span class="counter" data-target="312">0</span></h3>
+<p class="text-gray-600">Довольных клиентов</p>
 </div>
-<!-- Project 3 -->
-<div class="bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="relative h-64">
-<img src="https://readdy.ai/api/search-image?query=luxury%2520villa%2520with%2520pool%252C%2520modern%2520architecture%252C%2520professional%2520photography%252C%2520high%2520quality%252C%2520residential%2520design%252C%2520elegant%2520exterior&width=600&height=400&seq=project3&orientation=landscape" alt="Частная резиденция" class="absolute inset-0 w-full h-full object-cover object-top">
-</div>
-<div class="p-6">
-<h3 class="text-xl font-semibold mb-2">Частная резиденция "Лагуна"</h3>
-<p class="text-gray-600 mb-4">Эксклюзивный проект загородного дома с бассейном и ландшафтным дизайном.</p>
-<div class="flex justify-between items-center">
-<span class="text-sm text-gray-500">Подмосковье, 2024</span>
-<button class="!rounded-button bg-black text-white px-4 py-1.5 text-sm hover:bg-gray-800 whitespace-nowrap">Подробнее</button>
+<div class="counter-item bg-white p-8 rounded-lg shadow-lg text-center">
+<div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-award-line ri-2x"></i>
 </div>
 </div>
+<h3 class="text-4xl font-bold text-gray-900 mb-2"><span class="counter" data-target="15">0</span></h3>
+<p class="text-gray-600">Лет на рынке</p>
 </div>
 </div>
-<div class="mt-12 text-center">
-<button class="!rounded-button bg-primary hover:bg-primary/90 px-6 py-3 text-white font-medium whitespace-nowrap">Смотреть все проекты</button>
-</div>
-</div>
-</section>
-<!-- CTA Section -->
-<section class="py-16 bg-black text-white">
-<div class="container mx-auto px-6 text-center">
-<h2 class="text-4xl font-bold mb-4">Готовы начать проект?</h2>
-<p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto">Свяжитесь с нами для бесплатной консультации и расчета стоимости вашего проекта</p>
-<div class="flex flex-wrap justify-center gap-4">
-<button class="!rounded-button bg-primary hover:bg-primary/90 px-6 py-3 text-white font-medium whitespace-nowrap">Заказать консультацию</button>
-<button class="!rounded-button bg-transparent border-2 border-white hover:bg-white/10 px-6 py-3 text-white font-medium whitespace-nowrap">Позвонить нам</button>
-</div>
-</div>
-</section>
-<!-- Partners Section -->
-<section class="py-16 bg-white">
-<div class="container mx-auto px-6">
-<h2 class="text-4xl font-bold text-black mb-4 text-center">Наши партнеры</h2>
-<p class="text-gray-600 mb-12 max-w-3xl mx-auto text-center">Мы сотрудничаем с ведущими производителями строительных материалов и оборудования</p>
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
-<!-- Partner 1 -->
-<div class="flex flex-col items-center">
-<div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-<i class="ri-building-line text-gray-700 text-3xl"></i>
-</div>
-<p class="text-center font-medium">СтройМатериалы</p>
-</div>
-<!-- Partner 2 -->
-<div class="flex flex-col items-center">
-<div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-<i class="ri-hammer-line text-gray-700 text-3xl"></i>
-</div>
-<p class="text-center font-medium">ТехноСтрой</p>
-</div>
-<!-- Partner 3 -->
-<div class="flex flex-col items-center">
-<div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-<i class="ri-paint-line text-gray-700 text-3xl"></i>
-</div>
-<p class="text-center font-medium">КолорМастер</p>
-</div>
-<!-- Partner 4 -->
-<div class="flex flex-col items-center">
-<div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-<i class="ri-tools-line text-gray-700 text-3xl"></i>
-</div>
-<p class="text-center font-medium">ИнструментПро</p>
-</div>
-<!-- Partner 5 -->
-<div class="flex flex-col items-center">
-<div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-<i class="ri-home-gear-line text-gray-700 text-3xl"></i>
-</div>
-<p class="text-center font-medium">ЭкоДом</p>
-</div>
-<!-- Partner 6 -->
-<div class="flex flex-col items-center">
-<div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-3">
-<i class="ri-door-line text-gray-700 text-3xl"></i>
-</div>
-<p class="text-center font-medium">ДвериОкна</p>
-</div>
-</div>
-</div>
-</section>
-<!-- Footer -->
-<footer class="bg-black text-white pt-16 pb-8">
-<div class="container mx-auto px-6">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
-<!-- Company Info -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
 <div>
-<h3 class="text-xl font-bold mb-4">О компании</h3>
-<p class="text-gray-400 mb-4">Мы специализируемся на строительстве и реконструкции зданий различного назначения, предлагая комплексные решения под ключ.</p>
+<h3 class="text-2xl font-bold text-gray-900 mb-4">Почему выбирают нас</h3>
+<div class="space-y-6">
+<div class="flex items-start">
+<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-check-line"></i>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-900 mb-1">Высокое качество</h4>
+<p class="text-gray-600">Используем только проверенные материалы и современные технологии строительства</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-check-line"></i>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-900 mb-1">Соблюдение сроков</h4>
+<p class="text-gray-600">Четкое планирование и контроль на всех этапах строительства</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-check-line"></i>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-900 mb-1">Прозрачное ценообразование</h4>
+<p class="text-gray-600">Фиксированная стоимость работ без скрытых платежей</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-check-line"></i>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-900 mb-1">Гарантия на все работы</h4>
+<p class="text-gray-600">Предоставляем гарантию до 5 лет на все виды выполненных работ</p>
+</div>
+</div>
+</div>
+</div>
+<div>
+<img src="blank1.png" alt="Наша команда" class="rounded-lg w-full h-auto object-cover">
+</div>
+</div>
+</div>
+</section>
+<!-- Услуги -->
+<section id="services" class="py-20 bg-gray-50">
+<div class="container mx-auto px-6 md:px-12">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Наши услуги</h2>
+<p class="text-lg text-gray-600 max-w-3xl mx-auto">Полный спектр строительных услуг от проектирования до отделочных работ</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-48 overflow-hidden">
+<img src="krasnodar.jpg" alt="Жилищное строительство" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-3">Жилищное строительство</h3>
+<p class="text-gray-600 mb-4">Строительство частных домов, коттеджей, таунхаусов и многоквартирных зданий с полным циклом работ.</p>
+</div>
+</div>
+<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-48 overflow-hidden">
+<img src="krasnodar.jpg" alt="Коммерческое строительство" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-3">Коммерческое строительство</h3>
+<p class="text-gray-600 mb-4">Возведение офисных зданий, торговых центров, складских помещений и других коммерческих объектов.</p>
+</div>
+</div>
+<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-48 overflow-hidden">
+<img src="krasnodar.jpg" alt="Проектирование" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-3">Проектирование</h3>
+<p class="text-gray-600 mb-4">Разработка архитектурных проектов, конструкторской документации и инженерных решений.</p>
+</div>
+</div>
+<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-48 overflow-hidden">
+<img src="krasnodar.jpg" alt="Ремонт и реконструкция" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-3">Ремонт и реконструкция</h3>
+<p class="text-gray-600 mb-4">Капитальный ремонт, реконструкция и реставрация зданий любого назначения и сложности.</p>
+</div>
+</div>
+<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-48 overflow-hidden">
+<img src="krasnodar.jpg" alt="Отделочные работы" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-3">Отделочные работы</h3>
+<p class="text-gray-600 mb-4">Внутренняя и внешняя отделка помещений с использованием современных материалов и технологий.</p>
+</div>
+</div>
+<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-48 overflow-hidden">
+<img src="krasnodar.jpg" alt="Инженерные системы" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-6">
+<h3 class="text-xl font-bold text-gray-900 mb-3">Инженерные системы</h3>
+<p class="text-gray-600 mb-4">Монтаж и обслуживание систем отопления, вентиляции, кондиционирования, электроснабжения и водоснабжения.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Портфолио проектов -->
+<section id="projects" class="py-20 bg-white">
+<div class="container mx-auto px-6 md:px-12">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Наши проекты</h2>
+<p class="text-lg text-gray-600 max-w-3xl mx-auto">Реализованные объекты, которыми мы гордимся</p>
+</div>
+<div class="mb-8 flex justify-center">
+<div class="inline-flex bg-gray-100 p-1 rounded-full">
+<button class="project-filter-btn active px-4 py-2 rounded-full bg-primary text-white !rounded-button whitespace-nowrap" data-filter="all">Все проекты</button>
+<button class="project-filter-btn px-4 py-2 rounded-full text-gray-700 !rounded-button whitespace-nowrap" data-filter="residential">Жилые</button>
+<button class="project-filter-btn px-4 py-2 rounded-full text-gray-700 !rounded-button whitespace-nowrap" data-filter="commercial">Коммерческие</button>
+<button class="project-filter-btn px-4 py-2 rounded-full text-gray-700 !rounded-button whitespace-nowrap" data-filter="industrial">Промышленные</button>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<div class="project-item" data-category="residential">
+<div class="bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-64 overflow-hidden">
+<img src="krasnodar.jpg" alt="Жилой комплекс «Панорама»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-xl font-bold text-gray-900">ЖК «Панорама»</h3>
+<span class="bg-blue-100 text-primary text-xs px-3 py-1 rounded-full">Жилой</span>
+</div>
+<p class="text-gray-600 mb-4">Современный жилой комплекс из 5 многоквартирных домов с подземным паркингом и благоустроенной территорией.</p>
+<div class="flex justify-between items-center">
+<span class="text-sm text-gray-500">Москва, 2023</span>
+</div>
+</div>
+</div>
+</div>
+<div class="project-item" data-category="commercial">
+<div class="bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-64 overflow-hidden">
+<img src="krasnodar.jpg" alt="Бизнес-центр «Горизонт»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-xl font-bold text-gray-900">БЦ «Горизонт»</h3>
+<span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Коммерческий</span>
+</div>
+<p class="text-gray-600 mb-4">Бизнес-центр класса А с панорамным остеклением, современными инженерными системами и подземной парковкой.</p>
+<div class="flex justify-between items-center">
+<span class="text-sm text-gray-500">Санкт-Петербург, 2022</span>
+</div>
+</div>
+</div>
+</div>
+<div class="project-item" data-category="industrial">
+<div class="bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-64 overflow-hidden">
+<img src="krasnodar.jpg" alt="Логистический центр «Меркурий»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-xl font-bold text-gray-900">ЛЦ «Меркурий»</h3>
+<span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Промышленный</span>
+</div>
+<p class="text-gray-600 mb-4">Современный логистический комплекс площадью 45 000 м² с автоматизированными системами хранения и обработки грузов.</p>
+<div class="flex justify-between items-center">
+<span class="text-sm text-gray-500">Екатеринбург, 2021</span>
+</div>
+</div>
+</div>
+</div>
+<div class="project-item" data-category="residential">
+<div class="bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-64 overflow-hidden">
+<img src="krasnodar.jpg" alt="Таунхаусы «Зеленая роща»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-xl font-bold text-gray-900">ТХ «Зеленая роща»</h3>
+<span class="bg-blue-100 text-primary text-xs px-3 py-1 rounded-full">Жилой</span>
+</div>
+<p class="text-gray-600 mb-4">Комплекс из 28 таунхаусов в экологически чистом районе с собственной инфраструктурой и охраняемой территорией.</p>
+<div class="flex justify-between items-center">
+<span class="text-sm text-gray-500">Казань, 2022</span>
+</div>
+</div>
+</div>
+</div>
+<div class="project-item" data-category="commercial">
+<div class="bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-64 overflow-hidden">
+<img src="krasnodar.jpg" alt="Торговый центр «Метрополис»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-xl font-bold text-gray-900">ТЦ «Метрополис»</h3>
+<span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Коммерческий</span>
+</div>
+<p class="text-gray-600 mb-4">Многофункциональный торговый центр с развлекательной зоной, фуд-кортом и подземным паркингом на 1200 машиномест.</p>
+<div class="flex justify-between items-center">
+<span class="text-sm text-gray-500">Новосибирск, 2023</span>
+</div>
+</div>
+</div>
+</div>
+<div class="project-item" data-category="industrial">
+<div class="bg-white rounded-lg overflow-hidden shadow-lg">
+<div class="h-64 overflow-hidden">
+<img src="krasnodar.jpg" alt="Пищевой комбинат «Вкусно»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
+</div>
+<div class="p-6">
+<div class="flex justify-between items-center mb-3">
+<h3 class="text-xl font-bold text-gray-900">ПК «Вкусно»</h3>
+<span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Промышленный</span>
+</div>
+<p class="text-gray-600 mb-4">Современный пищевой комбинат с автоматизированными линиями производства и строгим соблюдением санитарных норм.</p>
+<div class="flex justify-between items-center">
+<span class="text-sm text-gray-500">Краснодар, 2021</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Контактная форма -->
+<section id="contact" class="py-20 bg-gray-50">
+<div class="container mx-auto px-6 md:px-12">
+<div class="text-center mb-16">
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Свяжитесь с нами</h2>
+<p class="text-lg text-gray-600 max-w-3xl mx-auto">Готовы обсудить ваш проект? Оставьте заявку, и мы свяжемся с вами в ближайшее время</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+<div>
+<div class="bg-white rounded-lg shadow-lg p-8">
+<h3 class="text-2xl font-bold text-gray-900 mb-6">Оставить заявку</h3>
+<form id="contact-form">
+<div class="mb-6">
+<label for="name" class="block text-gray-700 mb-2">Ваше имя</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<div class="w-5 h-5 flex items-center justify-center text-gray-400">
+<i class="ri-user-line"></i>
+</div>
+</div>
+<input type="text" id="name" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Иван Петров">
+</div>
+</div>
+<div class="mb-6">
+<label for="email" class="block text-gray-700 mb-2">Электронная почта</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<div class="w-5 h-5 flex items-center justify-center text-gray-400">
+<i class="ri-mail-line"></i>
+</div>
+</div>
+<input type="email" id="email" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" placeholder="example@mail.ru">
+</div>
+</div>
+<div class="mb-6">
+<label for="phone" class="block text-gray-700 mb-2">Номер телефона</label>
+<div class="relative">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<div class="w-5 h-5 flex items-center justify-center text-gray-400">
+<i class="ri-phone-line"></i>
+</div>
+</div>
+<input type="tel" id="phone" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" placeholder="+7 (___) ___-__-__">
+</div>
+</div>
+<div class="mb-6">
+<label for="message" class="block text-gray-700 mb-2">Сообщение</label>
+<textarea id="message" rows="4" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Опишите ваш проект или задайте вопрос"></textarea>
+</div>
+<div class="mb-6">
+<label class="flex items-center">
+<div class="relative inline-block w-5 h-5 mr-3">
+<input type="checkbox" id="privacy" class="absolute opacity-0 w-0 h-0">
+<span class="checkmark absolute top-0 left-0 h-5 w-5 bg-gray-200 rounded"></span>
+</div>
+<span class="text-sm text-gray-600">Я согласен на обработку персональных данных</span>
+</label>
+</div>
+<button type="submit" class="w-full bg-primary text-white py-3 px-6 !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">Отправить заявку</button>
+</form>
+</div>
+</div>
+<div>
+<div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+<h3 class="text-2xl font-bold text-gray-900 mb-6">Контактная информация</h3>
+<div class="space-y-6">
+<div class="flex items-start">
+<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-map-pin-line"></i>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-900 mb-1">Адрес</h4>
+<p class="text-gray-600">г. Москва, ул. Строителей, д. 15, офис 301</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-phone-line"></i>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-900 mb-1">Телефон</h4>
+<p class="text-gray-600">+7 (495) 123-45-67</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-mail-line"></i>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-900 mb-1">Email</h4>
+<p class="text-gray-600">info@stroymaster.ru</p>
+</div>
+</div>
+<div class="flex items-start">
+<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-time-line"></i>
+</div>
+</div>
+<div>
+<h4 class="text-lg font-semibold text-gray-900 mb-1">Режим работы</h4>
+<p class="text-gray-600">Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходные</p>
+</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-lg overflow-hidden h-80">
+<iframe src="https://yandex.ru/map-widget/v1/?ll=49.182859,55.765153&z=16&l=map&pt=49.182859,55.765153&mode=search&text=Казань, улица Хусаина Мавлютова" class="w-full h-full border-none"></iframe>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Футер -->
+<footer class="bg-gray-900 text-white py-12" style="background-image: url('bg12.jpg'); background-position: center; background-size: cover;">
+<div class="container mx-auto px-6 md:px-12">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+<div>
+<a href="#" class="inline-block mb-6">
+<img src="logo.png" alt="СтройМастер" class="h-10">
+</a>
+<p class="text-gray-400 mb-6">Профессиональные строительные решения для вашего бизнеса и жизни. Качество, проверенное временем.</p>
 <div class="flex space-x-4">
-<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
-<i class="ri-facebook-fill text-white"></i>
+<a href="#" class="social-icon w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-facebook-fill"></i>
+</div>
 </a>
-<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
-<i class="ri-instagram-line text-white"></i>
+<a href="#" class="social-icon w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-instagram-line"></i>
+</div>
 </a>
-<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
-<i class="ri-telegram-line text-white"></i>
+<a href="#" class="social-icon w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-youtube-line"></i>
+</div>
 </a>
-<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition-colors">
-<i class="ri-youtube-line text-white"></i>
+<a href="#" class="social-icon w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-telegram-line"></i>
+</div>
 </a>
 </div>
 </div>
-<!-- Quick Links -->
 <div>
-<h3 class="text-xl font-bold mb-4">Навигация</h3>
-<ul class="space-y-2">
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Главная</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">О компании</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Услуги</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Проекты</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Блог</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Контакты</a></li>
-</ul>
-</div>
-<!-- Services -->
-<div>
-<h3 class="text-xl font-bold mb-4">Услуги</h3>
-<ul class="space-y-2">
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Строительство домов</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Капитальный ремонт</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Реконструкция</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Проектирование</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Ландшафтные работы</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Инженерные системы</a></li>
-</ul>
-</div>
-<!-- Contact -->
-<div>
-<h3 class="text-xl font-bold mb-4">Контакты</h3>
+<h4 class="text-lg font-bold mb-6">Навигация</h4>
 <ul class="space-y-3">
-<li class="flex items-start">
-<div class="w-5 h-5 flex items-center justify-center mt-1 mr-3">
-<i class="ri-map-pin-line text-primary"></i>
-</div>
-<span class="text-gray-400">г. Москва, ул. Строителей, д. 10, офис 505</span>
-</li>
-<li class="flex items-center">
-<div class="w-5 h-5 flex items-center justify-center mr-3">
-<i class="ri-phone-line text-primary"></i>
-</div>
-<span class="text-gray-400">+7 (495) 123-45-67</span>
-</li>
-<li class="flex items-center">
-<div class="w-5 h-5 flex items-center justify-center mr-3">
-<i class="ri-mail-line text-primary"></i>
-</div>
-<span class="text-gray-400">info@stroykompaniya.ru</span>
-</li>
-<li class="flex items-center">
-<div class="w-5 h-5 flex items-center justify-center mr-3">
-<i class="ri-time-line text-primary"></i>
-</div>
-<span class="text-gray-400">Пн-Пт: 9:00-18:00</span>
-</li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Главная</a></li>
+<li><a href="#about" class="text-gray-400 hover:text-white transition-colors">О компании</a></li>
+<li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Услуги</a></li>
+<li><a href="#projects" class="text-gray-400 hover:text-white transition-colors">Проекты</a></li>
+<li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Контакты</a></li>
 </ul>
 </div>
+<div>
+<h4 class="text-lg font-bold mb-6">Услуги</h4>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Жилищное строительство</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Коммерческое строительство</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Проектирование</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Ремонт и реконструкция</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Отделочные работы</a></li>
+</ul>
 </div>
-<div class="pt-8 border-t border-gray-800 text-center text-gray-500">
-<p>© 2025 Строительная компания. Все права защищены.</p>
+<div>
+<h4 class="text-lg font-bold mb-6">Связаться</h4>
+<p class="text-gray-400 mb-4">Напишите нам на почту по любому вашему деловому предожению или позвоните по номеру +7 (495) 123-45-67.</p>
+<form class="mb-4">
+<div class="flex">
+<input type="email" placeholder="Ваш email" class="flex-grow px-4 py-2 bg-gray-800 border border-gray-700 rounded-l focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+<button type="submit" class="bg-primary text-white px-4 py-2 rounded-r !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">
+<div class="w-5 h-5 flex items-center justify-center">
+<i class="ri-send-plane-line"></i>
+</div>
+</button>
+</div>
+</form>
+<div class="flex items-center space-x-3">
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-visa-fill ri-lg"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-mastercard-fill ri-lg"></i>
+</div>
+<div class="w-8 h-8 flex items-center justify-center">
+<i class="ri-paypal-fill ri-lg"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 LULZ. Все права защищены.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Политика конфиденциальности</a>
+<a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Условия использования</a>
+</div>
 </div>
 </div>
 </footer>
-<script id="parallaxEffect">
+<!-- Кнопка "Наверх" -->
+<button id="back-to-top" class="back-to-top bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">
+<div class="w-6 h-6 flex items-center justify-center">
+<i class="ri-arrow-up-line ri-lg"></i>
+</div>
+</button>
+<!-- Скрипты -->
+<script id="navigation-script">
 document.addEventListener('DOMContentLoaded', function() {
+// Навигационное меню
+const navbar = document.getElementById('navbar');
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+// Изменение стиля навигации при прокрутке
 window.addEventListener('scroll', function() {
-const parallaxOverlay = document.querySelector('.parallax-overlay');
-if (parallaxOverlay) {
-const scrollPosition = window.pageYOffset;
-const translateY = scrollPosition * 0.4;
-parallaxOverlay.style.transform = `translateY(${translateY}px)`;
+if (window.scrollY > 50) {
+navbar.classList.add('scrolled');
+} else {
+navbar.classList.remove('scrolled');
 }
+});
+// Мобильное меню
+if (mobileMenuButton) {
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+});
+}
+// Плавная прокрутка к разделам
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+anchor.addEventListener('click', function (e) {
+e.preventDefault();
+const targetId = this.getAttribute('href');
+if (targetId === '#') return;
+const targetElement = document.querySelector(targetId);
+if (targetElement) {
+window.scrollTo({
+top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+});
+// Закрыть мобильное меню после клика
+if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+mobileMenu.classList.add('hidden');
+}
+}
+});
+});
+});
+</script>
+<script id="hero-animation-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Анимация заголовка в Hero секции
+const heroTitle = document.getElementById('hero-title');
+const heroSubtitle = document.getElementById('hero-subtitle');
+const heroButton = document.getElementById('hero-button');
+if (heroTitle && heroSubtitle && heroButton) {
+setTimeout(() => {
+heroTitle.style.opacity = '1';
+heroTitle.style.transform = 'translateY(0)';
+heroTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+}, 300);
+setTimeout(() => {
+heroSubtitle.style.opacity = '1';
+heroSubtitle.style.transform = 'translateY(0)';
+heroSubtitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+}, 600);
+setTimeout(() => {
+heroButton.style.opacity = '1';
+heroButton.style.transform = 'translateY(0)';
+heroButton.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+}, 900);
+}
+// Смена фоновых изображений в Hero секции
+const heroSection = document.getElementById('hero');
+const heroImages = [
+'art33.jpg',
+'art2.jpg',
+'art1.jpg'
+];
+let currentImageIndex = 0;
+function changeHeroBackground() {
+currentImageIndex = (currentImageIndex + 1) % heroImages.length;
+heroSection.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
+}
+// Меняем изображение каждые 5 секунд
+setInterval(changeHeroBackground, 5000);
+});
+</script>
+<script id="counter-animation-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Анимация счетчиков
+const counterItems = document.querySelectorAll('.counter-item');
+const counters = document.querySelectorAll('.counter');
+const options = {
+root: null,
+rootMargin: '0px',
+threshold: 0.1
+};
+const counterObserver = new IntersectionObserver(function(entries, observer) {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.classList.add('visible');
+// Если элемент содержит счетчик, запускаем анимацию счетчика
+const counter = entry.target.querySelector('.counter');
+if (counter) {
+const target = parseInt(counter.getAttribute('data-target'));
+let count = 0;
+const duration = 2000; // 2 секунды
+const step = Math.ceil(target / (duration / 20));
+const updateCounter = () => {
+count += step;
+if (count >= target) {
+counter.textContent = target;
+clearInterval(timer);
+} else {
+counter.textContent = count;
+}
+};
+const timer = setInterval(updateCounter, 20);
+}
+observer.unobserve(entry.target);
+}
+});
+}, options);
+counterItems.forEach(item => {
+counterObserver.observe(item);
+});
+});
+</script>
+<script id="project-filter-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Фильтрация проектов
+const filterButtons = document.querySelectorAll('.project-filter-btn');
+const projectItems = document.querySelectorAll('.project-item');
+filterButtons.forEach(button => {
+button.addEventListener('click', function() {
+const filterValue = this.getAttribute('data-filter');
+// Активный класс для кнопок
+filterButtons.forEach(btn => {
+btn.classList.remove('bg-primary', 'text-white');
+btn.classList.add('text-gray-700');
+});
+this.classList.add('bg-primary', 'text-white');
+this.classList.remove('text-gray-700');
+// Фильтрация проектов
+projectItems.forEach(item => {
+if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+item.style.display = 'block';
+} else {
+item.style.display = 'none';
+}
+});
+});
+});
+});
+</script>
+<script id="form-validation-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Валидация формы
+const contactForm = document.getElementById('contact-form');
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
+const messageInput = document.getElementById('message');
+const privacyCheckbox = document.getElementById('privacy');
+if (contactForm) {
+contactForm.addEventListener('submit', function(e) {
+e.preventDefault();
+let isValid = true;
+// Проверка имени
+if (!nameInput.value.trim()) {
+highlightError(nameInput);
+isValid = false;
+} else {
+removeError(nameInput);
+}
+// Проверка email
+const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailInput.value.trim() || !emailPattern.test(emailInput.value)) {
+highlightError(emailInput);
+isValid = false;
+} else {
+removeError(emailInput);
+}
+// Проверка телефона
+const phonePattern = /^(\+7|8)[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/;
+if (!phoneInput.value.trim() || !phonePattern.test(phoneInput.value)) {
+highlightError(phoneInput);
+isValid = false;
+} else {
+removeError(phoneInput);
+}
+// Проверка сообщения
+if (!messageInput.value.trim()) {
+highlightError(messageInput);
+isValid = false;
+} else {
+removeError(messageInput);
+}
+// Проверка согласия
+if (!privacyCheckbox.checked) {
+const checkmark = document.querySelector('.checkmark');
+checkmark.style.borderColor = '#ef4444';
+isValid = false;
+} else {
+const checkmark = document.querySelector('.checkmark');
+checkmark.style.borderColor = '';
+}
+if (isValid) {
+// Здесь будет отправка формы
+alert('Спасибо! Ваша заявка успешно отправлена.');
+contactForm.reset();
+}
+});
+// Маска для телефона
+if (phoneInput) {
+phoneInput.addEventListener('input', function(e) {
+let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
+if (x[1] === '') {
+e.target.value = '';
+} else {
+e.target.value = '+7 (' + x[2] + ') ' + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
+}
+});
+}
+// Стилизация чекбокса
+if (privacyCheckbox) {
+const checkmark = document.querySelector('.checkmark');
+privacyCheckbox.addEventListener('change', function() {
+if (this.checked) {
+checkmark.style.backgroundColor = '#2563eb';
+checkmark.style.borderColor = '#2563eb';
+checkmark.innerHTML = '<div class="w-3 h-3 absolute top-1 left-1"><i class="ri-check-line text-white text-xs"></i></div>';
+} else {
+checkmark.style.backgroundColor = '#e5e7eb';
+checkmark.style.borderColor = '#d1d5db';
+checkmark.innerHTML = '';
+}
+});
+}
+}
+function highlightError(input) {
+input.classList.add('border-red-500');
+input.classList.add('bg-red-50');
+}
+function removeError(input) {
+input.classList.remove('border-red-500');
+input.classList.remove('bg-red-50');
+}
+});
+</script>
+<script id="back-to-top-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Кнопка "Наверх"
+const backToTopButton = document.getElementById('back-to-top');
+window.addEventListener('scroll', function() {
+if (window.scrollY > 300) {
+backToTopButton.classList.add('visible');
+} else {
+backToTopButton.classList.remove('visible');
+}
+});
+backToTopButton.addEventListener('click', function() {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
 });
 });
 </script>
