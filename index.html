@@ -1,903 +1,2091 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>НАЗВАНИЕ - Строительная компания</title>
-<script src="https://cdn.tailwindcss.com/3.4.16"></script>
-<script>tailwind.config={theme:{extend:{colors:{primary:'#2563eb',secondary:'#f59e0b'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
-<style>
-:where([class^="ri-"])::before { content: "\f3c2"; }
-body {
-font-family: 'Montserrat', sans-serif;
-scroll-behavior: smooth;
-}
-.hero-section {
-position: relative;
-height: 100vh;
-min-height: 700px;
-background-position: center;
-background-size: cover;
-background-repeat: no-repeat;
-transition: background-image 1s ease-in-out;
-}
-.hero-overlay {
-position: absolute;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5));
-}
-.counter-item {
-opacity: 0;
-transform: translateY(20px);
-transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.counter-item.visible {
-opacity: 1;
-transform: translateY(0);
-}
-.service-card {
-transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-.service-card:hover {
-transform: translateY(-10px);
-box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-}
-.back-to-top {
-position: fixed;
-bottom: 30px;
-right: 30px;
-z-index: 99;
-opacity: 0;
-visibility: hidden;
-transition: opacity 0.3s, visibility 0.3s;
-}
-.back-to-top.visible {
-opacity: 1;
-visibility: visible;
-}
-.navbar {
-transition: background-color 0.3s ease;
-}
-.navbar.scrolled {
-background-color: rgba(17, 24, 39, 0.95);
-box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-}
-.project-item {
-transition: transform 0.3s ease;
-}
-.project-item:hover {
-transform: scale(1.03);
-}
-input:focus, textarea:focus {
-outline: none;
-border-color: #2563eb;
-}
-.social-icon {
-transition: transform 0.3s ease, color 0.3s ease;
-}
-.social-icon:hover {
-transform: translateY(-3px);
-color: #2563eb;
-}
-</style>
-</head>
-<body>
-<nav id="navbar" class="navbar fixed w-full z-50 py-4 px-6 md:px-12">
-<div class="container mx-auto flex justify-between items-center">
-<a href="#" class="flex items-center">
-<img src="logo.png" alt="СтройМастер" class="h-10">
-</a>
-<div class="hidden md:flex space-x-8">
-<a href="#about" class="text-white hover:text-primary transition-colors">О компании</a>
-<a href="#services" class="text-white hover:text-primary transition-colors">Услуги</a>
-<a href="#projects" class="text-white hover:text-primary transition-colors">Проекты</a>
-<a href="#contact" class="text-white hover:text-primary transition-colors">Контакты</a>
-</div>
-<div class="hidden md:flex items-center">
-  <a href="https://t.me/bubilny" target="_blank" class="flex items-center space-x-2 bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">
-    <div class="w-5 h-5 flex items-center justify-center">
-      <i class="ri-phone-line"></i>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Строительная компания</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#e74c3c", secondary: "#34495e" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <style>
+      :where([class^="ri-"])::before { content: "\f3c2"; }
+      body {
+      font-family: 'Montserrat', sans-serif;
+      }
+      .hero-overlay {
+      background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.4) 100%);
+      }
+      .navbar-fixed {
+      transition: all 0.3s ease;
+      }
+      .counter-item {
+      transition: transform 0.3s ease;
+      }
+      .counter-item:hover {
+      transform: translateY(-5px);
+      }
+      .service-card {
+      transition: all 0.3s ease;
+      }
+      .service-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+      .portfolio-item {
+      transition: all 0.3s ease;
+      overflow: hidden;
+      }
+      .portfolio-item:hover img {
+      transform: scale(1.05);
+      }
+      .portfolio-item img {
+      transition: transform 0.5s ease;
+      }
+      .social-icon {
+      transition: all 0.3s ease;
+      }
+      .social-icon:hover {
+      transform: translateY(-3px);
+      color: var(--primary);
+      }
+      .back-to-top {
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      }
+      .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      }
+      .language-switcher {
+      position: relative;
+      }
+      .language-options {
+      display: none;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      }
+      .language-switcher:hover .language-options {
+      display: block;
+      }
+      input[type="range"] {
+      -webkit-appearance: none;
+      width: 100%;
+      height: 8px;
+      border-radius: 5px;
+      background: #e2e8f0;
+      outline: none;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #e74c3c;
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+      input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #e74c3c;
+      cursor: pointer;
+      border: 2px solid white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      }
+      .custom-checkbox {
+      position: relative;
+      padding-left: 30px;
+      cursor: pointer;
+      user-select: none;
+      }
+      .custom-checkbox input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+      }
+      .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      background-color: #fff;
+      border: 2px solid #e2e8f0;
+      border-radius: 4px;
+      }
+      .custom-checkbox:hover input ~ .checkmark {
+      border-color: #e74c3c;
+      }
+      .custom-checkbox input:checked ~ .checkmark {
+      background-color: #e74c3c;
+      border-color: #e74c3c;
+      }
+      .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      }
+      .custom-checkbox input:checked ~ .checkmark:after {
+      display: block;
+      }
+      .custom-checkbox .checkmark:after {
+      left: 6px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      }
+      .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+      }
+      .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+      }
+      .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #e2e8f0;
+      transition: .4s;
+      border-radius: 24px;
+      }
+      .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+      }
+      input:checked + .slider {
+      background-color: #e74c3c;
+      }
+      input:checked + .slider:before {
+      transform: translateX(26px);
+      }
+      .radio-container {
+      display: flex;
+      align-items: center;
+      }
+      .radio-container input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      }
+      .radio-container label {
+      position: relative;
+      padding-left: 30px;
+      cursor: pointer;
+      line-height: 20px;
+      }
+      .radio-container label:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #e2e8f0;
+      border-radius: 100%;
+      background: #fff;
+      }
+      .radio-container label:after {
+      content: '';
+      width: 12px;
+      height: 12px;
+      background: #e74c3c;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      border-radius: 100%;
+      transition: all 0.2s ease;
+      opacity: 0;
+      transform: scale(0);
+      }
+      .radio-container input:checked ~ label:after {
+      opacity: 1;
+      transform: scale(1);
+      }
+      .radio-container input:checked ~ label:before {
+      border-color: #e74c3c;
+      }
+    </style>
+    <script id="translations">
+      const translations = {
+        en: {
+          "О компании": "About Us",
+          Услуги: "Services",
+          Проекты: "Projects",
+          Калькулятор: "Calculator",
+          Контакты: "Contacts",
+          "Обратный звонок": "Request Call",
+          "Современные решения для вашего строительства":
+            "Modern Solutions for Your Construction",
+          "Профессиональный подход к строительству и ремонту любой сложности":
+            "Professional approach to construction and renovation of any complexity",
+          "Заказать консультацию": "Request Consultation",
+          "Наши проекты": "Our Projects",
+          // Add more translations as needed
+        },
+        ru: {
+          "О компании": "О компании",
+          Услуги: "Услуги",
+          Проекты: "Проекты",
+          Калькулятор: "Калькулятор",
+          Контакты: "Контакты",
+          "Обратный звонок": "Обратный звонок",
+          "Современные решения для вашего строительства":
+            "Современные решения для вашего строительства",
+          "Профессиональный подход к строительству и ремонту любой сложности":
+            "Профессиональный подход к строительству и ремонту любой сложности",
+          "Заказать консультацию": "Заказать консультацию",
+          "Наши проекты": "Наши проекты",
+          // Add more translations as needed
+        },
+      };
+    </script>
+    <script id="language-switcher">
+      document.addEventListener("DOMContentLoaded", function () {
+        const langButtons = document.querySelectorAll(".language-options a");
+        const currentLangSpan = document.getElementById("currentLang");
+        function translatePage(lang) {
+          document.querySelectorAll("[data-translate]").forEach((element) => {
+            const key = element.getAttribute("data-translate");
+            if (translations[lang][key]) {
+              element.textContent = translations[lang][key];
+            }
+          });
+          currentLangSpan.textContent = lang.toUpperCase();
+        }
+        langButtons.forEach((button) => {
+          button.addEventListener("click", function (e) {
+            e.preventDefault();
+            const lang = this.getAttribute("data-lang");
+            translatePage(lang);
+          });
+        });
+      });
+    </script>
+  </head>
+  <body class="bg-gray-50">
+    <!-- Header/Navbar -->
+    <header
+      class="navbar-fixed fixed w-full z-50 transition-all duration-300 bg-transparent"
+    >
+      <div
+        class="container mx-auto px-4 py-4 flex justify-between items-center"
+      >
+        <a href="#" class="text-3xl font-['Pacifico'] text-white">logo</a>
+        <nav class="hidden md:flex items-center space-x-8">
+          <a
+            href="#about"
+            class="text-white hover:text-primary font-medium transition-colors"
+            >О компании</a
+          >
+          <a
+            href="#services"
+            class="text-white hover:text-primary font-medium transition-colors"
+            >Услуги</a
+          >
+          <a
+            href="#portfolio"
+            class="text-white hover:text-primary font-medium transition-colors"
+            >Проекты</a
+          >
+          <a
+            href="#calculator"
+            class="text-white hover:text-primary font-medium transition-colors"
+            >Калькулятор</a
+          >
+          <a
+            href="#contacts"
+            class="text-white hover:text-primary font-medium transition-colors"
+            >Контакты</a
+          >
+        </nav>
+        <div class="flex items-center space-x-4">
+          <div class="language-switcher">
+            <button
+              id="langToggle"
+              class="flex items-center text-white hover:text-primary transition-colors"
+            >
+              <span id="currentLang">RU</span>
+              <div class="w-6 h-6 flex items-center justify-center ml-1">
+                <i class="ri-arrow-down-s-line"></i>
+              </div>
+            </button>
+            <div class="language-options py-2 w-24">
+              <a
+                href="#"
+                data-lang="ru"
+                class="block px-4 py-2 hover:bg-gray-100 text-gray-800"
+                >RU</a
+              >
+              <a
+                href="#"
+                data-lang="en"
+                class="block px-4 py-2 hover:bg-gray-100 text-gray-800"
+                >ENG</a
+              >
+            </div>
+          </div>
+          <button
+            class="hidden md:flex items-center bg-primary text-white px-4 py-2 rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap"
+          >
+            <div class="w-5 h-5 flex items-center justify-center mr-2">
+              <i class="ri-phone-line"></i>
+            </div>
+            <span>Обратный звонок</span>
+          </button>
+          <button
+            class="md:hidden w-10 h-10 flex items-center justify-center text-white"
+          >
+            <i class="ri-menu-line text-2xl"></i>
+          </button>
+        </div>
+      </div>
+    </header>
+    <!-- Mobile Menu -->
+    <div
+      class="mobile-menu fixed inset-0 bg-gray-900 bg-opacity-95 z-50 hidden flex-col justify-center items-center"
+    >
+      <button
+        class="absolute top-6 right-6 text-white w-10 h-10 flex items-center justify-center"
+      >
+        <i class="ri-close-line text-2xl"></i>
+      </button>
+      <nav class="flex flex-col items-center space-y-6 text-xl">
+        <a
+          href="#about"
+          class="text-white hover:text-primary font-medium transition-colors"
+          >О компании</a
+        >
+        <a
+          href="#services"
+          class="text-white hover:text-primary font-medium transition-colors"
+          >Услуги</a
+        >
+        <a
+          href="#portfolio"
+          class="text-white hover:text-primary font-medium transition-colors"
+          >Проекты</a
+        >
+        <a
+          href="#calculator"
+          class="text-white hover:text-primary font-medium transition-colors"
+          >Калькулятор</a
+        >
+        <a
+          href="#contacts"
+          class="text-white hover:text-primary font-medium transition-colors"
+          >Контакты</a
+        >
+      </nav>
+      <div class="mt-10 flex flex-col items-center space-y-4">
+        <div class="flex space-x-4 text-white">
+          <a
+            href="#"
+            class="w-10 h-10 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition-all"
+          >
+            <i class="ri-facebook-fill"></i>
+          </a>
+          <a
+            href="#"
+            class="w-10 h-10 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition-all"
+          >
+            <i class="ri-instagram-line"></i>
+          </a>
+          <a
+            href="#"
+            class="w-10 h-10 flex items-center justify-center border border-white rounded-full hover:bg-white hover:text-primary transition-all"
+          >
+            <i class="ri-telegram-line"></i>
+          </a>
+        </div>
+        <button
+          class="bg-primary text-white px-6 py-3 rounded-button hover:bg-opacity-90 transition-all mt-4 whitespace-nowrap"
+        >
+          Обратный звонок
+        </button>
+      </div>
     </div>
-    <span>Telegram</span>
-  </a>
-</div>
-<div class="md:hidden">
-<button id="mobile-menu-button" class="text-white">
-<div class="w-6 h-6 flex items-center justify-center">
-<i class="ri-menu-line ri-lg"></i>
-</div>
-</button>
-</div>
-</div>
-<div id="mobile-menu" class="hidden md:hidden absolute top-full left-0 w-full bg-gray-900 py-4 px-6">
-<div class="flex flex-col space-y-4">
-<a href="#about" class="text-white hover:text-primary transition-colors">О компании</a>
-<a href="#services" class="text-white hover:text-primary transition-colors">Услуги</a>
-<a href="#projects" class="text-white hover:text-primary transition-colors">Проекты</a>
-<a href="#contact" class="text-white hover:text-primary transition-colors">Контакты</a>
-<button class="flex items-center justify-center space-x-2 bg-primary text-white px-4 py-2 !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">
-<div class="w-5 h-5 flex items-center justify-center">
-<i class="ri-phone-line"></i>
-</div>
-<span>Написать в Telegram</span>
-</button>
-</div>
-</div>
-</nav>
-<section id="hero" class="hero-section" style="background-image: url('art33.jpg')">
-<div class="hero-overlay"></div>
-<div class="container mx-auto h-full flex items-center">
-<div class="w-full max-w-3xl px-6 md:px-0 relative z-10">
-<h1 id="hero-title" class="text-4xl md:text-6xl font-bold text-white mb-6 opacity-0">Строим будущее с надежным фундаментом</h1>
-<p id="hero-subtitle" class="text-xl md:text-2xl text-gray-200 mb-8 opacity-0">Профессиональные строительные решения любой сложности с гарантией качества</p>
-<button id="hero-button" class="bg-primary text-white px-8 py-4 text-lg !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors opacity-0">
-Заказать консультацию
-</button>
-</div>
-</div>
-</section>
-<section id="about" class="py-20 bg-white">
-<div class="container mx-auto px-6 md:px-12">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">О нашей компании</h2>
-<p class="text-lg text-gray-600 max-w-3xl mx-auto">Более 15 лет мы создаем пространства, в которых хочется жить и работать. Наша миссия — строить качественно, надежно и в срок.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-<div class="counter-item bg-white p-8 rounded-lg shadow-lg text-center">
-<div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
-<div class="w-8 h-8 flex items-center justify-center text-primary">
-<i class="ri-building-line ri-2x"></i>
-</div>
-</div>
-<h3 class="text-4xl font-bold text-gray-900 mb-2"><span class="counter" data-target="156">0</span></h3>
-<p class="text-gray-600">Завершенных проектов</p>
-</div>
-<div class="counter-item bg-white p-8 rounded-lg shadow-lg text-center">
-<div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
-<div class="w-8 h-8 flex items-center justify-center text-primary">
-<i class="ri-team-line ri-2x"></i>
-</div>
-</div>
-<h3 class="text-4xl font-bold text-gray-900 mb-2"><span class="counter" data-target="85">0</span></h3>
-<p class="text-gray-600">Профессиональных сотрудников</p>
-</div>
-<div class="counter-item bg-white p-8 rounded-lg shadow-lg text-center">
-<div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
-<div class="w-8 h-8 flex items-center justify-center text-primary">
-<i class="ri-user-smile-line ri-2x"></i>
-</div>
-</div>
-<h3 class="text-4xl font-bold text-gray-900 mb-2"><span class="counter" data-target="312">0</span></h3>
-<p class="text-gray-600">Довольных клиентов</p>
-</div>
-<div class="counter-item bg-white p-8 rounded-lg shadow-lg text-center">
-<div class="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-4">
-<div class="w-8 h-8 flex items-center justify-center text-primary">
-<i class="ri-award-line ri-2x"></i>
-</div>
-</div>
-<h3 class="text-4xl font-bold text-gray-900 mb-2"><span class="counter" data-target="15">0</span></h3>
-<p class="text-gray-600">Лет на рынке</p>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-<div>
-<h3 class="text-2xl font-bold text-gray-900 mb-4">Почему выбирают нас</h3>
-<div class="space-y-6">
-<div class="flex items-start">
-<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-<div class="w-5 h-5 flex items-center justify-center text-primary">
-<i class="ri-check-line"></i>
-</div>
-</div>
-<div>
-<h4 class="text-lg font-semibold text-gray-900 mb-1">Высокое качество</h4>
-<p class="text-gray-600">Используем только проверенные материалы и современные технологии строительства</p>
-</div>
-</div>
-<div class="flex items-start">
-<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-<div class="w-5 h-5 flex items-center justify-center text-primary">
-<i class="ri-check-line"></i>
-</div>
-</div>
-<div>
-<h4 class="text-lg font-semibold text-gray-900 mb-1">Соблюдение сроков</h4>
-<p class="text-gray-600">Четкое планирование и контроль на всех этапах строительства</p>
-</div>
-</div>
-<div class="flex items-start">
-<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-<div class="w-5 h-5 flex items-center justify-center text-primary">
-<i class="ri-check-line"></i>
-</div>
-</div>
-<div>
-<h4 class="text-lg font-semibold text-gray-900 mb-1">Прозрачное ценообразование</h4>
-<p class="text-gray-600">Фиксированная стоимость работ без скрытых платежей</p>
-</div>
-</div>
-<div class="flex items-start">
-<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-<div class="w-5 h-5 flex items-center justify-center text-primary">
-<i class="ri-check-line"></i>
-</div>
-</div>
-<div>
-<h4 class="text-lg font-semibold text-gray-900 mb-1">Гарантия на все работы</h4>
-<p class="text-gray-600">Предоставляем гарантию до 5 лет на все виды выполненных работ</p>
-</div>
-</div>
-</div>
-</div>
-<div>
-<img src="blank1.png" alt="Наша команда" class="rounded-lg w-full h-auto object-cover">
-</div>
-</div>
-</div>
-</section>
-<section id="services" class="py-20 bg-gray-50">
-<div class="container mx-auto px-6 md:px-12">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Наши услуги</h2>
-<p class="text-lg text-gray-600 max-w-3xl mx-auto">Полный спектр строительных услуг от проектирования до отделочных работ</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-48 overflow-hidden">
-<img src="krasnodar.jpg" alt="Жилищное строительство" class="w-full h-full object-cover object-top">
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-3">Жилищное строительство</h3>
-<p class="text-gray-600 mb-4">Строительство частных домов, коттеджей, таунхаусов и многоквартирных зданий с полным циклом работ.</p>
-</div>
-</div>
-<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-48 overflow-hidden">
-<img src="krasnodar.jpg" alt="Коммерческое строительство" class="w-full h-full object-cover object-top">
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-3">Коммерческое строительство</h3>
-<p class="text-gray-600 mb-4">Возведение офисных зданий, торговых центров, складских помещений и других коммерческих объектов.</p>
-</div>
-</div>
-<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-48 overflow-hidden">
-<img src="krasnodar.jpg" alt="Проектирование" class="w-full h-full object-cover object-top">
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-3">Проектирование</h3>
-<p class="text-gray-600 mb-4">Разработка архитектурных проектов, конструкторской документации и инженерных решений.</p>
-</div>
-</div>
-<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-48 overflow-hidden">
-<img src="krasnodar.jpg" alt="Ремонт и реконструкция" class="w-full h-full object-cover object-top">
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-3">Ремонт и реконструкция</h3>
-<p class="text-gray-600 mb-4">Капитальный ремонт, реконструкция и реставрация зданий любого назначения и сложности.</p>
-</div>
-</div>
-<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-48 overflow-hidden">
-<img src="krasnodar.jpg" alt="Отделочные работы" class="w-full h-full object-cover object-top">
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-3">Отделочные работы</h3>
-<p class="text-gray-600 mb-4">Внутренняя и внешняя отделка помещений с использованием современных материалов и технологий.</p>
-</div>
-</div>
-<div class="service-card bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-48 overflow-hidden">
-<img src="krasnodar.jpg" alt="Инженерные системы" class="w-full h-full object-cover object-top">
-</div>
-<div class="p-6">
-<h3 class="text-xl font-bold text-gray-900 mb-3">Инженерные системы</h3>
-<p class="text-gray-600 mb-4">Монтаж и обслуживание систем отопления, вентиляции, кондиционирования, электроснабжения и водоснабжения.</p>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="projects" class="py-20 bg-white">
-<div class="container mx-auto px-6 md:px-12">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Наши проекты</h2>
-<p class="text-lg text-gray-600 max-w-3xl mx-auto">Реализованные объекты, которыми мы гордимся</p>
-</div>
-<div class="mb-8 flex justify-center">
-<div class="inline-flex bg-gray-100 p-1 rounded-full">
-<button class="project-filter-btn active px-4 py-2 rounded-full bg-primary text-white !rounded-button whitespace-nowrap" data-filter="all">Все проекты</button>
-<button class="project-filter-btn px-4 py-2 rounded-full text-gray-700 !rounded-button whitespace-nowrap" data-filter="residential">Жилые</button>
-<button class="project-filter-btn px-4 py-2 rounded-full text-gray-700 !rounded-button whitespace-nowrap" data-filter="commercial">Коммерческие</button>
-<button class="project-filter-btn px-4 py-2 rounded-full text-gray-700 !rounded-button whitespace-nowrap" data-filter="industrial">Промышленные</button>
-</div>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-<div class="project-item" data-category="residential">
-<div class="bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-64 overflow-hidden">
-<img src="krasnodar.jpg" alt="Жилой комплекс «Панорама»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
-</div>
-<div class="p-6">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-xl font-bold text-gray-900">ЖК «Панорама»</h3>
-<span class="bg-blue-100 text-primary text-xs px-3 py-1 rounded-full">Жилой</span>
-</div>
-<p class="text-gray-600 mb-4">Современный жилой комплекс из 5 многоквартирных домов с подземным паркингом и благоустроенной территорией.</p>
-<div class="flex justify-between items-center">
-<span class="text-sm text-gray-500">Казань, 2025</span>
-</div>
-</div>
-</div>
-</div>
-<div class="project-item" data-category="commercial">
-<div class="bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-64 overflow-hidden">
-<img src="krasnodar.jpg" alt="Бизнес-центр «Горизонт»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
-</div>
-<div class="p-6">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-xl font-bold text-gray-900">БЦ «Горизонт»</h3>
-<span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Коммерческий</span>
-</div>
-<p class="text-gray-600 mb-4">Бизнес-центр класса А с панорамным остеклением, современными инженерными системами и подземной парковкой.</p>
-<div class="flex justify-between items-center">
-<span class="text-sm text-gray-500">Санкт-Петербург, 2022</span>
-</div>
-</div>
-</div>
-</div>
-<div class="project-item" data-category="industrial">
-<div class="bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-64 overflow-hidden">
-<img src="krasnodar.jpg" alt="Логистический центр «Меркурий»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
-</div>
-<div class="p-6">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-xl font-bold text-gray-900">ЛЦ «Меркурий»</h3>
-<span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Промышленный</span>
-</div>
-<p class="text-gray-600 mb-4">Современный логистический комплекс площадью 45 000 м² с автоматизированными системами хранения и обработки грузов.</p>
-<div class="flex justify-between items-center">
-<span class="text-sm text-gray-500">Екатеринбург, 2021</span>
-</div>
-</div>
-</div>
-</div>
-<div class="project-item" data-category="residential">
-<div class="bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-64 overflow-hidden">
-<img src="krasnodar.jpg" alt="Таунхаусы «Зеленая роща»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
-</div>
-<div class="p-6">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-xl font-bold text-gray-900">ТХ «Зеленая роща»</h3>
-<span class="bg-blue-100 text-primary text-xs px-3 py-1 rounded-full">Жилой</span>
-</div>
-<p class="text-gray-600 mb-4">Комплекс из 28 таунхаусов в экологически чистом районе с собственной инфраструктурой и охраняемой территорией.</p>
-<div class="flex justify-between items-center">
-<span class="text-sm text-gray-500">Казань, 2022</span>
-</div>
-</div>
-</div>
-</div>
-<div class="project-item" data-category="commercial">
-<div class="bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-64 overflow-hidden">
-<img src="krasnodar.jpg" alt="Торговый центр «Метрополис»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
-</div>
-<div class="p-6">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-xl font-bold text-gray-900">ТЦ «Метрополис»</h3>
-<span class="bg-yellow-100 text-yellow-800 text-xs px-3 py-1 rounded-full">Коммерческий</span>
-</div>
-<p class="text-gray-600 mb-4">Многофункциональный торговый центр с развлекательной зоной, фуд-кортом и подземным паркингом на 1200 машиномест.</p>
-<div class="flex justify-between items-center">
-<span class="text-sm text-gray-500">Новосибирск, 2023</span>
-</div>
-</div>
-</div>
-</div>
-<div class="project-item" data-category="industrial">
-<div class="bg-white rounded-lg overflow-hidden shadow-lg">
-<div class="h-64 overflow-hidden">
-<img src="krasnodar.jpg" alt="Пищевой комбинат «Вкусно»" class="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-110">
-</div>
-<div class="p-6">
-<div class="flex justify-between items-center mb-3">
-<h3 class="text-xl font-bold text-gray-900">ПК «Вкусно»</h3>
-<span class="bg-gray-100 text-gray-800 text-xs px-3 py-1 rounded-full">Промышленный</span>
-</div>
-<p class="text-gray-600 mb-4">Современный пищевой комбинат с автоматизированными линиями производства и строгим соблюдением санитарных норм.</p>
-<div class="flex justify-between items-center">
-<span class="text-sm text-gray-500">Краснодар, 2021</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<section id="contact" class="py-20 bg-gray-50">
-<div class="container mx-auto px-6 md:px-12">
-<div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Свяжитесь с нами</h2>
-<p class="text-lg text-gray-600 max-w-3xl mx-auto">Готовы обсудить ваш проект? Оставьте заявку, и мы свяжемся с вами в ближайшее время</p>
-</div>
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-<div>
-<div class="bg-white rounded-lg shadow-lg p-8">
-<h3 class="text-2xl font-bold text-gray-900 mb-6">Оставить заявку</h3>
-<form id="contact-form">
-<div class="mb-6">
-<label for="name" class="block text-gray-700 mb-2">Ваше имя</label>
-<div class="relative">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-<div class="w-5 h-5 flex items-center justify-center text-gray-400">
-<i class="ri-user-line"></i>
-</div>
-</div>
-<input type="text" id="name" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Иван Петров">
-</div>
-</div>
-<div class="mb-6">
-<label for="email" class="block text-gray-700 mb-2">Электронная почта</label>
-<div class="relative">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-<div class="w-5 h-5 flex items-center justify-center text-gray-400">
-<i class="ri-mail-line"></i>
-</div>
-</div>
-<input type="email" id="email" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" placeholder="example@mail.ru">
-</div>
-</div>
-<div class="mb-6">
-<label for="phone" class="block text-gray-700 mb-2">Номер телефона</label>
-<div class="relative">
-<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-<div class="w-5 h-5 flex items-center justify-center text-gray-400">
-<i class="ri-phone-line"></i>
-</div>
-</div>
-<input type="tel" id="phone" class="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" placeholder="+7 (___) ___-__-__">
-</div>
-</div>
-<div class="mb-6">
-<label for="message" class="block text-gray-700 mb-2">Сообщение</label>
-<textarea id="message" rows="4" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Опишите ваш проект или задайте вопрос"></textarea>
-</div>
-<div class="mb-6">
-<label class="flex items-center">
-<div class="relative inline-block w-5 h-5 mr-3">
-<input type="checkbox" id="privacy" class="absolute opacity-0 w-0 h-0">
-<span class="checkmark absolute top-0 left-0 h-5 w-5 bg-gray-200 rounded"></span>
-</div>
-<span class="text-sm text-gray-600">Я согласен на обработку персональных данных</span>
-</label>
-</div>
-<button type="submit" class="w-full bg-primary text-white py-3 px-6 !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">Отправить заявку</button>
-</form>
-</div>
-</div>
-<div>
-<div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-<h3 class="text-2xl font-bold text-gray-900 mb-6">Контактная информация</h3>
-<div class="space-y-6">
-<div class="flex items-start">
-<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-<div class="w-5 h-5 flex items-center justify-center text-primary">
-<i class="ri-map-pin-line"></i>
-</div>
-</div>
-<div>
-<h4 class="text-lg font-semibold text-gray-900 mb-1">Адрес</h4>
-<p class="text-gray-600">г. Казань, ул. Мавлютова, д. 10Е, офис 777</p>
-</div>
-</div>
-<div class="flex items-start">
-<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-<div class="w-5 h-5 flex items-center justify-center text-primary">
-<i class="ri-phone-line"></i>
-</div>
-</div>
-<div>
-<h4 class="text-lg font-semibold text-gray-900 mb-1">Телефон</h4>
-<p class="text-gray-600">+7 (495) 123-45-67</p>
-</div>
-</div>
-<div class="flex items-start">
-<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-<div class="w-5 h-5 flex items-center justify-center text-primary">
-<i class="ri-mail-line"></i>
-</div>
-</div>
-<div>
-<h4 class="text-lg font-semibold text-gray-900 mb-1">Email</h4>
-<p class="text-gray-600">info@stroymaster.ru</p>
-</div>
-</div>
-<div class="flex items-start">
-<div class="w-10 h-10 flex-shrink-0 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-<div class="w-5 h-5 flex items-center justify-center text-primary">
-<i class="ri-time-line"></i>
-</div>
-</div>
-<div>
-<h4 class="text-lg font-semibold text-gray-900 mb-1">Режим работы</h4>
-<p class="text-gray-600">Пн-Пт: 9:00 - 18:00<br>Сб-Вс: выходные</p>
-</div>
-</div>
-</div>
-</div>
-<div class="bg-white rounded-lg shadow-lg overflow-hidden h-80">
-<iframe src="https://yandex.ru/map-widget/v1/?ll=49.182859,55.765153&z=16&l=map&pt=49.182859,55.765153&mode=search&text=Казань, улица Хусаина Мавлютова" class="w-full h-full border-none"></iframe>
-</div>
-</div>
-</div>
-</div>
-</section>
-<footer class="bg-gray-900 text-white py-12" style="background-image: url('bg12.jpg'); background-position: center; background-size: cover;">
-<div class="container mx-auto px-6 md:px-12">
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-<div>
-<a href="#" class="inline-block mb-6">
-<img src="logo.png" alt="СтройМастер" class="h-10">
-</a>
-<p class="text-gray-400 mb-6">Профессиональные строительные решения для вашего бизнеса и жизни. Качество, проверенное временем.</p>
-<div class="flex space-x-4">
-<a href="#" class="social-icon w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
-<div class="w-5 h-5 flex items-center justify-center">
-<i class="ri-facebook-fill"></i>
-</div>
-</a>
-<a href="#" class="social-icon w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
-<div class="w-5 h-5 flex items-center justify-center">
-<i class="ri-instagram-line"></i>
-</div>
-</a>
-<a href="#" class="social-icon w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
-<div class="w-5 h-5 flex items-center justify-center">
-<i class="ri-youtube-line"></i>
-</div>
-</a>
-<a href="#" class="social-icon w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center">
-<div class="w-5 h-5 flex items-center justify-center">
-<i class="ri-telegram-line"></i>
-</div>
-</a>
-</div>
-</div>
-<div>
-<h4 class="text-lg font-bold mb-6">Навигация</h4>
-<ul class="space-y-3">
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Главная</a></li>
-<li><a href="#about" class="text-gray-400 hover:text-white transition-colors">О компании</a></li>
-<li><a href="#services" class="text-gray-400 hover:text-white transition-colors">Услуги</a></li>
-<li><a href="#projects" class="text-gray-400 hover:text-white transition-colors">Проекты</a></li>
-<li><a href="#contact" class="text-gray-400 hover:text-white transition-colors">Контакты</a></li>
-</ul>
-</div>
-<div>
-<h4 class="text-lg font-bold mb-6">Услуги</h4>
-<ul class="space-y-3">
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Жилищное строительство</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Коммерческое строительство</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Проектирование</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Ремонт и реконструкция</a></li>
-<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Отделочные работы</a></li>
-</ul>
-</div>
-<div>
-<h4 class="text-lg font-bold mb-6">Связаться</h4>
-<p class="text-gray-400 mb-4">Напишите нам на почту по любому вашему деловому предожению или позвоните по номеру +7 (495) 123-45-67.</p>
-<form class="mb-4">
-<div class="flex">
-<input type="email" placeholder="Ваш email" class="flex-grow px-4 py-2 bg-gray-800 border border-gray-700 rounded-l focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
-<button type="submit" class="bg-primary text-white px-4 py-2 rounded-r !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">
-<div class="w-5 h-5 flex items-center justify-center">
-<i class="ri-send-plane-line"></i>
-</div>
-</button>
-</div>
-</form>
-<div class="flex items-center space-x-3">
-<div class="w-8 h-8 flex items-center justify-center">
-<i class="ri-visa-fill ri-lg"></i>
-</div>
-<div class="w-8 h-8 flex items-center justify-center">
-<i class="ri-mastercard-fill ri-lg"></i>
-</div>
-<div class="w-8 h-8 flex items-center justify-center">
-<i class="ri-paypal-fill ri-lg"></i>
-</div>
-</div>
-</div>
-</div>
-<div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-<p class="text-gray-400 text-sm mb-4 md:mb-0">© 2025 LULZ. Все права защищены.</p>
-<div class="flex space-x-6">
-<a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Политика конфиденциальности</a>
-<a href="#" class="text-gray-400 text-sm hover:text-white transition-colors">Условия использования</a>
-</div>
-</div>
-</div>
-</footer>
-<button id="back-to-top" class="back-to-top bg-primary text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center !rounded-button whitespace-nowrap hover:bg-blue-600 transition-colors">
-<div class="w-6 h-6 flex items-center justify-center">
-<i class="ri-arrow-up-line ri-lg"></i>
-</div>
-</button>
-<script id="navigation-script">
-document.addEventListener('DOMContentLoaded', function() {
-// Навигационное меню
-const navbar = document.getElementById('navbar');
-const mobileMenuButton = document.getElementById('mobile-menu-button');
-const mobileMenu = document.getElementById('mobile-menu');
-// Изменение стиля навигации при прокрутке
-window.addEventListener('scroll', function() {
-if (window.scrollY > 50) {
-navbar.classList.add('scrolled');
-} else {
-navbar.classList.remove('scrolled');
-}
-});
-// Мобильное меню
-if (mobileMenuButton) {
-mobileMenuButton.addEventListener('click', function() {
-mobileMenu.classList.toggle('hidden');
-});
-}
-// Плавная прокрутка к разделам
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-anchor.addEventListener('click', function (e) {
-e.preventDefault();
-const targetId = this.getAttribute('href');
-if (targetId === '#') return;
-const targetElement = document.querySelector(targetId);
-if (targetElement) {
-window.scrollTo({
-top: targetElement.offsetTop - 80,
-behavior: 'smooth'
-});
-// Закрыть мобильное меню после клика
-if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-mobileMenu.classList.add('hidden');
-}
-}
-});
-});
-});
-</script>
-<script id="hero-animation-script">
-document.addEventListener('DOMContentLoaded', function() {
-// Анимация заголовка в Hero секции
-const heroTitle = document.getElementById('hero-title');
-const heroSubtitle = document.getElementById('hero-subtitle');
-const heroButton = document.getElementById('hero-button');
-if (heroTitle && heroSubtitle && heroButton) {
-setTimeout(() => {
-heroTitle.style.opacity = '1';
-heroTitle.style.transform = 'translateY(0)';
-heroTitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-}, 300);
-setTimeout(() => {
-heroSubtitle.style.opacity = '1';
-heroSubtitle.style.transform = 'translateY(0)';
-heroSubtitle.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-}, 600);
-setTimeout(() => {
-heroButton.style.opacity = '1';
-heroButton.style.transform = 'translateY(0)';
-heroButton.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-}, 900);
-}
-// Смена фоновых изображений в Hero секции
-const heroSection = document.getElementById('hero');
-const heroImages = [
-'art33.jpg',
-'art2.jpg',
-'art1.jpg'
-];
-let currentImageIndex = 0;
-function changeHeroBackground() {
-currentImageIndex = (currentImageIndex + 1) % heroImages.length;
-heroSection.style.backgroundImage = `url('${heroImages[currentImageIndex]}')`;
-}
-// Меняем изображение каждые 5 секунд
-setInterval(changeHeroBackground, 5000);
-});
-</script>
-<script id="counter-animation-script">
-document.addEventListener('DOMContentLoaded', function() {
-// Анимация счетчиков
-const counterItems = document.querySelectorAll('.counter-item');
-const counters = document.querySelectorAll('.counter');
-const options = {
-root: null,
-rootMargin: '0px',
-threshold: 0.1
-};
-const counterObserver = new IntersectionObserver(function(entries, observer) {
-entries.forEach(entry => {
-if (entry.isIntersecting) {
-entry.target.classList.add('visible');
-// Если элемент содержит счетчик, запускаем анимацию счетчика
-const counter = entry.target.querySelector('.counter');
-if (counter) {
-const target = parseInt(counter.getAttribute('data-target'));
-let count = 0;
-const duration = 2000; // 2 секунды
-const step = Math.ceil(target / (duration / 20));
-const updateCounter = () => {
-count += step;
-if (count >= target) {
-counter.textContent = target;
-clearInterval(timer);
-} else {
-counter.textContent = count;
-}
-};
-const timer = setInterval(updateCounter, 20);
-}
-observer.unobserve(entry.target);
-}
-});
-}, options);
-counterItems.forEach(item => {
-counterObserver.observe(item);
-});
-});
-</script>
-<script id="project-filter-script">
-document.addEventListener('DOMContentLoaded', function() {
-// Фильтрация проектов
-const filterButtons = document.querySelectorAll('.project-filter-btn');
-const projectItems = document.querySelectorAll('.project-item');
-filterButtons.forEach(button => {
-button.addEventListener('click', function() {
-const filterValue = this.getAttribute('data-filter');
-// Активный класс для кнопок
-filterButtons.forEach(btn => {
-btn.classList.remove('bg-primary', 'text-white');
-btn.classList.add('text-gray-700');
-});
-this.classList.add('bg-primary', 'text-white');
-this.classList.remove('text-gray-700');
-// Фильтрация проектов
-projectItems.forEach(item => {
-if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
-item.style.display = 'block';
-} else {
-item.style.display = 'none';
-}
-});
-});
-});
-});
-</script>
-<script id="form-validation-script">
-document.addEventListener('DOMContentLoaded', function() {
-// Валидация формы
-const contactForm = document.getElementById('contact-form');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const phoneInput = document.getElementById('phone');
-const messageInput = document.getElementById('message');
-const privacyCheckbox = document.getElementById('privacy');
-if (contactForm) {
-contactForm.addEventListener('submit', function(e) {
-e.preventDefault();
-let isValid = true;
-// Проверка имени
-if (!nameInput.value.trim()) {
-highlightError(nameInput);
-isValid = false;
-} else {
-removeError(nameInput);
-}
-// Проверка email
-const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-if (!emailInput.value.trim() || !emailPattern.test(emailInput.value)) {
-highlightError(emailInput);
-isValid = false;
-} else {
-removeError(emailInput);
-}
-// Проверка телефона
-const phonePattern = /^(\+7|8)[\s\-]?\(?\d{3}\)?[\s\-]?\d{3}[\s\-]?\d{2}[\s\-]?\d{2}$/;
-if (!phoneInput.value.trim() || !phonePattern.test(phoneInput.value)) {
-highlightError(phoneInput);
-isValid = false;
-} else {
-removeError(phoneInput);
-}
-// Проверка сообщения
-if (!messageInput.value.trim()) {
-highlightError(messageInput);
-isValid = false;
-} else {
-removeError(messageInput);
-}
-// Проверка согласия
-if (!privacyCheckbox.checked) {
-const checkmark = document.querySelector('.checkmark');
-checkmark.style.borderColor = '#ef4444';
-isValid = false;
-} else {
-const checkmark = document.querySelector('.checkmark');
-checkmark.style.borderColor = '';
-}
-if (isValid) {
-// Здесь будет отправка формы
-alert('Спасибо! Ваша заявка успешно отправлена.');
-contactForm.reset();
-}
-});
-// Маска для телефона
-if (phoneInput) {
-phoneInput.addEventListener('input', function(e) {
-let x = e.target.value.replace(/\D/g, '').match(/(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/);
-if (x[1] === '') {
-e.target.value = '';
-} else {
-e.target.value = '+7 (' + x[2] + ') ' + x[3] + (x[4] ? '-' + x[4] : '') + (x[5] ? '-' + x[5] : '');
-}
-});
-}
-// Стилизация чекбокса
-if (privacyCheckbox) {
-const checkmark = document.querySelector('.checkmark');
-privacyCheckbox.addEventListener('change', function() {
-if (this.checked) {
-checkmark.style.backgroundColor = '#2563eb';
-checkmark.style.borderColor = '#2563eb';
-checkmark.innerHTML = '<div class="w-3 h-3 absolute top-1 left-1"><i class="ri-check-line text-white text-xs"></i></div>';
-} else {
-checkmark.style.backgroundColor = '#e5e7eb';
-checkmark.style.borderColor = '#d1d5db';
-checkmark.innerHTML = '';
-}
-});
-}
-}
-function highlightError(input) {
-input.classList.add('border-red-500');
-input.classList.add('bg-red-50');
-}
-function removeError(input) {
-input.classList.remove('border-red-500');
-input.classList.remove('bg-red-50');
-}
-});
-</script>
-<script id="back-to-top-script">
-document.addEventListener('DOMContentLoaded', function() {
-// Кнопка "Наверх"
-const backToTopButton = document.getElementById('back-to-top');
-window.addEventListener('scroll', function() {
-if (window.scrollY > 300) {
-backToTopButton.classList.add('visible');
-} else {
-backToTopButton.classList.remove('visible');
-}
-});
-backToTopButton.addEventListener('click', function() {
-window.scrollTo({
-top: 0,
-behavior: 'smooth'
-});
-});
-});
-</script>
-</body>
+    <!-- Hero Section -->
+    <section
+      class="relative h-screen flex items-center"
+      style="background-image: url('https://readdy.ai/api/search-image?query=modern%20construction%20site%20with%20workers%20in%20safety%20helmets%2C%20cranes%20and%20scaffolding%2C%20dramatic%20lighting%2C%20professional%20high-quality%20architectural%20photography%2C%20wide%20angle%20shot%20showing%20scale%20of%20construction%2C%20urban%20development%2C%20blue%20sky%20with%20clouds&width=1920&height=1080&seq=1&orientation=landscape'); background-size: cover; background-position: center;"
+    >
+      <div class="hero-overlay absolute inset-0"></div>
+      <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-3xl">
+          <h1
+            class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight"
+          >
+            Современные решения для вашего строительства
+          </h1>
+          <p class="text-xl text-gray-200 mb-8">
+            Профессиональный подход к строительству и ремонту любой сложности.
+            Более 15 лет опыта и сотни успешных проектов.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button
+              onclick="openModal()"
+              class="bg-primary text-white px-8 py-4 rounded-button hover:bg-opacity-90 transition-all text-lg font-medium whitespace-nowrap"
+            >
+              Заказать консультацию
+            </button>
+            <a
+              href="#portfolio"
+              class="bg-white bg-opacity-20 text-white border border-white border-opacity-40 px-8 py-4 rounded-button hover:bg-opacity-30 transition-all text-lg font-medium whitespace-nowrap hover:scale-105 transform"
+            >
+              Наши проекты
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            О компании
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Мы предоставляем полный спектр строительных услуг, от проектирования
+            до сдачи объекта под ключ, гарантируя высокое качество и соблюдение
+            сроков.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <h3 class="text-2xl font-bold text-gray-900 mb-6">Наша миссия</h3>
+            <p class="text-gray-700 mb-6">
+              Создавать надежные, функциональные и эстетически привлекательные
+              объекты, которые улучшают качество жизни наших клиентов и
+              способствуют развитию городской среды.
+            </p>
+            <p class="text-gray-700 mb-8">
+              Мы стремимся к инновациям, постоянно совершенствуем технологии
+              строительства и внедряем современные материалы, обеспечивая
+              оптимальное соотношение цены и качества.
+            </p>
+            <button
+              class="bg-primary text-white px-6 py-3 rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap"
+            >
+              Подробнее о нас
+            </button>
+          </div>
+          <div class="relative">
+            <img
+              src="https://readdy.ai/api/search-image?query=modern%20construction%20office%20with%20architects%20and%20engineers%20working%20on%20blueprints%2C%20professional%20team%20in%20business%20attire%20discussing%20project%20details%2C%20bright%20modern%20office%20space%20with%20glass%20walls%2C%20computers%20with%203D%20models%2C%20architectural%20models%20on%20display&width=600&height=400&seq=2&orientation=landscape"
+              alt="Наша команда"
+              class="w-full h-auto rounded-lg shadow-xl"
+            />
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div
+            class="counter-item bg-white p-8 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce"
+            >
+              <div
+                class="w-8 h-8 flex items-center justify-center text-primary"
+              >
+                <i class="ri-building-line text-2xl"></i>
+              </div>
+            </div>
+            <h4 class="text-4xl font-bold text-gray-900 mb-2" data-target="15">
+              0
+            </h4>
+            <p class="text-gray-600">лет на рынке</p>
+          </div>
+          <div
+            class="counter-item bg-white p-8 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce"
+            >
+              <div
+                class="w-8 h-8 flex items-center justify-center text-primary"
+              >
+                <i class="ri-team-line text-2xl"></i>
+              </div>
+            </div>
+            <h4 class="text-4xl font-bold text-gray-900 mb-2" data-target="120">
+              0
+            </h4>
+            <p class="text-gray-600">специалистов</p>
+          </div>
+          <div
+            class="counter-item bg-white p-8 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce"
+            >
+              <div
+                class="w-8 h-8 flex items-center justify-center text-primary"
+              >
+                <i class="ri-home-smile-line text-2xl"></i>
+              </div>
+            </div>
+            <h4 class="text-4xl font-bold text-gray-900 mb-2" data-target="350">
+              0
+            </h4>
+            <p class="text-gray-600">завершенных проектов</p>
+          </div>
+          <div
+            class="counter-item bg-white p-8 rounded-lg shadow-lg text-center transform hover:scale-105 transition-all duration-300"
+          >
+            <div
+              class="w-16 h-16 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce"
+            >
+              <div
+                class="w-8 h-8 flex items-center justify-center text-primary"
+              >
+                <i class="ri-user-smile-line text-2xl"></i>
+              </div>
+            </div>
+            <h4 class="text-4xl font-bold text-gray-900 mb-2" data-target="98">
+              0
+            </h4>
+            <p class="text-gray-600">довольных клиентов</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Наши услуги
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Предлагаем полный комплекс услуг в сфере строительства и ремонта, от
+            проектирования до отделочных работ.
+          </p>
+        </div>
+        <div class="flex justify-center mb-12">
+          <div class="inline-flex bg-white p-1 rounded-full shadow-md">
+            <button
+              class="service-tab px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-100 transition-all whitespace-nowrap active bg-primary text-white"
+            >
+              Проектирование
+            </button>
+            <button
+              class="service-tab px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-100 transition-all whitespace-nowrap"
+            >
+              Строительство
+            </button>
+            <button
+              class="service-tab px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-100 transition-all whitespace-nowrap"
+            >
+              Ремонт
+            </button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="service-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=architectural%20blueprint%20with%203D%20model%2C%20modern%20building%20design%2C%20professional%20architectural%20drawing%20with%20detailed%20measurements%2C%20high-quality%20visualization%2C%20clean%20background%2C%20technical%20drawing&width=600&height=400&seq=3&orientation=landscape"
+                alt="Проектирование"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-4"
+              >
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary"
+                >
+                  <i class="ri-draft-line"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Проектирование
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Разработка полного комплекта проектной документации для объектов
+                любой сложности с учетом всех требований и норм.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center hover:underline"
+              >
+                Подробнее
+                <div class="w-5 h-5 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=construction%20of%20a%20modern%20building%20foundation%2C%20workers%20in%20safety%20equipment%2C%20concrete%20pouring%2C%20construction%20machinery%2C%20professional%20construction%20site%20photography%2C%20clear%20blue%20sky%2C%20industrial%20construction%20process&width=600&height=400&seq=4&orientation=landscape"
+                alt="Строительство"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-4"
+              >
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary"
+                >
+                  <i class="ri-building-2-line"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Строительство
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Полный цикл строительных работ от фундамента до кровли с
+                использованием современных технологий и материалов.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center hover:underline"
+              >
+                Подробнее
+                <div class="w-5 h-5 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=interior%20renovation%20in%20progress%2C%20modern%20apartment%20renovation%2C%20workers%20installing%20drywall%2C%20painting%20walls%2C%20professional%20interior%20construction%20photography%2C%20bright%20lighting%2C%20renovation%20process&width=600&height=400&seq=5&orientation=landscape"
+                alt="Ремонт"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-4"
+              >
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary"
+                >
+                  <i class="ri-tools-line"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Ремонт и отделка
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Качественный ремонт помещений любого назначения, включая
+                черновые и чистовые отделочные работы.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center hover:underline"
+              >
+                Подробнее
+                <div class="w-5 h-5 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=landscape%20design%20and%20construction%2C%20modern%20garden%20with%20patio%2C%20professional%20landscaping%20with%20plants%20and%20decorative%20elements%2C%20outdoor%20living%20space%20design%2C%20garden%20architecture%2C%20professional%20photography&width=600&height=400&seq=6&orientation=landscape"
+                alt="Ландшафтный дизайн"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-4"
+              >
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary"
+                >
+                  <i class="ri-landscape-line"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Ландшафтный дизайн
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Проектирование и реализация ландшафтных решений для частных и
+                коммерческих территорий.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center hover:underline"
+              >
+                Подробнее
+                <div class="w-5 h-5 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=interior%20design%20visualization%2C%20modern%20living%20room%20design%2C%203D%20rendering%20of%20stylish%20interior%20with%20furniture%20and%20decor%2C%20professional%20interior%20design%20concept%2C%20architectural%20visualization&width=600&height=400&seq=7&orientation=landscape"
+                alt="Дизайн интерьера"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-4"
+              >
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary"
+                >
+                  <i class="ri-home-gear-line"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Дизайн интерьера
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Разработка концепции интерьера, 3D-визуализация, подбор
+                материалов и мебели, авторский надзор.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center hover:underline"
+              >
+                Подробнее
+                <div class="w-5 h-5 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+          <div
+            class="service-card bg-white rounded-lg shadow-lg overflow-hidden"
+          >
+            <div class="h-48 overflow-hidden">
+              <img
+                src="https://readdy.ai/api/search-image?query=engineering%20consultation%20at%20construction%20site%2C%20engineers%20with%20safety%20helmets%20reviewing%20plans%2C%20professional%20team%20discussing%20technical%20details%2C%20construction%20site%20background%2C%20technical%20consultation%2C%20professional%20photography&width=600&height=400&seq=8&orientation=landscape"
+                alt="Инженерные системы"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-6">
+              <div
+                class="w-12 h-12 bg-primary bg-opacity-10 rounded-lg flex items-center justify-center mb-4"
+              >
+                <div
+                  class="w-6 h-6 flex items-center justify-center text-primary"
+                >
+                  <i class="ri-settings-line"></i>
+                </div>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-3">
+                Инженерные системы
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Проектирование и монтаж всех видов инженерных коммуникаций:
+                электрика, водоснабжение, отопление, вентиляция.
+              </p>
+              <button
+                class="text-primary font-medium flex items-center hover:underline"
+              >
+                Подробнее
+                <div class="w-5 h-5 flex items-center justify-center ml-1">
+                  <i class="ri-arrow-right-line"></i>
+                </div>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Наши проекты
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Ознакомьтесь с нашими реализованными проектами в различных сферах
+            строительства.
+          </p>
+        </div>
+        <div class="flex justify-center mb-12">
+          <div class="inline-flex bg-gray-100 p-1 rounded-full shadow-sm">
+            <button
+              class="portfolio-filter active px-6 py-2 rounded-full bg-primary text-white font-medium whitespace-nowrap"
+            >
+              Все проекты
+            </button>
+            <button
+              class="portfolio-filter px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-200 transition-all whitespace-nowrap"
+            >
+              Жилые
+            </button>
+            <button
+              class="portfolio-filter px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-200 transition-all whitespace-nowrap"
+            >
+              Коммерческие
+            </button>
+            <button
+              class="portfolio-filter px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-200 transition-all whitespace-nowrap"
+            >
+              Промышленные
+            </button>
+          </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="portfolio-item rounded-lg overflow-hidden shadow-lg">
+            <div class="relative h-64">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20residential%20building%20exterior%2C%20contemporary%20apartment%20complex%20with%20glass%20facades%2C%20professional%20architectural%20photography%2C%20clean%20design%2C%20urban%20setting%2C%20blue%20sky&width=600&height=400&seq=9&orientation=landscape"
+                alt="Жилой комплекс"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"
+              >
+                <button
+                  class="bg-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-search-line text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 bg-white">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                ЖК "Панорама"
+              </h3>
+              <p class="text-gray-600 mb-3">Жилой комплекс премиум-класса</p>
+              <div class="flex items-center">
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-primary h-2 rounded-full"
+                    style="width: 100%"
+                  ></div>
+                </div>
+                <span class="ml-3 text-sm text-gray-600">Завершен</span>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item rounded-lg overflow-hidden shadow-lg">
+            <div class="relative h-64">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20office%20building%20exterior%2C%20corporate%20headquarters%20with%20glass%20and%20steel%20architecture%2C%20professional%20architectural%20photography%2C%20business%20district%2C%20contemporary%20design%2C%20clear%20sky&width=600&height=400&seq=10&orientation=landscape"
+                alt="Бизнес-центр"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"
+              >
+                <button
+                  class="bg-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-search-line text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 bg-white">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                БЦ "Меркурий"
+              </h3>
+              <p class="text-gray-600 mb-3">Бизнес-центр класса А</p>
+              <div class="flex items-center">
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-primary h-2 rounded-full"
+                    style="width: 100%"
+                  ></div>
+                </div>
+                <span class="ml-3 text-sm text-gray-600">Завершен</span>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item rounded-lg overflow-hidden shadow-lg">
+            <div class="relative h-64">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20shopping%20mall%20interior%2C%20luxury%20retail%20space%20with%20glass%20ceiling%2C%20professional%20architectural%20photography%2C%20commercial%20space%2C%20high-end%20design%2C%20bright%20interior&width=600&height=400&seq=11&orientation=landscape"
+                alt="Торговый центр"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"
+              >
+                <button
+                  class="bg-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-search-line text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 bg-white">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                ТРЦ "Галактика"
+              </h3>
+              <p class="text-gray-600 mb-3">Торгово-развлекательный центр</p>
+              <div class="flex items-center">
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-primary h-2 rounded-full"
+                    style="width: 100%"
+                  ></div>
+                </div>
+                <span class="ml-3 text-sm text-gray-600">Завершен</span>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item rounded-lg overflow-hidden shadow-lg">
+            <div class="relative h-64">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20industrial%20facility%20interior%2C%20clean%20manufacturing%20plant%20with%20high-tech%20equipment%2C%20professional%20industrial%20photography%2C%20factory%20floor%2C%20modern%20industrial%20design%2C%20bright%20well-lit%20space&width=600&height=400&seq=12&orientation=landscape"
+                alt="Промышленный объект"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"
+              >
+                <button
+                  class="bg-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-search-line text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 bg-white">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Завод "ТехноПром"
+              </h3>
+              <p class="text-gray-600 mb-3">Производственный комплекс</p>
+              <div class="flex items-center">
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-primary h-2 rounded-full"
+                    style="width: 85%"
+                  ></div>
+                </div>
+                <span class="ml-3 text-sm text-gray-600">85%</span>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item rounded-lg overflow-hidden shadow-lg">
+            <div class="relative h-64">
+              <img
+                src="https://readdy.ai/api/search-image?query=luxury%20villa%20exterior%20with%20pool%2C%20modern%20residential%20architecture%2C%20professional%20real%20estate%20photography%2C%20high-end%20home%20design%2C%20landscaped%20garden%2C%20sunset%20lighting&width=600&height=400&seq=13&orientation=landscape"
+                alt="Частный дом"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"
+              >
+                <button
+                  class="bg-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-search-line text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 bg-white">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Вилла "Лазурная"
+              </h3>
+              <p class="text-gray-600 mb-3">Частный дом премиум-класса</p>
+              <div class="flex items-center">
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-primary h-2 rounded-full"
+                    style="width: 100%"
+                  ></div>
+                </div>
+                <span class="ml-3 text-sm text-gray-600">Завершен</span>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item rounded-lg overflow-hidden shadow-lg">
+            <div class="relative h-64">
+              <img
+                src="https://readdy.ai/api/search-image?query=modern%20hotel%20exterior%20and%20lobby%2C%20luxury%20hospitality%20design%2C%20professional%20architectural%20photography%2C%20elegant%20interior%20with%20reception%20area%2C%20contemporary%20hotel%20design%2C%20welcoming%20atmosphere&width=600&height=400&seq=14&orientation=landscape"
+                alt="Гостиница"
+                class="w-full h-full object-cover object-top"
+              />
+              <div
+                class="absolute inset-0 bg-black bg-opacity-40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center"
+              >
+                <button
+                  class="bg-white text-gray-900 w-12 h-12 rounded-full flex items-center justify-center"
+                >
+                  <i class="ri-search-line text-xl"></i>
+                </button>
+              </div>
+            </div>
+            <div class="p-6 bg-white">
+              <h3 class="text-xl font-bold text-gray-900 mb-2">
+                Отель "Континенталь"
+              </h3>
+              <p class="text-gray-600 mb-3">Гостиничный комплекс</p>
+              <div class="flex items-center">
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    class="bg-primary h-2 rounded-full"
+                    style="width: 70%"
+                  ></div>
+                </div>
+                <span class="ml-3 text-sm text-gray-600">70%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center mt-12">
+          <button
+            class="bg-white border border-gray-300 text-gray-700 px-8 py-3 rounded-button hover:bg-gray-50 transition-all font-medium whitespace-nowrap"
+          >
+            Смотреть все проекты
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- Calculator Section -->
+    <section id="calculator" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Калькулятор стоимости
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Рассчитайте предварительную стоимость вашего проекта, выбрав
+            необходимые параметры.
+          </p>
+        </div>
+        <div class="bg-white rounded-lg shadow-lg p-8 max-w-4xl mx-auto">
+          <div class="mb-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">
+              Шаг 1: Выберите тип объекта
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="radio-container">
+                <input
+                  type="radio"
+                  id="type-residential"
+                  name="building-type"
+                  checked
+                />
+                <label
+                  for="type-residential"
+                  class="block w-full p-4 border border-gray-200 rounded-lg text-center cursor-pointer hover:border-primary transition-all"
+                >
+                  <div
+                    class="w-12 h-12 mx-auto mb-3 flex items-center justify-center"
+                  >
+                    <i class="ri-home-line text-3xl text-gray-700"></i>
+                  </div>
+                  <span class="font-medium text-gray-900">Жилой дом</span>
+                </label>
+              </div>
+              <div class="radio-container">
+                <input type="radio" id="type-commercial" name="building-type" />
+                <label
+                  for="type-commercial"
+                  class="block w-full p-4 border border-gray-200 rounded-lg text-center cursor-pointer hover:border-primary transition-all"
+                >
+                  <div
+                    class="w-12 h-12 mx-auto mb-3 flex items-center justify-center"
+                  >
+                    <i class="ri-store-line text-3xl text-gray-700"></i>
+                  </div>
+                  <span class="font-medium text-gray-900">Коммерческий</span>
+                </label>
+              </div>
+              <div class="radio-container">
+                <input type="radio" id="type-industrial" name="building-type" />
+                <label
+                  for="type-industrial"
+                  class="block w-full p-4 border border-gray-200 rounded-lg text-center cursor-pointer hover:border-primary transition-all"
+                >
+                  <div
+                    class="w-12 h-12 mx-auto mb-3 flex items-center justify-center"
+                  >
+                    <i class="ri-factory-line text-3xl text-gray-700"></i>
+                  </div>
+                  <span class="font-medium text-gray-900">Промышленный</span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="mb-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">
+              Шаг 2: Укажите площадь (м²)
+            </h3>
+            <div class="mb-4">
+              <input
+                type="range"
+                id="area-range"
+                min="50"
+                max="1000"
+                value="150"
+                class="w-full"
+              />
+            </div>
+            <div class="flex justify-between items-center">
+              <span class="text-gray-600">50 м²</span>
+              <span class="text-xl font-bold text-gray-900" id="area-value"
+                >150 м²</span
+              >
+              <span class="text-gray-600">1000 м²</span>
+            </div>
+          </div>
+          <div class="mb-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">
+              Шаг 3: Выберите тип работ
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <label
+                class="custom-checkbox flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary transition-all"
+              >
+                <input type="checkbox" checked />
+                <span class="checkmark"></span>
+                <div class="ml-2">
+                  <span class="font-medium text-gray-900">Проектирование</span>
+                  <p class="text-sm text-gray-600 mt-1">
+                    Разработка проектной документации
+                  </p>
+                </div>
+              </label>
+              <label
+                class="custom-checkbox flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary transition-all"
+              >
+                <input type="checkbox" checked />
+                <span class="checkmark"></span>
+                <div class="ml-2">
+                  <span class="font-medium text-gray-900">Строительство</span>
+                  <p class="text-sm text-gray-600 mt-1">
+                    Возведение конструкций
+                  </p>
+                </div>
+              </label>
+              <label
+                class="custom-checkbox flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary transition-all"
+              >
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                <div class="ml-2">
+                  <span class="font-medium text-gray-900"
+                    >Отделочные работы</span
+                  >
+                  <p class="text-sm text-gray-600 mt-1">
+                    Внутренняя и внешняя отделка
+                  </p>
+                </div>
+              </label>
+              <label
+                class="custom-checkbox flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary transition-all"
+              >
+                <input type="checkbox" />
+                <span class="checkmark"></span>
+                <div class="ml-2">
+                  <span class="font-medium text-gray-900"
+                    >Инженерные системы</span
+                  >
+                  <p class="text-sm text-gray-600 mt-1">Монтаж коммуникаций</p>
+                </div>
+              </label>
+            </div>
+          </div>
+          <div class="mb-8">
+            <h3 class="text-xl font-bold text-gray-900 mb-6">
+              Шаг 4: Дополнительные опции
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div
+                class="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              >
+                <div>
+                  <span class="font-medium text-gray-900">Дизайн-проект</span>
+                  <p class="text-sm text-gray-600 mt-1">
+                    Разработка дизайна интерьера
+                  </p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div
+                class="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              >
+                <div>
+                  <span class="font-medium text-gray-900"
+                    >Ландшафтный дизайн</span
+                  >
+                  <p class="text-sm text-gray-600 mt-1">
+                    Проектирование территории
+                  </p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div
+                class="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              >
+                <div>
+                  <span class="font-medium text-gray-900"
+                    >Авторский надзор</span
+                  >
+                  <p class="text-sm text-gray-600 mt-1">
+                    Контроль реализации проекта
+                  </p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div
+                class="flex items-center justify-between p-4 border border-gray-200 rounded-lg"
+              >
+                <div>
+                  <span class="font-medium text-gray-900">Согласование</span>
+                  <p class="text-sm text-gray-600 mt-1">
+                    Оформление документации
+                  </p>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" checked />
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 p-6 rounded-lg border border-gray-200">
+            <div class="flex justify-between items-center mb-4">
+              <span class="text-lg font-medium text-gray-700"
+                >Предварительная стоимость:</span
+              >
+              <span class="text-2xl font-bold text-primary">4 850 000 ₽</span>
+            </div>
+            <p class="text-sm text-gray-600 mb-4">
+              Окончательная стоимость может отличаться и зависит от многих
+              факторов. Для получения точного расчета свяжитесь с нашими
+              специалистами.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4">
+              <button
+                class="bg-primary text-white px-6 py-3 rounded-button hover:bg-opacity-90 transition-all font-medium flex-1 whitespace-nowrap"
+              >
+                Получить точный расчет
+              </button>
+              <button
+                class="bg-white border border-gray-300 text-gray-700 px-6 py-3 rounded-button hover:bg-gray-50 transition-all font-medium flex-1 whitespace-nowrap"
+              >
+                Скачать смету
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Partners Section -->
+    <section class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Наши партнеры
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Мы сотрудничаем с ведущими поставщиками материалов и оборудования,
+            что гарантирует высокое качество наших работ.
+          </p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8">
+          <div
+            class="partner-logo flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="w-16 h-16 flex items-center justify-center">
+              <i class="ri-building-4-fill text-4xl text-gray-700"></i>
+            </div>
+          </div>
+          <div
+            class="partner-logo flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="w-16 h-16 flex items-center justify-center">
+              <i class="ri-building-2-fill text-4xl text-gray-700"></i>
+            </div>
+          </div>
+          <div
+            class="partner-logo flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="w-16 h-16 flex items-center justify-center">
+              <i class="ri-hammer-fill text-4xl text-gray-700"></i>
+            </div>
+          </div>
+          <div
+            class="partner-logo flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="w-16 h-16 flex items-center justify-center">
+              <i class="ri-paint-fill text-4xl text-gray-700"></i>
+            </div>
+          </div>
+          <div
+            class="partner-logo flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="w-16 h-16 flex items-center justify-center">
+              <i class="ri-tools-fill text-4xl text-gray-700"></i>
+            </div>
+          </div>
+          <div
+            class="partner-logo flex items-center justify-center p-6 bg-white rounded-lg shadow-sm hover:shadow-md transition-all"
+          >
+            <div class="w-16 h-16 flex items-center justify-center">
+              <i class="ri-home-gear-fill text-4xl text-gray-700"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Contact Section -->
+    <section id="contacts" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            Свяжитесь с нами
+          </h2>
+          <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+            Оставьте заявку, и наши специалисты свяжутся с вами в ближайшее
+            время для консультации.
+          </p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <div>
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+              <h3 class="text-xl font-bold text-gray-900 mb-6">
+                Форма обратной связи
+              </h3>
+              <form>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                  <div>
+                    <label
+                      for="name"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                      >Ваше имя</label
+                    >
+                    <input
+                      type="text"
+                      id="name"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                      placeholder="Иван Петров"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      for="phone"
+                      class="block text-sm font-medium text-gray-700 mb-2"
+                      >Телефон</label
+                    >
+                    <input
+                      type="tel"
+                      id="phone"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                      placeholder="+7 (___) ___-__-__"
+                    />
+                  </div>
+                </div>
+                <div class="mb-6">
+                  <label
+                    for="email"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Email</label
+                  >
+                  <input
+                    type="email"
+                    id="email"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                    placeholder="example@mail.ru"
+                  />
+                </div>
+                <div class="mb-6">
+                  <label
+                    for="service"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Интересующая услуга</label
+                  >
+                  <div class="relative">
+                    <select
+                      id="service"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all appearance-none pr-8"
+                    >
+                      <option value="">Выберите услугу</option>
+                      <option value="design">Проектирование</option>
+                      <option value="construction">Строительство</option>
+                      <option value="renovation">Ремонт и отделка</option>
+                      <option value="landscape">Ландшафтный дизайн</option>
+                      <option value="interior">Дизайн интерьера</option>
+                      <option value="engineering">Инженерные системы</option>
+                    </select>
+                    <div
+                      class="absolute right-3 top-1/2 transform -translate-y-1/2 pointer-events-none w-5 h-5 flex items-center justify-center text-gray-500"
+                    >
+                      <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-6">
+                  <label
+                    for="message"
+                    class="block text-sm font-medium text-gray-700 mb-2"
+                    >Сообщение</label
+                  >
+                  <textarea
+                    id="message"
+                    rows="4"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                    placeholder="Опишите ваш проект или задайте вопрос"
+                  ></textarea>
+                </div>
+                <div class="mb-6">
+                  <label class="custom-checkbox flex items-start">
+                    <input type="checkbox" checked />
+                    <span class="checkmark"></span>
+                    <span class="ml-2 text-sm text-gray-600"
+                      >Я согласен на обработку персональных данных в
+                      соответствии с
+                      <a href="#" class="text-primary hover:underline"
+                        >Политикой конфиденциальности</a
+                      ></span
+                    >
+                  </label>
+                </div>
+                <button
+                  type="submit"
+                  class="w-full bg-primary text-white px-6 py-3 rounded-button hover:bg-opacity-90 transition-all font-medium whitespace-nowrap"
+                >
+                  Отправить заявку
+                </button>
+              </form>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+                <div
+                  class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <div
+                    class="w-6 h-6 flex items-center justify-center text-primary"
+                  >
+                    <i class="ri-map-pin-line"></i>
+                  </div>
+                </div>
+                <h4 class="font-bold text-gray-900 mb-2">Адрес</h4>
+                <p class="text-gray-600">
+                  г. Москва, ул. Строителей, д. 15, офис 301
+                </p>
+              </div>
+              <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+                <div
+                  class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <div
+                    class="w-6 h-6 flex items-center justify-center text-primary"
+                  >
+                    <i class="ri-phone-line"></i>
+                  </div>
+                </div>
+                <h4 class="font-bold text-gray-900 mb-2">Телефон</h4>
+                <p class="text-gray-600">+7 (495) 123-45-67</p>
+              </div>
+              <div class="bg-white rounded-lg shadow-sm p-6 text-center">
+                <div
+                  class="w-12 h-12 bg-primary bg-opacity-10 rounded-full flex items-center justify-center mx-auto mb-4"
+                >
+                  <div
+                    class="w-6 h-6 flex items-center justify-center text-primary"
+                  >
+                    <i class="ri-mail-line"></i>
+                  </div>
+                </div>
+                <h4 class="font-bold text-gray-900 mb-2">Email</h4>
+                <p class="text-gray-600">info@stroicompany.ru</p>
+              </div>
+            </div>
+          </div>
+          <div class="h-[600px] rounded-lg overflow-hidden shadow-lg">
+            <div
+              class="w-full h-full"
+              style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png'); background-size: cover; background-position: center;"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+      <div class="container mx-auto px-4">
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12"
+        >
+          <div>
+            <a href="#" class="text-3xl font-['Pacifico'] text-white mb-6 block"
+              >logo</a
+            >
+            <p class="text-gray-400 mb-6">
+              Профессиональные строительные и ремонтные услуги с гарантией
+              качества. Более 15 лет опыта в строительной отрасли.
+            </p>
+            <div class="flex space-x-4">
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center border border-gray-700 rounded-full text-gray-400 hover:text-white hover:border-white transition-all"
+              >
+                <i class="ri-facebook-fill"></i>
+              </a>
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center border border-gray-700 rounded-full text-gray-400 hover:text-white hover:border-white transition-all"
+              >
+                <i class="ri-instagram-line"></i>
+              </a>
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center border border-gray-700 rounded-full text-gray-400 hover:text-white hover:border-white transition-all"
+              >
+                <i class="ri-youtube-line"></i>
+              </a>
+              <a
+                href="#"
+                class="social-icon w-10 h-10 flex items-center justify-center border border-gray-700 rounded-full text-gray-400 hover:text-white hover:border-white transition-all"
+              >
+                <i class="ri-telegram-line"></i>
+              </a>
+            </div>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold mb-6">Услуги</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Проектирование</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Строительство</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Ремонт и отделка</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Ландшафтный дизайн</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Дизайн интерьера</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Инженерные системы</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold mb-6">Информация</h4>
+            <ul class="space-y-3">
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >О компании</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Проекты</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Отзывы</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Блог</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Вакансии</a
+                >
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="text-gray-400 hover:text-white transition-colors"
+                  >Контакты</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="text-xl font-bold mb-6">Подписка на новости</h4>
+            <p class="text-gray-400 mb-4">
+              Подпишитесь на нашу рассылку, чтобы получать новости и специальные
+              предложения.
+            </p>
+            <form class="mb-6">
+              <div class="flex">
+                <input
+                  type="email"
+                  placeholder="Ваш email"
+                  class="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-l-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all text-white"
+                />
+                <button
+                  type="submit"
+                  class="bg-primary text-white px-4 py-3 rounded-r-lg hover:bg-opacity-90 transition-all whitespace-nowrap"
+                >
+                  <div class="w-6 h-6 flex items-center justify-center">
+                    <i class="ri-send-plane-line"></i>
+                  </div>
+                </button>
+              </div>
+            </form>
+            <h4 class="text-xl font-bold mb-4">Режим работы</h4>
+            <p class="text-gray-400">Пн-Пт: 9:00 - 18:00</p>
+            <p class="text-gray-400">Сб-Вс: выходные</p>
+          </div>
+        </div>
+        <hr class="border-gray-800 mb-8" />
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-500 mb-4 md:mb-0">
+            © 2025 Строительная компания. Все права защищены.
+          </p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-500 hover:text-white transition-colors"
+              >Политика конфиденциальности</a
+            >
+            <a href="#" class="text-gray-500 hover:text-white transition-colors"
+              >Условия использования</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+    <!-- Back to Top Button -->
+    <button
+      class="back-to-top fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center z-50"
+    >
+      <i class="ri-arrow-up-line text-xl"></i>
+    </button>
+    <!-- Modal -->
+    <div
+      class="modal fixed inset-0 z-50 flex items-center justify-center hidden"
+    >
+      <div class="modal-overlay absolute inset-0 bg-black bg-opacity-50"></div>
+      <div
+        class="modal-container bg-white w-full max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-hidden"
+      >
+        <div
+          class="modal-header flex justify-between items-center p-6 border-b"
+        >
+          <h3 class="text-xl font-bold text-gray-900">
+            Заказать обратный звонок
+          </h3>
+          <button class="modal-close text-gray-500 hover:text-gray-700">
+            <div class="w-6 h-6 flex items-center justify-center">
+              <i class="ri-close-line text-xl"></i>
+            </div>
+          </button>
+        </div>
+        <div class="modal-body p-6">
+          <form>
+            <div class="mb-4">
+              <label
+                for="modal-name"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Ваше имя</label
+              >
+              <input
+                type="text"
+                id="modal-name"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                placeholder="Иван Петров"
+              />
+            </div>
+            <div class="mb-4">
+              <label
+                for="modal-phone"
+                class="block text-sm font-medium text-gray-700 mb-2"
+                >Телефон</label
+              >
+              <input
+                type="tel"
+                id="modal-phone"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all"
+                placeholder="+7 (___) ___-__-__"
+              />
+            </div>
+            <div class="mb-6">
+              <label class="custom-checkbox flex items-start">
+                <input type="checkbox" checked />
+                <span class="checkmark"></span>
+                <span class="ml-2 text-sm text-gray-600"
+                  >Я согласен на обработку персональных данных</span
+                >
+              </label>
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-primary text-white px-6 py-3 rounded-button hover:bg-opacity-90 transition-all font-medium whitespace-nowrap"
+            >
+              Заказать звонок
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script id="navbar-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const navbar = document.querySelector(".navbar-fixed");
+        const navLinks = document.querySelectorAll('a[href^="#"]');
+        navLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute("href");
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+              const offset = navbar.offsetHeight;
+              const targetPosition = targetElement.offsetTop - offset;
+              window.scrollTo({
+                top: targetPosition,
+                behavior: "smooth",
+              });
+            }
+          });
+        });
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 50) {
+            navbar.classList.add("bg-gray-900", "shadow-md");
+            navbar.classList.remove("bg-transparent");
+          } else {
+            navbar.classList.remove("bg-gray-900", "shadow-md");
+            navbar.classList.add("bg-transparent");
+          }
+        });
+        // Mobile menu toggle
+        const menuButton = document.querySelector(".md\\:hidden");
+        const mobileMenu = document.querySelector(".mobile-menu");
+        const closeButton = document.querySelector(".mobile-menu button");
+        menuButton.addEventListener("click", function () {
+          mobileMenu.classList.remove("hidden");
+          mobileMenu.classList.add("flex");
+          document.body.style.overflow = "hidden";
+        });
+        closeButton.addEventListener("click", function () {
+          mobileMenu.classList.add("hidden");
+          mobileMenu.classList.remove("flex");
+          document.body.style.overflow = "";
+        });
+        // Mobile menu links
+        const mobileLinks = document.querySelectorAll(".mobile-menu nav a");
+        mobileLinks.forEach((link) => {
+          link.addEventListener("click", function () {
+            mobileMenu.classList.add("hidden");
+            mobileMenu.classList.remove("flex");
+            document.body.style.overflow = "";
+          });
+        });
+      });
+    </script>
+    <script id="animation-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        // Counter animation
+        function animateCounter(element) {
+          const target = parseInt(element.getAttribute("data-target"));
+          const duration = 2000;
+          const step = target / (duration / 16);
+          let current = 0;
+          const timer = setInterval(() => {
+            current += step;
+            if (current >= target) {
+              current = target;
+              clearInterval(timer);
+            }
+            element.textContent = Math.floor(current) + "+";
+          }, 16);
+        }
+        // Intersection Observer for counter animation
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                const counters = entry.target.querySelectorAll("[data-target]");
+                counters.forEach((counter) => animateCounter(counter));
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          { threshold: 0.5 },
+        );
+        // Observe counter section
+        const counterSection = document.querySelector("#about");
+        if (counterSection) {
+          observer.observe(counterSection);
+        }
+        // Services tabs
+        const serviceTabs = document.querySelectorAll(".service-tab");
+        serviceTabs.forEach((tab) => {
+          tab.addEventListener("click", function () {
+            serviceTabs.forEach((t) => {
+              t.classList.remove("active", "bg-primary", "text-white");
+              t.classList.add("text-gray-700", "hover:bg-gray-100");
+            });
+            this.classList.add("active", "bg-primary", "text-white");
+            this.classList.remove("text-gray-700", "hover:bg-gray-100");
+          });
+        });
+      });
+    </script>
+    <script id="portfolio-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const portfolioFilters = document.querySelectorAll(".portfolio-filter");
+        portfolioFilters.forEach((filter) => {
+          filter.addEventListener("click", function () {
+            // Remove active class from all filters
+            portfolioFilters.forEach((f) => {
+              f.classList.remove("active", "bg-primary", "text-white");
+              f.classList.add("text-gray-700", "hover:bg-gray-200");
+            });
+            // Add active class to clicked filter
+            this.classList.add("active", "bg-primary", "text-white");
+            this.classList.remove("text-gray-700", "hover:bg-gray-200");
+          });
+        });
+      });
+    </script>
+    <script id="calculator-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const areaRange = document.getElementById("area-range");
+        const areaValue = document.getElementById("area-value");
+        const totalPriceElement = document.querySelector(
+          ".text-2xl.font-bold.text-primary",
+        );
+        function calculatePrice() {
+          let basePrice = 0;
+          const area = parseInt(areaRange.value);
+          // Building type prices
+          const buildingType = document.querySelector(
+            'input[name="building-type"]:checked',
+          ).id;
+          switch (buildingType) {
+            case "type-residential":
+              basePrice = 45000;
+              break;
+            case "type-commercial":
+              basePrice = 55000;
+              break;
+            case "type-industrial":
+              basePrice = 65000;
+              break;
+          }
+          // Area multiplier
+          let areaMultiplier = area;
+          // Work types
+          const workTypes = document.querySelectorAll(
+            '.custom-checkbox input[type="checkbox"]',
+          );
+          let workTypesMultiplier = 1;
+          workTypes.forEach((type) => {
+            if (type.checked) {
+              workTypesMultiplier += 0.2;
+            }
+          });
+          // Additional options
+          const additionalOptions = document.querySelectorAll(
+            '.switch input[type="checkbox"]',
+          );
+          let additionalMultiplier = 1;
+          additionalOptions.forEach((option) => {
+            if (option.checked) {
+              additionalMultiplier += 0.15;
+            }
+          });
+          // Calculate total
+          const total =
+            basePrice * areaMultiplier * workTypesMultiplier * additionalMultiplier;
+          totalPriceElement.textContent =
+            new Intl.NumberFormat("ru-RU").format(Math.round(total)) + " ₽";
+        }
+        // Event listeners
+        areaRange.addEventListener("input", function () {
+          areaValue.textContent = this.value + " м²";
+          calculatePrice();
+        });
+        const allInputs = document.querySelectorAll(
+          'input[type="radio"], input[type="checkbox"]',
+        );
+        allInputs.forEach((input) => {
+          input.addEventListener("change", calculatePrice);
+        });
+        // Initial calculation
+        calculatePrice();
+      });
+    </script>
+    <script id="modal-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const callbackButtons = document.querySelectorAll(
+          'button:not(.modal-close):contains("Обратный звонок"), button:not(.modal-close):contains("звонок")',
+        );
+        const modal = document.querySelector(".modal");
+        const modalClose = document.querySelector(".modal-close");
+        const modalOverlay = document.querySelector(".modal-overlay");
+        function openModal() {
+          modal.classList.remove("hidden");
+          document.body.style.overflow = "hidden";
+        }
+        function closeModal() {
+          modal.classList.add("hidden");
+          document.body.style.overflow = "";
+        }
+        // Polyfill for :contains selector
+        if (!Element.prototype.matches) {
+          Element.prototype.matches =
+            Element.prototype.msMatchesSelector ||
+            Element.prototype.webkitMatchesSelector;
+        }
+        if (!NodeList.prototype.forEach) {
+          NodeList.prototype.forEach = Array.prototype.forEach;
+        }
+        // Get all callback buttons
+        document.querySelectorAll("button").forEach((button) => {
+          if (
+            button.textContent.includes("звонок") ||
+            button.textContent.includes("Обратный звонок")
+          ) {
+            if (!button.classList.contains("modal-close")) {
+              button.addEventListener("click", openModal);
+            }
+          }
+        });
+        if (modalClose) {
+          modalClose.addEventListener("click", closeModal);
+        }
+        if (modalOverlay) {
+          modalOverlay.addEventListener("click", closeModal);
+        }
+      });
+    </script>
+    <script id="back-to-top-script">
+      document.addEventListener("DOMContentLoaded", function () {
+        const backToTopButton = document.querySelector(".back-to-top");
+        window.addEventListener("scroll", function () {
+          if (window.scrollY > 300) {
+            backToTopButton.classList.add("visible");
+          } else {
+            backToTopButton.classList.remove("visible");
+          }
+        });
+        backToTopButton.addEventListener("click", function () {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
 </html>
