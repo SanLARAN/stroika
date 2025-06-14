@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Портфолио проектов строительной компании - жилые, коммерческие и промышленные объекты">
+<meta name="keywords" content="строительство, проекты, портфолио, жилые комплексы, коммерческая недвижимость, промышленные объекты">
+<title>Наши проекты | Lulz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#f97316',
+secondary: '#64748b'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+.masonry-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+grid-gap: 24px;
+}
+.project-card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.project-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+.project-card:hover .project-image {
+transform: scale(1.05);
+}
+.project-image {
+transition: transform 0.5s ease;
+}
+.status-badge {
+position: absolute;
+top: 16px;
+right: 16px;
+z-index: 10;
+}
+.progress-bar {
+height: 4px;
+background-color: #e5e7eb;
+border-radius: 2px;
+overflow: hidden;
+}
+.progress-value {
+height: 100%;
+border-radius: 2px;
+transition: width 0.5s ease;
+}
+.filter-button.active {
+background-color: #3b82f6;
+color: white;
+}
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+z-index: 50;
+overflow-y: auto;
+}
+.modal-content {
+opacity: 0;
+transform: translateY(20px);
+transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.modal.show .modal-content {
+opacity: 1;
+transform: translateY(0);
+}
+.timeline-item {
+position: relative;
+padding-left: 28px;
+}
+.timeline-item::before {
+content: "";
+position: absolute;
+left: 0;
+top: 0;
+bottom: 0;
+width: 2px;
+background-color: #e5e7eb;
+}
+.timeline-dot {
+position: absolute;
+left: -5px;
+width: 12px;
+height: 12px;
+border-radius: 50%;
+background-color: #3b82f6;
+z-index: 1;
+}
+.timeline-dot.completed {
+background-color: #10b981;
+}
+.timeline-dot.pending {
+background-color: #f59e0b;
+}
+.compare-slider {
+position: relative;
+overflow: hidden;
+height: 300px;
+}
+.compare-before, .compare-after {
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+}
+.compare-after {
+width: 50%;
+overflow: hidden;
+}
+.compare-handle {
+position: absolute;
+top: 0;
+left: 50%;
+width: 4px;
+height: 100%;
+background-color: white;
+cursor: ew-resize;
+z-index: 10;
+}
+.compare-handle::after {
+content: "";
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+width: 40px;
+height: 40px;
+border-radius: 50%;
+background-color: white;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+display: flex;
+align-items: center;
+justify-content: center;
+}
+.search-container {
+position: relative;
+}
+.search-results {
+display: none;
+position: absolute;
+top: 100%;
+left: 0;
+width: 100%;
+background-color: white;
+border-radius: 0 0 8px 8px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+z-index: 20;
+max-height: 300px;
+overflow-y: auto;
+}
+.custom-checkbox {
+appearance: none;
+-webkit-appearance: none;
+width: 20px;
+height: 20px;
+border: 2px solid #d1d5db;
+border-radius: 4px;
+outline: none;
+cursor: pointer;
+position: relative;
+}
+.custom-checkbox:checked {
+background-color: #3b82f6;
+border-color: #3b82f6;
+}
+.custom-checkbox:checked::after {
+content: "";
+position: absolute;
+top: 3px;
+left: 6px;
+width: 6px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.scroll-indicator {
+position: fixed;
+top: 0;
+left: 0;
+height: 3px;
+background-color: #3b82f6;
+z-index: 100;
+width: 0%;
+transition: width 0.2s ease;
+}
+@media (max-width: 768px) {
+.masonry-grid {
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+}
+</style>
+</head>
+<body class="bg-gray-50">
+<div class="scroll-indicator"></div>
+<!-- Фиксированная навигация -->
+<header class="fixed top-0 left-0 w-full bg-white shadow-md z-40">
+<div class="container mx-auto px-4 py-3 flex items-center justify-between">
+<a href="/" class="h-8"><img src="logoblack.png" alt="logo" class="h-full"></a>
+<nav class="hidden md:flex items-center space-x-6">
+<a href="index.html" class="text-gray-600 hover:text-primary transition-colors">Главная</a>
+<a href="index.html" class="text-primary font-medium border-b-2 border-primary pb-1">Проекты</a>
+<a href="index.html" class="text-gray-600 hover:text-primary transition-colors">Услуги</a>
+<a href="index.html" class="text-gray-600 hover:text-primary transition-colors">О компании</a>
+<a href="index.html" class="text-gray-600 hover:text-primary transition-colors">Калькулятор</a>
+</nav>
+<div class="flex items-center space-x-4">
+<button id="mobile-menu-button" class="md:hidden w-10 h-10 flex items-center justify-center text-gray-700">
+<i class="ri-menu-line text-2xl"></i>
+</button>
+</div>
+</div>
+<!-- Мобильное меню -->
+<div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-200">
+<div class="container mx-auto px-4 py-2">
+<nav class="flex flex-col space-y-3">
+<a href="index.html" class="text-gray-600 hover:text-primary transition-colors py-2">Главная</a>
+<a href="index.html" class="text-primary font-medium border-l-4 border-primary pl-2 py-2">Проекты</a>
+<a href="index.html" class="text-gray-600 hover:text-primary transition-colors py-2">Услуги</a>
+<a href="index.html" class="text-gray-600 hover:text-primary transition-colors py-2">О компании</a>
+<a href="index.html" class="text-gray-600 hover:text-primary transition-colors py-2">Контакты</a>
+</nav>
+</div>
+</div>
+</header>
+<!-- Основной контент -->
+<main class="container mx-auto px-4 pt-28 pb-16">
+<section class="mb-12">
+<h1 class="text-4xl font-bold text-gray-900 mb-2">Наши проекты</h1>
+<p class="text-xl text-gray-600 mb-8">Портфолио реализованных и текущих строительных проектов</p>
+<!-- Фильтры проектов -->
+<div class="mb-8">
+<div class="flex flex-wrap items-center gap-4">
+<div class="text-gray-700 font-medium">Фильтр:</div>
+<div class="flex flex-wrap gap-2">
+<button class="filter-button active px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors !rounded-button whitespace-nowrap" data-filter="all">Все проекты</button>
+<button class="filter-button px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors !rounded-button whitespace-nowrap" data-filter="residential">Жилые</button>
+<button class="filter-button px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors !rounded-button whitespace-nowrap" data-filter="commercial">Коммерческие</button>
+<button class="filter-button px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors !rounded-button whitespace-nowrap" data-filter="industrial">Промышленные</button>
+</div>
+<div class="ml-auto flex items-center gap-4">
+<div class="flex items-center gap-2">
+<input type="checkbox" id="completed-filter" class="custom-checkbox">
+<label for="completed-filter" class="text-gray-700 cursor-pointer">Завершенные</label>
+</div>
+<div class="flex items-center gap-2">
+<input type="checkbox" id="in-progress-filter" class="custom-checkbox">
+<label for="in-progress-filter" class="text-gray-700 cursor-pointer">В процессе</label>
+</div>
+<div class="flex items-center gap-2">
+<input type="checkbox" id="planned-filter" class="custom-checkbox">
+<label for="planned-filter" class="text-gray-700 cursor-pointer">Планируемые</label>
+</div>
+</div>
+</div>
+</div>
+<!-- Сетка проектов -->
+<div class="masonry-grid" id="projects-grid">
+<!-- Проект 1 -->
+<div class="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-category="residential" data-status="completed">
+<div class="relative overflow-hidden h-64">
+<img src="art1.jpg" alt="ЖК Панорама" class="project-image w-full h-full object-cover object-top">
+<div class="status-badge px-3 py-1 bg-green-500 text-white rounded-full text-sm font-medium">Завершен</div>
+</div>
+<div class="p-5">
+<h3 class="text-xl font-bold text-gray-900 mb-2">ЖК «Панорама»</h3>
+<p class="text-gray-600 mb-4">Современный жилой комплекс из 3 башен с панорамным остеклением и подземным паркингом.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">Жилой</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">25 000 м²</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">2022-2024</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-green-600 font-medium">100% завершен</span>
+<button class="view-project-btn px-4 py-2 bg-primary text-white rounded hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap" data-project-id="1">Подробнее</button>
+</div>
+</div>
+</div>
+<!-- Проект 2 -->
+<div class="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-category="commercial" data-status="in-progress">
+<div class="relative overflow-hidden h-64">
+<img src="art1.jpg" alt="Бизнес-центр Меркурий" class="project-image w-full h-full object-cover object-top">
+<div class="status-badge px-3 py-1 bg-blue-500 text-white rounded-full text-sm font-medium">В процессе</div>
+</div>
+<div class="p-5">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Бизнес-центр «Меркурий»</h3>
+<p class="text-gray-600 mb-4">Офисное здание класса А+ с современными инженерными системами и зеленой кровлей.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">Коммерческий</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">18 500 м²</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">2023-2025</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between mb-1">
+<span class="text-sm text-gray-700">Прогресс строительства</span>
+<span class="text-sm text-blue-600 font-medium">65%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-value bg-blue-500" style="width: 65%"></div>
+</div>
+</div>
+<div class="flex justify-end">
+<button class="view-project-btn px-4 py-2 bg-primary text-white rounded hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap" data-project-id="2">Подробнее</button>
+</div>
+</div>
+</div>
+<!-- Проект 3 -->
+<div class="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-category="industrial" data-status="completed">
+<div class="relative overflow-hidden h-64">
+<img src="art33.jpg" alt="Завод Технопром" class="project-image w-full h-full object-cover object-top">
+<div class="status-badge px-3 py-1 bg-green-500 text-white rounded-full text-sm font-medium">Завершен</div>
+</div>
+<div class="p-5">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Завод «Технопром»</h3>
+<p class="text-gray-600 mb-4">Производственный комплекс с автоматизированными линиями и солнечными панелями на крыше.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-orange-100 text-orange-800 rounded text-xs font-medium">Промышленный</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">42 000 м²</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">2021-2023</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-green-600 font-medium">100% завершен</span>
+<button class="view-project-btn px-4 py-2 bg-primary text-white rounded hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap" data-project-id="3">Подробнее</button>
+</div>
+</div>
+</div>
+<!-- Проект 4 -->
+<div class="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-category="residential" data-status="in-progress">
+<div class="relative overflow-hidden h-64">
+<img src="art2.jpg" alt="Таунхаусы Зеленая Долина" class="project-image w-full h-full object-cover object-top">
+<div class="status-badge px-3 py-1 bg-blue-500 text-white rounded-full text-sm font-medium">В процессе</div>
+</div>
+<div class="p-5">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Таунхаусы «Зеленая Долина»</h3>
+<p class="text-gray-600 mb-4">Комплекс из 24 таунхаусов с индивидуальными участками и ландшафтным дизайном.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">Жилой</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">8 400 м²</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">2023-2025</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between mb-1">
+<span class="text-sm text-gray-700">Прогресс строительства</span>
+<span class="text-sm text-blue-600 font-medium">45%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-value bg-blue-500" style="width: 45%"></div>
+</div>
+</div>
+<div class="flex justify-end">
+<button class="view-project-btn px-4 py-2 bg-primary text-white rounded hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap" data-project-id="4">Подробнее</button>
+</div>
+</div>
+</div>
+<!-- Проект 5 -->
+<div class="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-category="commercial" data-status="planned">
+<div class="relative overflow-hidden h-64">
+<img src="art33.jpg" alt="ТРЦ Галактика" class="project-image w-full h-full object-cover object-top">
+<div class="status-badge px-3 py-1 bg-yellow-500 text-white rounded-full text-sm font-medium">Планируется</div>
+</div>
+<div class="p-5">
+<h3 class="text-xl font-bold text-gray-900 mb-2">ТРЦ «Галактика»</h3>
+<p class="text-gray-600 mb-4">Многофункциональный торгово-развлекательный центр с кинотеатром и фудкортом.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">Коммерческий</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">56 000 м²</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">2024-2026</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-yellow-600 font-medium">Начало строительства: Август 2024</span>
+<button class="view-project-btn px-4 py-2 bg-primary text-white rounded hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap" data-project-id="5">Подробнее</button>
+</div>
+</div>
+</div>
+<!-- Проект 6 -->
+<div class="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-category="industrial" data-status="in-progress">
+<div class="relative overflow-hidden h-64">
+<img src="art33.jpg" alt="Логистический центр Карго-Экспресс" class="project-image w-full h-full object-cover object-top">
+<div class="status-badge px-3 py-1 bg-blue-500 text-white rounded-full text-sm font-medium">В процессе</div>
+</div>
+<div class="p-5">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Логистический центр «Карго-Экспресс»</h3>
+<p class="text-gray-600 mb-4">Современный складской комплекс с автоматизированной системой хранения и обработки грузов.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-orange-100 text-orange-800 rounded text-xs font-medium">Промышленный</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">32 000 м²</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">2023-2024</span>
+</div>
+<div class="mb-2">
+<div class="flex justify-between mb-1">
+<span class="text-sm text-gray-700">Прогресс строительства</span>
+<span class="text-sm text-blue-600 font-medium">78%</span>
+</div>
+<div class="progress-bar">
+<div class="progress-value bg-blue-500" style="width: 78%"></div>
+</div>
+</div>
+<div class="flex justify-end">
+<button class="view-project-btn px-4 py-2 bg-primary text-white rounded hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap" data-project-id="6">Подробнее</button>
+</div>
+</div>
+</div>
+<!-- Проект 7 -->
+<div class="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-category="residential" data-status="completed">
+<div class="relative overflow-hidden h-64">
+<img src="art33.jpg" alt="Виллы Лазурный Берег" class="project-image w-full h-full object-cover object-top">
+<div class="status-badge px-3 py-1 bg-green-500 text-white rounded-full text-sm font-medium">Завершен</div>
+</div>
+<div class="p-5">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Виллы «Лазурный Берег»</h3>
+<p class="text-gray-600 mb-4">Комплекс из 12 элитных вилл с бассейнами и собственным выходом к морю.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium">Жилой</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">6 800 м²</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">2021-2023</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-green-600 font-medium">100% завершен</span>
+<button class="view-project-btn px-4 py-2 bg-primary text-white rounded hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap" data-project-id="7">Подробнее</button>
+</div>
+</div>
+</div>
+<!-- Проект 8 -->
+<div class="project-card bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300" data-category="commercial" data-status="planned">
+<div class="relative overflow-hidden h-64">
+<img src="art2.jpg" alt="Отель Континенталь" class="project-image w-full h-full object-cover object-top">
+<div class="status-badge px-3 py-1 bg-yellow-500 text-white rounded-full text-sm font-medium">Планируется</div>
+</div>
+<div class="p-5">
+<h3 class="text-xl font-bold text-gray-900 mb-2">Отель «Континенталь»</h3>
+<p class="text-gray-600 mb-4">Пятизвездочный отель с конференц-залами, спа-центром и панорамным рестораном на крыше.</p>
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-2 py-1 bg-purple-100 text-purple-800 rounded text-xs font-medium">Коммерческий</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">22 000 м²</span>
+<span class="px-2 py-1 bg-gray-100 text-gray-800 rounded text-xs font-medium">2024-2026</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-yellow-600 font-medium">Начало строительства: Октябрь 2024</span>
+<button class="view-project-btn px-4 py-2 bg-primary text-white rounded hover:bg-blue-600 transition-colors !rounded-button whitespace-nowrap" data-project-id="8">Подробнее</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Кнопка "Загрузить еще" -->
+<div class="flex justify-center mt-10">
+<button id="load-more-btn" class="px-6 py-3 bg-white border border-gray-300 rounded-full text-gray-700 hover:bg-gray-50 transition-colors flex items-center gap-2 !rounded-button whitespace-nowrap">
+<span>Загрузить еще</span>
+<i class="ri-arrow-down-line"></i>
+</button>
+</div>
+</section>
+<!-- Статистика проектов -->
+<section class="bg-white rounded-lg shadow-md p-6 mb-12">
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Статистика проектов</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<h3 class="text-lg font-medium text-gray-800 mb-4">Распределение по типам</h3>
+<div id="project-types-chart" class="h-80"></div>
+</div>
+<div>
+<h3 class="text-lg font-medium text-gray-800 mb-4">Динамика строительства</h3>
+<div id="project-timeline-chart" class="h-80"></div>
+</div>
+</div>
+</section>
+<!-- Команда проекта -->
+<section class="bg-white rounded-lg shadow-md p-6">
+<h2 class="text-2xl font-bold text-gray-900 mb-6">Наша команда</h2>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+<div class="text-center">
+<div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4">
+<img src="blank1.png" alt="Алексей Иванов" class="w-full h-full object-cover object-top">
+</div>
+<h3 class="text-lg font-medium text-gray-900">Алексей Иванов</h3>
+<p class="text-gray-600">Главный архитектор</p>
+</div>
+<div class="text-center">
+<div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4">
+<img src="blank1.png" alt="Екатерина Смирнова" class="w-full h-full object-cover object-top">
+</div>
+<h3 class="text-lg font-medium text-gray-900">Екатерина Смирнова</h3>
+<p class="text-gray-600">Руководитель проектов</p>
+</div>
+<div class="text-center">
+<div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4">
+<img src="blank1.png" alt="Дмитрий Петров" class="w-full h-full object-cover object-top">
+</div>
+<h3 class="text-lg font-medium text-gray-900">Дмитрий Петров</h3>
+<p class="text-gray-600">Главный инженер</p>
+</div>
+<div class="text-center">
+<div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-4">
+<img src="blank1.png" alt="Ольга Козлова" class="w-full h-full object-cover object-top">
+</div>
+<h3 class="text-lg font-medium text-gray-900">Ольга Козлова</h3>
+<p class="text-gray-600">Дизайнер интерьеров</p>
+</div>
+</div>
+</section>
+</main>
+<!-- Модальное окно с детальной информацией о проекте -->
+<div id="project-modal" class="modal">
+<div class="modal-content max-w-5xl mx-auto my-8 bg-white rounded-lg shadow-xl overflow-hidden">
+<div class="relative">
+<div id="modal-header-image" class="h-80 w-full bg-gray-200">
+    </div>
+<button id="close-modal" class="absolute top-4 right-4 w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-gray-700 hover:text-gray-900 transition-colors">
+<i class="ri-close-line text-xl"></i>
+</button>
+<div id="modal-status-badge" class="absolute bottom-4 left-6 px-4 py-2 rounded-full text-white text-sm font-medium"></div>
+</div>
+<div class="p-6">
+<h2 id="modal-title" class="text-3xl font-bold text-gray-900 mb-2"></h2>
+<div id="modal-meta" class="flex flex-wrap gap-3 mb-6"></div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+<div class="md:col-span-2">
+<h3 class="text-xl font-semibold text-gray-900 mb-4">О проекте</h3>
+<p id="modal-description" class="text-gray-700 mb-6"></p>
+<h3 class="text-xl font-semibold text-gray-900 mb-4">Особенности проекта</h3>
+<ul id="modal-features" class="list-disc list-inside text-gray-700 space-y-2 mb-6"></ul>
+<div id="compare-container" class="mb-6 hidden">
+<h3 class="text-xl font-semibold text-gray-900 mb-4">До и После</h3>
+<div class="compare-slider rounded-lg overflow-hidden">
+<div id="compare-before" class="compare-before"></div>
+<div id="compare-after" class="compare-after"></div>
+<div class="compare-handle"></div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="text-xl font-semibold text-gray-900 mb-4">Информация</h3>
+<div class="space-y-4">
+<div>
+<h4 class="text-sm font-medium text-gray-500">Тип проекта</h4>
+<p id="modal-type" class="text-gray-900"></p>
+</div>
+<div>
+<h4 class="text-sm font-medium text-gray-500">Площадь</h4>
+<p id="modal-area" class="text-gray-900"></p>
+</div>
+<div>
+<h4 class="text-sm font-medium text-gray-500">Сроки реализации</h4>
+<p id="modal-timeline" class="text-gray-900"></p>
+</div>
+<div>
+<h4 class="text-sm font-medium text-gray-500">Адрес</h4>
+<p id="modal-address" class="text-gray-900"></p>
+</div>
+<div id="modal-progress-container" class="hidden">
+<h4 class="text-sm font-medium text-gray-500">Прогресс строительства</h4>
+<div class="flex justify-between mb-1">
+<span class="text-sm text-gray-700">Выполнено</span>
+<span id="modal-progress-value" class="text-sm text-blue-600 font-medium"></span>
+</div>
+<div class="progress-bar">
+<div id="modal-progress-bar" class="progress-value bg-blue-500"></div>
+</div>
+</div>
+</div>
+<h3 class="text-xl font-semibold text-gray-900 mt-8 mb-4">Этапы реализации</h3>
+<div id="modal-timeline-items" class="space-y-4"></div>
+</div>
+</div>
+<div id="modal-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+<!-- Галерея изображений -->
+</div>
+<div class="flex justify-end">
+<button id="modal-contact-btn" class="px-6 py-3 bg-primary text-white rounded hover:bg-blue-600 transition-colors flex items-center gap-2 !rounded-button whitespace-nowrap">
+<span>Связаться с менеджером проекта</span>
+<i class="ri-arrow-right-line"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Футер -->
+<footer class="bg-gray-900 text-white py-12 mt-16">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+<div>
+<a href="index.html" class="h-10 mb-4 inline-block"><img src="logoblack.png" alt="logo" class="h-full brightness-0 invert"></a>
+<p class="text-gray-400 mb-6">Ведущая строительная компания с многолетним опытом реализации проектов любой сложности.</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+<i class="ri-vk-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+<i class="ri-telegram-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-primary transition-colors">
+<i class="ri-youtube-line"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Навигация</h3>
+<ul class="space-y-2">
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Главная</a></li>
+<li><a href="index.html" class="text-white font-medium">Проекты</a></li>
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Услуги</a></li>
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">О компании</a></li>
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Новости</a></li>
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Контакты</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Услуги</h3>
+<ul class="space-y-2">
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Жилое строительство</a></li>
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Коммерческая недвижимость</a></li>
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Промышленные объекты</a></li>
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Проектирование</a></li>
+<li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Реконструкция</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-semibold mb-4">Контакты</h3>
+<ul class="space-y-3">
+<li class="flex items-start gap-3">
+<div class="w-5 h-5 flex items-center justify-center mt-1 text-primary">
+<i class="ri-map-pin-line"></i>
+</div>
+<span class="text-gray-400">г. Казань, ул. Строителей, д. 15, офис 777</span>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-phone-line"></i>
+</div>
+<a href="tel:+74951234567" class="text-gray-400 hover:text-white transition-colors">+7 (495) 123-45-67</a>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-mail-line"></i>
+</div>
+<a href="mailto:info@company.ru" class="text-gray-400 hover:text-white transition-colors">murat@stroycompany.com</a>
+</li>
+<li class="flex items-center gap-3">
+<div class="w-5 h-5 flex items-center justify-center text-primary">
+<i class="ri-time-line"></i>
+</div>
+<span class="text-gray-400">Пн-Пт: 9:00 - 18:00</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-gray-800 mt-10 pt-6 flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm mb-4 md:mb-0">© 2024-2025 Lulz. Все права защищены.</p>
+<div class="flex items-center gap-4">
+<a href="privacy.html" class="text-gray-500 text-sm hover:text-white transition-colors">Политика конфиденциальности</a>
+<span class="text-gray-700">|</span>
+<a href="ConditionOfUse.html" class="text-gray-500 text-sm hover:text-white transition-colors">Условия использования</a>
+</div>
+</div>
+</div>
+</footer>
+<script id="mobile-menu-script">
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+const mobileMenu = document.getElementById('mobile-menu');
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.toggle('hidden');
+if (mobileMenu.classList.contains('hidden')) {
+mobileMenuButton.innerHTML = '<i class="ri-menu-line text-2xl"></i>';
+} else {
+mobileMenuButton.innerHTML = '<i class="ri-close-line text-2xl"></i>';
+}
+});
+});
+</script>
+<script id="filter-script">
+document.addEventListener('DOMContentLoaded', function() {
+const filterButtons = document.querySelectorAll('.filter-button');
+const projectCards = document.querySelectorAll('.project-card');
+const completedFilter = document.getElementById('completed-filter');
+const inProgressFilter = document.getElementById('in-progress-filter');
+const plannedFilter = document.getElementById('planned-filter');
+// Функция фильтрации проектов
+function filterProjects() {
+const activeCategory = document.querySelector('.filter-button.active').dataset.filter;
+const showCompleted = completedFilter.checked;
+const showInProgress = inProgressFilter.checked;
+const showPlanned = plannedFilter.checked;
+projectCards.forEach(card => {
+const cardCategory = card.dataset.category;
+const cardStatus = card.dataset.status;
+let showByCategory = activeCategory === 'all' || cardCategory === activeCategory;
+let showByStatus = true;
+// Если хотя бы один фильтр статуса выбран, проверяем статус
+if (showCompleted || showInProgress || showPlanned) {
+showByStatus = (showCompleted && cardStatus === 'completed') ||
+(showInProgress && cardStatus === 'in-progress') ||
+(showPlanned && cardStatus === 'planned');
+}
+if (showByCategory && showByStatus) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+});
+}
+// Обработчики для кнопок фильтра категорий
+filterButtons.forEach(button => {
+button.addEventListener('click', function() {
+filterButtons.forEach(btn => btn.classList.remove('active'));
+this.classList.add('active');
+filterProjects();
+});
+});
+// Обработчики для чекбоксов фильтра статуса
+completedFilter.addEventListener('change', filterProjects);
+inProgressFilter.addEventListener('change', filterProjects);
+plannedFilter.addEventListener('change', filterProjects);
+});
+</script>
+<script id="modal-script">
+document.addEventListener('DOMContentLoaded', function() {
+const projectModal = document.getElementById('project-modal');
+const closeModalBtn = document.getElementById('close-modal');
+const viewProjectBtns = document.querySelectorAll('.view-project-btn');
+const mapMarkers = document.querySelectorAll('[data-project-id]');
+// Данные проектов
+const projectsData = {
+1: {
+title: 'ЖК «Панорама»',
+status: 'completed',
+statusText: 'Завершен',
+statusColor: 'bg-green-500',
+type: 'Жилой комплекс',
+category: 'residential',
+area: '25 000 м²',
+timeline: '2022-2024',
+address: 'г. Москва, ул. Новаторов, 15',
+progress: 100,
+description: 'Современный жилой комплекс из 3 башен с панорамным остеклением и подземным паркингом. Проект включает в себя 320 квартир различной планировки, от студий до пятикомнатных пентхаусов. Комплекс оснащен современными инженерными системами, включая центральное кондиционирование, фильтрацию воды и систему «умный дом».',
+features: [
+'Панорамное остекление с видом на город',
+'Подземный паркинг на 350 машиномест',
+'Закрытая охраняемая территория',
+'Детские и спортивные площадки',
+'Зоны отдыха с ландшафтным дизайном',
+'Коммерческие помещения на первых этажах'
+],
+timeline_items: [
+{ date: 'Март 2022', title: 'Начало строительства', status: 'completed' },
+{ date: 'Август 2022', title: 'Завершение фундаментных работ', status: 'completed' },
+{ date: 'Февраль 2023', title: 'Возведение каркаса зданий', status: 'completed' },
+{ date: 'Июль 2023', title: 'Монтаж инженерных систем', status: 'completed' },
+{ date: 'Ноябрь 2023', title: 'Фасадные работы', status: 'completed' },
+{ date: 'Февраль 2024', title: 'Внутренняя отделка', status: 'completed' },
+{ date: 'Апрель 2024', title: 'Благоустройство территории', status: 'completed' },
+{ date: 'Май 2024', title: 'Сдача объекта в эксплуатацию', status: 'completed' }
+],
+headerImage: 'blank1.png',
+gallery: [
+'art1.jpg',
+'art1.jpg',
+'art1.jpg'
+],
+beforeAfterImages: {
+before: 'art1.jpg',
+after: 'art2.jpg'
+}
+},
+2: {
+title: 'Бизнес-центр «Меркурий»',
+status: 'in-progress',
+statusText: 'В процессе',
+statusColor: 'bg-blue-500',
+type: 'Офисное здание',
+category: 'commercial',
+area: '18 500 м²',
+timeline: '2023-2025',
+address: 'г. Москва, Пресненская наб., 10',
+progress: 65,
+description: 'Офисное здание класса А+ с современными инженерными системами и зеленой кровлей. Проект предусматривает создание 12-этажного бизнес-центра с гибкими офисными пространствами, конференц-залами и подземной парковкой. Здание спроектировано с учетом принципов устойчивого развития и энергоэффективности.',
+features: [
+'Гибкие офисные пространства open space',
+'Система «умное здание»',
+'Зеленая кровля с солнечными панелями',
+'Конференц-залы с современным оборудованием',
+'Ресторан и кафе на первом этаже',
+'Подземная парковка на 200 машиномест'
+],
+timeline_items: [
+{ date: 'Январь 2023', title: 'Начало строительства', status: 'completed' },
+{ date: 'Май 2023', title: 'Завершение фундаментных работ', status: 'completed' },
+{ date: 'Октябрь 2023', title: 'Возведение каркаса здания', status: 'completed' },
+{ date: 'Февраль 2024', title: 'Монтаж инженерных систем', status: 'completed' },
+{ date: 'Июнь 2024', title: 'Фасадные работы', status: 'in-progress' },
+{ date: 'Ноябрь 2024', title: 'Внутренняя отделка', status: 'pending' },
+{ date: 'Февраль 2025', title: 'Благоустройство территории', status: 'pending' },
+{ date: 'Апрель 2025', title: 'Сдача объекта в эксплуатацию', status: 'pending' }
+],
+headerImage: 'art1.jpg',
+gallery: [
+'art1.jpg',
+'art1.jpg',
+'art1.jpg']
+},
+3: {
+title: 'Завод «Технопром»',
+status: 'completed',
+statusText: 'Завершен',
+statusColor: 'bg-green-500',
+type: 'Производственный комплекс',
+category: 'industrial',
+area: '42 000 м²',
+timeline: '2021-2023',
+address: 'Московская обл., г. Подольск, ул. Промышленная, 5',
+progress: 100,
+description: 'Производственный комплекс с автоматизированными линиями и солнечными панелями на крыше. Проект включает в себя производственные цеха, складские помещения, административный корпус и инженерную инфраструктуру. Завод оснащен современным оборудованием для производства высокотехнологичных компонентов.',
+features: [
+'Автоматизированные производственные линии',
+'Солнечные панели мощностью 500 кВт',
+'Система очистки промышленных стоков',
+'Складской комплекс с автоматизированной системой хранения',
+'Административно-бытовой корпус',
+'Собственная котельная и трансформаторная подстанция'
+],
+timeline_items: [
+{ date: 'Февраль 2021', title: 'Начало строительства', status: 'completed' },
+{ date: 'Июнь 2021', title: 'Завершение фундаментных работ', status: 'completed' },
+{ date: 'Октябрь 2021', title: 'Возведение металлоконструкций', status: 'completed' },
+{ date: 'Март 2022', title: 'Монтаж кровли и ограждающих конструкций', status: 'completed' },
+{ date: 'Июль 2022', title: 'Монтаж инженерных систем', status: 'completed' },
+{ date: 'Ноябрь 2022', title: 'Установка производственного оборудования', status: 'completed' },
+{ date: 'Февраль 2023', title: 'Пусконаладочные работы', status: 'completed' },
+{ date: 'Май 2023', title: 'Сдача объекта в эксплуатацию', status: 'completed' }
+],
+headerImage: 'art1.jpg',
+gallery: [
+'art1.jpg',
+'art1.jpg',
+'art1.jpg'
+],
+beforeAfterImages: {
+before: 'art1.jpg',
+after: 'art1.jpg'
+}
+},
+4: {
+title: 'Таунхаусы «Зеленая Долина»',
+status: 'in-progress',
+statusText: 'В процессе',
+statusColor: 'bg-blue-500',
+type: 'Жилой комплекс',
+category: 'residential',
+area: '8 400 м²',
+timeline: '2023-2025',
+address: 'Московская обл., г. Одинцово, ул. Лесная, 12',
+progress: 45,
+description: 'Комплекс из 24 таунхаусов с индивидуальными участками и ландшафтным дизайном. Проект предусматривает строительство двухэтажных таунхаусов площадью от 150 до 200 м² с гаражами и приватными двориками. Комплекс расположен в экологически чистом районе с развитой инфраструктурой.',
+features: [
+'Индивидуальные участки от 2 до 4 соток',
+'Панорамное остекление',
+'Террасы на втором этаже',
+'Гаражи на 2 автомобиля',
+'Центральные коммуникации',
+'Охраняемая территория с видеонаблюдением'
+],
+timeline_items: [
+{ date: 'Март 2023', title: 'Начало строительства', status: 'completed' },
+{ date: 'Июнь 2023', title: 'Завершение фундаментных работ', status: 'completed' },
+{ date: 'Октябрь 2023', title: 'Возведение стен первого этажа', status: 'completed' },
+{ date: 'Февраль 2024', title: 'Возведение стен второго этажа', status: 'completed' },
+{ date: 'Июнь 2024', title: 'Монтаж кровли', status: 'in-progress' },
+{ date: 'Октябрь 2024', title: 'Инженерные системы и отделка', status: 'pending' },
+{ date: 'Февраль 2025', title: 'Благоустройство территории', status: 'pending' },
+{ date: 'Май 2025', title: 'Сдача объекта в эксплуатацию', status: 'pending' }
+],
+headerImage: 'art1.jpg',
+gallery: [
+'art1.jpg',
+'art1.jpg',
+'art1.jpg'
+]
+},
+5: {
+title: 'ТРЦ «Галактика»',
+status: 'planned',
+statusText: 'Планируется',
+statusColor: 'bg-yellow-500',
+type: 'Торгово-развлекательный центр',
+category: 'commercial',
+area: '56 000 м²',
+timeline: '2024-2026',
+address: 'г. Москва, Варшавское шоссе, 170',
+description: 'Многофункциональный торгово-развлекательный центр с кинотеатром и фудкортом. Проект предусматривает строительство 4-этажного ТРЦ с подземной парковкой, торговыми галереями, развлекательной зоной и ресторанным двориком. Центр станет новой точкой притяжения для жителей района.',
+features: [
+'Мультиплекс на 8 кинозалов',
+'Фудкорт с 15 ресторанами',
+'Детский развлекательный центр',
+'Торговая галерея с более чем 200 магазинами',
+'Подземная парковка на 1500 машиномест',
+'Зеленая кровля с зоной отдыха'
+],
+timeline_items: [
+{ date: 'Август 2024', title: 'Начало строительства', status: 'pending' },
+{ date: 'Декабрь 2024', title: 'Завершение фундаментных работ', status: 'pending' },
+{ date: 'Май 2025', title: 'Возведение каркаса здания', status: 'pending' },
+{ date: 'Сентябрь 2025', title: 'Монтаж ограждающих конструкций', status: 'pending' },
+{ date: 'Январь 2026', title: 'Монтаж инженерных систем', status: 'pending' },
+{ date: 'Апрель 2026', title: 'Внутренняя отделка', status: 'pending' },
+{ date: 'Июль 2026', title: 'Благоустройство территории', status: 'pending' },
+{ date: 'Сентябрь 2026', title: 'Сдача объекта в эксплуатацию', status: 'pending' }
+],
+headerImage: 'art1.jpg',
+gallery: [
+'art1.jpg',
+'art1.jpg',
+'art1.jpg'
+]
+},
+6: {
+title: 'Логистический центр «Карго-Экспресс»',
+status: 'in-progress',
+statusText: 'В процессе',
+statusColor: 'bg-blue-500',
+type: 'Складской комплекс',
+category: 'industrial',
+area: '32 000 м²',
+timeline: '2023-2024',
+address: 'Московская обл., г. Домодедово, Логистическая ул., 8',
+progress: 78,
+description: 'Современный складской комплекс с автоматизированной системой хранения и обработки грузов. Проект включает в себя складские помещения класса А+, административно-бытовой корпус, зону погрузки-разгрузки и парковку для грузового транспорта. Комплекс оснащен современными системами хранения и обработки грузов.',
+features: [
+'Автоматизированная система хранения и комплектации заказов',
+'Высота потолков 12 метров',
+'Система климат-контроля',
+'24 погрузочно-разгрузочных дока',
+'Парковка для грузового транспорта на 50 машиномест',
+'Офисные помещения площадью 2 000 м²'
+],
+timeline_items: [
+{ date: 'Апрель 2023', title: 'Начало строительства', status: 'completed' },
+{ date: 'Июль 2023', title: 'Завершение фундаментных работ', status: 'completed' },
+{ date: 'Октябрь 2023', title: 'Возведение металлоконструкций', status: 'completed' },
+{ date: 'Январь 2024', title: 'Монтаж ограждающих конструкций', status: 'completed' },
+{ date: 'Март 2024', title: 'Монтаж инженерных систем', status: 'completed' },
+{ date: 'Июнь 2024', title: 'Установка складского оборудования', status: 'in-progress' },
+{ date: 'Август 2024', title: 'Благоустройство территории', status: 'pending' },
+{ date: 'Октябрь 2024', title: 'Сдача объекта в эксплуатацию', status: 'pending' }
+],
+headerImage: 'art1.jpg',
+gallery: [
+'art1.jpg',
+'art1.jpg',
+'art1.jpg'
+]
+},
+7: {
+title: 'Виллы «Лазурный Берег»',
+status: 'completed',
+statusText: 'Завершен',
+statusColor: 'bg-green-500',
+type: 'Жилой комплекс',
+category: 'residential',
+area: '6 800 м²',
+timeline: '2021-2023',
+address: 'г. Сочи, ул. Морская, 25',
+progress: 100,
+description: 'Комплекс из 12 элитных вилл с бассейнами и собственным выходом к морю. Проект включает в себя строительство двухэтажных вилл площадью от 350 до 500 м² на участках от 10 до 15 соток. Каждая вилла имеет индивидуальный дизайн, бассейн и ландшафтный дизайн.',
+features: [
+'Панорамное остекление с видом на море',
+'Индивидуальные бассейны с подогревом',
+'Террасы и патио',
+'Гаражи на 2-3 автомобиля',
+'Системы «умный дом»',
+'Ландшафтный дизайн участков'
+],
+timeline_items: [
+{ date: 'Март 2021', title: 'Начало строительства', status: 'completed' },
+{ date: 'Июнь 2021', title: 'Завершение фундаментных работ', status: 'completed' },
+{ date: 'Сентябрь 2021', title: 'Возведение стен', status: 'completed' },
+{ date: 'Декабрь 2021', title: 'Монтаж кровли', status: 'completed' },
+{ date: 'Март 2022', title: 'Монтаж инженерных систем', status: 'completed' },
+{ date: 'Август 2022', title: 'Внутренняя отделка', status: 'completed' },
+{ date: 'Январь 2023', title: 'Благоустройство территории', status: 'completed' },
+{ date: 'Май 2023', title: 'Сдача объекта в эксплуатацию', status: 'completed' }
+],
+headerImage: 'art1.jpg',
+gallery: [
+'art1.jpg',
+'art1.jpg',
+'art1.jpg'
+],
+beforeAfterImages: {
+before: 'art1.jpg',
+after: 'art1.jpg'
+}
+},
+8: {
+title: 'Отель «Континенталь»',
+status: 'planned',
+statusText: 'Планируется',
+statusColor: 'bg-yellow-500',
+type: 'Гостиничный комплекс',
+category: 'commercial',
+area: '22 000 м²',
+timeline: '2024-2026',
+address: 'г. Москва, Кутузовский пр-т, 32',
+description: 'Пятизвездочный отель с конференц-залами, спа-центром и панорамным рестораном на крыше. Проект предусматривает строительство 15-этажного отеля на 250 номеров различных категорий, от стандартных до президентских люксов. Отель будет оснащен современной инфраструктурой для бизнеса и отдыха.',
+features: [
+'250 номеров различных категорий',
+'Конференц-центр на 500 человек',
+'Спа-центр с бассейном',
+'Панорамный ресторан на крыше',
+'3 ресторана различной кухни',
+'Подземная парковка на 150 машиномест'
+],
+timeline_items: [
+{ date: 'Октябрь 2024', title: 'Начало строительства', status: 'pending' },
+{ date: 'Февраль 2025', title: 'Завершение фундаментных работ', status: 'pending' },
+{ date: 'Июнь 2025', title: 'Возведение каркаса здания', status: 'pending' },
+{ date: 'Октябрь 2025', title: 'Монтаж ограждающих конструкций', status: 'pending' },
+{ date: 'Январь 2026', title: 'Монтаж инженерных систем', status: 'pending' },
+{ date: 'Апрель 2026', title: 'Внутренняя отделка', status: 'pending' },
+{ date: 'Июль 2026', title: 'Благоустройство территории', status: 'pending' },
+{ date: 'Сентябрь 2026', title: 'Сдача объекта в эксплуатацию', status: 'pending' }
+],
+headerImage: 'art1.jpg',
+gallery: [
+'art1.jpg',
+'art1.jpg',
+'art1.jpg'
+]
+}
+};
+// Функция открытия модального окна с информацией о проекте
+function openProjectModal(projectId) {
+const project = projectsData[projectId];
+if (!project) return;
+// Заполняем данные проекта
+document.getElementById('modal-title').textContent = project.title;
+document.getElementById('modal-description').textContent = project.description;
+document.getElementById('modal-type').textContent = project.type;
+document.getElementById('modal-area').textContent = project.area;
+document.getElementById('modal-timeline').textContent = project.timeline;
+document.getElementById('modal-address').textContent = project.address;
+// Статус проекта
+const statusBadge = document.getElementById('modal-status-badge');
+statusBadge.textContent = project.statusText;
+statusBadge.className = `${project.statusColor} px-4 py-2 rounded-full text-white text-sm font-medium`;
+// Мета-информация
+const metaContainer = document.getElementById('modal-meta');
+metaContainer.innerHTML = '';
+// Добавляем тег категории
+let categoryClass, categoryText;
+switch (project.category) {
+case 'residential':
+categoryClass = 'bg-blue-100 text-blue-800';
+categoryText = 'Жилой';
+break;
+case 'commercial':
+categoryClass = 'bg-purple-100 text-purple-800';
+categoryText = 'Коммерческий';
+break;
+case 'industrial':
+categoryClass = 'bg-orange-100 text-orange-800';
+categoryText = 'Промышленный';
+break;
+}
+metaContainer.innerHTML += `<span class="px-3 py-1 ${categoryClass} rounded text-sm font-medium">${categoryText}</span>`;
+metaContainer.innerHTML += `<span class="px-3 py-1 bg-gray-100 text-gray-800 rounded text-sm font-medium">${project.area}</span>`;
+metaContainer.innerHTML += `<span class="px-3 py-1 bg-gray-100 text-gray-800 rounded text-sm font-medium">${project.timeline}</span>`;
+// Особенности проекта
+const featuresContainer = document.getElementById('modal-features');
+featuresContainer.innerHTML = '';
+project.features.forEach(feature => {
+featuresContainer.innerHTML += `<li>${feature}</li>`;
+});
+// Временная шкала
+const timelineContainer = document.getElementById('modal-timeline-items');
+timelineContainer.innerHTML = '';
+project.timeline_items.forEach(item => {
+let statusClass;
+switch (item.status) {
+case 'completed':
+statusClass = 'completed';
+break;
+case 'in-progress':
+statusClass = 'pending';
+break;
+case 'pending':
+statusClass = '';
+break;
+}
+timelineContainer.innerHTML += `
+<div class="timeline-item">
+<div class="timeline-dot ${statusClass}" style="top: 4px;"></div>
+<div class="text-sm text-gray-500">${item.date}</div>
+<div class="font-medium text-gray-900">${item.title}</div>
+</div>
+`;
+});
+// Прогресс строительства
+const progressContainer = document.getElementById('modal-progress-container');
+if (project.status === 'in-progress') {
+progressContainer.classList.remove('hidden');
+document.getElementById('modal-progress-value').textContent = `${project.progress}%`;
+document.getElementById('modal-progress-bar').style.width = `${project.progress}%`;
+} else {
+progressContainer.classList.add('hidden');
+}
+// Заглавное изображение
+document.getElementById('modal-header-image').style.backgroundImage = `url('${project.headerImage}')`;
+document.getElementById('modal-header-image').style.backgroundSize = 'cover';
+document.getElementById('modal-header-image').style.backgroundPosition = 'center';
+// Галерея изображений
+const galleryContainer = document.getElementById('modal-gallery');
+galleryContainer.innerHTML = '';
+project.gallery.forEach(image => {
+galleryContainer.innerHTML += `
+<div class="rounded-lg overflow-hidden shadow">
+<img src="${image}" alt="${project.title}" class="w-full h-48 object-cover object-top">
+</div>
+`;
+});
+// До и После (если есть)
+const compareContainer = document.getElementById('compare-container');
+if (project.beforeAfterImages) {
+compareContainer.classList.remove('hidden');
+const beforeContainer = document.getElementById('compare-before');
+const afterContainer = document.getElementById('compare-after');
+beforeContainer.style.backgroundImage = `url('${project.beforeAfterImages.before}')`;
+beforeContainer.style.backgroundSize = 'cover';
+beforeContainer.style.backgroundPosition = 'center';
+afterContainer.style.backgroundImage = `url('${project.beforeAfterImages.after}')`;
+afterContainer.style.backgroundSize = 'cover';
+afterContainer.style.backgroundPosition = 'center';
+} else {
+compareContainer.classList.add('hidden');
+}
+// Открываем модальное окно
+projectModal.style.display = 'block';
+setTimeout(() => {
+projectModal.classList.add('show');
+}, 10);
+// Инициализация слайдера До/После
+if (project.beforeAfterImages) {
+initCompareSlider();
+}
+}
+// Инициализация слайдера До/После
+function initCompareSlider() {
+const slider = document.querySelector('.compare-slider');
+const handle = slider.querySelector('.compare-handle');
+const afterDiv = slider.querySelector('.compare-after');
+let isDragging = false;
+// Функция обновления положения
+function updateSliderPosition(x) {
+const sliderRect = slider.getBoundingClientRect();
+let position = (x - sliderRect.left) / sliderRect.width;
+// Ограничиваем значение от 0 до 1
+position = Math.max(0, Math.min(1, position));
+// Обновляем положение
+const percentage = position * 100;
+afterDiv.style.width = `${percentage}%`;
+handle.style.left = `${percentage}%`;
+}
+// Обработчики событий
+handle.addEventListener('mousedown', function(e) {
+isDragging = true;
+e.preventDefault();
+});
+slider.addEventListener('mousemove', function(e) {
+if (isDragging) {
+updateSliderPosition(e.clientX);
+}
+});
+window.addEventListener('mouseup', function() {
+isDragging = false;
+});
+// Поддержка сенсорных устройств
+handle.addEventListener('touchstart', function(e) {
+isDragging = true;
+e.preventDefault();
+});
+slider.addEventListener('touchmove', function(e) {
+if (isDragging) {
+updateSliderPosition(e.touches[0].clientX);
+}
+});
+window.addEventListener('touchend', function() {
+isDragging = false;
+});
+// Клик по слайдеру
+slider.addEventListener('click', function(e) {
+updateSliderPosition(e.clientX);
+});
+}
+// Обработчики событий для кнопок просмотра проектов
+viewProjectBtns.forEach(btn => {
+btn.addEventListener('click', function() {
+const projectId = this.dataset.projectId;
+openProjectModal(projectId);
+});
+});
+// Обработчики для маркеров на карте
+mapMarkers.forEach(marker => {
+marker.addEventListener('click', function() {
+const projectId = this.dataset.projectId;
+openProjectModal(projectId);
+});
+});
+// Закрытие модального окна
+closeModalBtn.addEventListener('click', function() {
+projectModal.classList.remove('show');
+setTimeout(() => {
+projectModal.style.display = 'none';
+}, 300);
+});
+// Закрытие модального окна при клике вне содержимого
+projectModal.addEventListener('click', function(e) {
+if (e.target === projectModal) {
+projectModal.classList.remove('show');
+setTimeout(() => {
+projectModal.style.display = 'none';
+}, 300);
+}
+});
+});
+</script>
+<script id="charts-script">
+document.addEventListener('DOMContentLoaded', function() {
+// Инициализация графика типов проектов
+const typesChart = echarts.init(document.getElementById('project-types-chart'));
+const typesOption = {
+animation: false,
+tooltip: {
+trigger: 'item',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e2e8f0',
+borderWidth: 1,
+textStyle: {
+color: '#1f2937'
+}
+},
+legend: {
+top: 'bottom',
+left: 'center',
+textStyle: {
+color: '#1f2937'
+}
+},
+series: [
+{
+name: 'Типы проектов',
+type: 'pie',
+radius: ['40%', '70%'],
+avoidLabelOverlap: false,
+itemStyle: {
+borderRadius: 8,
+borderColor: '#fff',
+borderWidth: 2
+},
+label: {
+show: false
+},
+emphasis: {
+label: {
+show: true,
+fontSize: '14',
+fontWeight: 'bold'
+}
+},
+labelLine: {
+show: false
+},
+data: [
+{ value: 3, name: 'Жилые', itemStyle: { color: 'rgba(87, 181, 231, 1)' } },
+{ value: 3, name: 'Коммерческие', itemStyle: { color: 'rgba(141, 211, 199, 1)' } },
+{ value: 2, name: 'Промышленные', itemStyle: { color: 'rgba(251, 191, 114, 1)' } }
+]
+}
+]
+};
+typesChart.setOption(typesOption);
+// Инициализация графика динамики строительства
+const timelineChart = echarts.init(document.getElementById('project-timeline-chart'));
+const timelineOption = {
+animation: false,
+tooltip: {
+trigger: 'axis',
+backgroundColor: 'rgba(255, 255, 255, 0.9)',
+borderColor: '#e2e8f0',
+borderWidth: 1,
+textStyle: {
+color: '#1f2937'
+}
+},
+legend: {
+data: ['Завершенные', 'В процессе', 'Планируемые'],
+top: 'bottom',
+textStyle: {
+color: '#1f2937'
+}
+},
+grid: {
+left: '3%',
+right: '4%',
+bottom: '15%',
+top: '3%',
+containLabel: true
+},
+xAxis: {
+type: 'category',
+boundaryGap: false,
+data: ['2021', '2022', '2023', '2024', '2025', '2026'],
+axisLabel: {
+color: '#1f2937'
+}
+},
+yAxis: {
+type: 'value',
+axisLabel: {
+color: '#1f2937'
+}
+},
+series: [
+{
+name: 'Завершенные',
+type: 'line',
+stack: 'Total',
+smooth: true,
+lineStyle: {
+width: 3
+},
+showSymbol: false,
+areaStyle: {
+opacity: 0.1,
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+{ offset: 0, color: 'rgba(87, 181, 231, 0.5)' },
+{ offset: 1, color: 'rgba(87, 181, 231, 0.1)' }
+])
+},
+emphasis: {
+focus: 'series'
+},
+itemStyle: {
+color: 'rgba(87, 181, 231, 1)'
+},
+data: [0, 1, 3, 3, 3, 3]
+},
+{
+name: 'В процессе',
+type: 'line',
+stack: 'Total',
+smooth: true,
+lineStyle: {
+width: 3
+},
+showSymbol: false,
+areaStyle: {
+opacity: 0.1,
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+{ offset: 0, color: 'rgba(141, 211, 199, 0.5)' },
+{ offset: 1, color: 'rgba(141, 211, 199, 0.1)' }
+])
+},
+emphasis: {
+focus: 'series'
+},
+itemStyle: {
+color: 'rgba(141, 211, 199, 1)'
+},
+data: [1, 2, 3, 3, 2, 0]
+},
+{
+name: 'Планируемые',
+type: 'line',
+stack: 'Total',
+smooth: true,
+lineStyle: {
+width: 3
+},
+showSymbol: false,
+areaStyle: {
+opacity: 0.1,
+color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+{ offset: 0, color: 'rgba(251, 191, 114, 0.5)' },
+{ offset: 1, color: 'rgba(251, 191, 114, 0.1)' }
+])
+},
+emphasis: {
+focus: 'series'
+},
+itemStyle: {
+color: 'rgba(251, 191, 114, 1)'
+},
+data: [0, 0, 0, 2, 2, 2]
+}
+]
+};
+timelineChart.setOption(timelineOption);
+// Адаптивность графиков при изменении размера окна
+window.addEventListener('resize', function() {
+typesChart.resize();
+timelineChart.resize();
+});
+});
+</script>
+<script id="scroll-indicator-script">
+document.addEventListener('DOMContentLoaded', function() {
+const scrollIndicator = document.querySelector('.scroll-indicator');
+window.addEventListener('scroll', function() {
+const windowHeight = window.innerHeight;
+const documentHeight = document.documentElement.scrollHeight;
+const scrollTop = window.scrollY;
+const scrollPercentage = (scrollTop / (documentHeight - windowHeight)) * 100;
+scrollIndicator.style.width = scrollPercentage + '%';
+});
+});
+</script>
+<script id="load-more-script">
+document.addEventListener('DOMContentLoaded', function() {
+const loadMoreBtn = document.getElementById('load-more-btn');
+loadMoreBtn.addEventListener('click', function() {
+// В реальном приложении здесь был бы AJAX-запрос для загрузки дополнительных проектов
+// Для демонстрации просто изменим текст кнопки
+loadMoreBtn.innerHTML = `
+<span>Загрузка...</span>
+<i class="ri-loader-4-line animate-spin"></i>
+`;
+// Имитация задержки загрузки
+setTimeout(function() {
+loadMoreBtn.innerHTML = `
+<span>Все проекты загружены</span>
+<i class="ri-check-line"></i>
+`;
+loadMoreBtn.disabled = true;
+loadMoreBtn.classList.add('opacity-50', 'cursor-not-allowed');
+}, 1500);
+});
+});
+</script>
+</body>
+</html>
