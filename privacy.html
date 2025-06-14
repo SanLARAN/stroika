@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Политика конфиденциальности | Lulz</title>
+<meta name="description" content="Политика конфиденциальности строительной компании Lulz. Узнайте, как мы защищаем ваши персональные данные при оказании строительных услуг.">
+<meta name="keywords" content="политика конфиденциальности, строительная компания, защита данных, персональные данные, Lulz">
+<meta property="og:title" content="Политика конфиденциальности | Lulz"> <!--Тут Мета теги-->
+<meta property="og:description" content="Узнайте, как строительная компания Lulz защищает ваши персональные данные.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ТУТ ТВОЙ URL КОГДА БУДЕТ КОРОЧЕ/privacy-policy">
+<meta property="og:image" content="https://ТУТ ТВОЙ URL КОГДА БУДЕТ КОРОЧЕ/images/og-image.jpg">
+<link rel="canonical" href="https://ТУТ ТВОЙ URL КОГДА БУДЕТ КОРОЧЕ/privacy-policy">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#1a1a1a',secondary:'#4a4a4a'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideIn {
+from { transform: translateX(-20px); opacity: 0; }
+to { transform: translateX(0); opacity: 1; }
+}
+@keyframes scaleIn {
+from { transform: scale(0.95); opacity: 0; }
+to { transform: scale(1); opacity: 1; }
+}
+.animate-fade-in {
+animation: fadeIn 0.8s ease forwards;
+}
+.animate-slide-in {
+animation: slideIn 0.6s ease forwards;
+}
+.animate-scale-in {
+animation: scaleIn 0.5s ease forwards;
+}
+.backdrop-blur-header {
+backdrop-filter: blur(8px);
+-webkit-backdrop-filter: blur(8px);
+background-color: rgba(255, 255, 255, 0.8);
+}
+.gradient-bg {
+background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+}
+.gradient-divider {
+height: 1px;
+background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.1) 50%, rgba(0,0,0,0) 100%);
+}
+.section-card {
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.section-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.nav-link {
+position: relative;
+}
+.nav-link::after {
+content: '';
+position: absolute;
+width: 0;
+height: 2px;
+bottom: -2px;
+left: 0;
+background-color: #1a1a1a;
+transition: width 0.3s ease;
+}
+.nav-link:hover::after,
+.nav-link.active::after {
+width: 100%;
+}
+.table-of-contents li {
+transition: transform 0.2s ease, color 0.2s ease;
+}
+.table-of-contents li:hover {
+transform: translateX(5px);
+color: #1a1a1a;
+}
+.back-to-top {
+opacity: 0;
+visibility: hidden;
+transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.back-to-top.visible {
+opacity: 1;
+visibility: visible;
+}
+@media (max-width: 768px) {
+.table-of-contents {
+display: none;
+}
+}
+</style>
+</head>
+<body class="gradient-bg min-h-screen">
+<header id="header" class="fixed w-full top-0 z-50 transition-all duration-300 py-4">
+<div class="container mx-auto px-4 md:px-6 flex justify-between items-center">
+<a href="/" class="block">
+<img src="logoblack.png" alt="Logo" class="h-8 w-auto transition-all duration-300 hover:brightness-0">
+</a>
+<nav class="hidden md:flex space-x-8">
+<a href="index.html" class="nav-link text-gray-800 hover:text-primary transition-colors">Главная</a>
+<a href="index.html" class="nav-link text-gray-800 hover:text-primary transition-colors">Услуги</a>
+<a href="index.html" class="nav-link text-gray-800 hover:text-primary transition-colors">Проекты</a>
+<a href="index.html" class="nav-link text-gray-800 hover:text-primary transition-colors">О нас</a>
+<a href="index.html" class="nav-link text-gray-800 hover:text-primary transition-colors">Контакты</a>
+</nav>
+<button id="mobileMenuButton" class="md:hidden w-10 h-10 flex items-center justify-center text-primary">
+<i class="ri-menu-line ri-lg"></i>
+</button>
+</div>
+<div id="mobileMenu" class="md:hidden fixed inset-0 bg-white bg-opacity-95 z-50 transform translate-x-full transition-transform duration-300 ease-in-out">
+<div class="container mx-auto px-4 py-6">
+<div class="flex justify-between items-center mb-8">
+<a href="/" class="block">
+<img src="logoblack.png" alt="Logo" class="h-8 w-auto transition-all duration-300 hover:brightness-0">
+</a>
+<button id="closeMenuButton" class="w-10 h-10 flex items-center justify-center text-primary">
+<i class="ri-close-line ri-lg"></i>
+</button>
+</div>
+<nav class="flex flex-col space-y-6">
+<a href="/" class="text-xl text-gray-800 hover:text-primary transition-colors">Главная</a>
+<a href="/services" class="text-xl text-gray-800 hover:text-primary transition-colors">Услуги</a>
+<a href="/projects" class="text-xl text-gray-800 hover:text-primary transition-colors">Проекты</a>
+<a href="/about" class="text-xl text-gray-800 hover:text-primary transition-colors">О нас</a>
+<a href="/contacts" class="text-xl text-gray-800 hover:text-primary transition-colors">Контакты</a>
+</nav>
+</div>
+</div>
+</header>
+<main class="container mx-auto px-4 md:px-6 pt-32 pb-20">
+<div class="flex flex-col lg:flex-row gap-10">
+<div class="lg:w-3/4">
+<h1 class="text-4xl md:text-5xl font-bold mb-8 opacity-0 animate-fade-in" style="animation-delay: 0.1s;">Политика конфиденциальности</h1>
+<p class="text-lg text-gray-700 mb-10 opacity-0 animate-fade-in" style="animation-delay: 0.3s;">
+Настоящая Политика конфиденциальности определяет, каким образом компания Lulz собирает, использует, хранит и раскрывает информацию, полученную от пользователей нашего сайта и при оказании строительных услуг. Данная политика конфиденциальности относится к сайту и всем продуктам и услугам, предлагаемым Lulz.
+</p>
+<div class="space-y-12">
+<section id="personal-data" class="section-card bg-white rounded-lg p-6 md:p-8 shadow-md opacity-0 animate-scale-in" style="animation-delay: 0.4s;">
+<div class="flex items-start gap-4">
+<div class="w-15 h-6 flex items-center justify-center bg-orange-300 rounded-full text-primary">
+<i class="ri-shield-user-line ri-xl"></i>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4">1. Персональные данные</h2>
+<p class="text-gray-700 mb-4">
+Мы можем собирать персональную информацию от пользователей разными способами, включая, но не ограничиваясь, когда пользователи посещают наш сайт, регистрируются на сайте, оформляют заказ, заполняют формы и в связи с другими действиями на сайте.
+</p>
+<p class="text-gray-700">
+При заполнении форм на сайте пользователи могут предоставлять нам следующую информацию: имя, фамилию, адрес электронной почты, номер телефона, адрес и другие данные. Мы собираем такую информацию только в случае добровольного предоставления её пользователем.
+</p>
+</div>
+</div>
+</section>
+<section id="data-usage" class="section-card bg-white rounded-lg p-6 md:p-8 shadow-md opacity-0 animate-scale-in" style="animation-delay: 0.5s;">
+<div class="flex items-start gap-4">
+<div class="w-15 h-6 flex items-center justify-center bg-orange-300 rounded-full text-primary">
+<i class="ri-file-list-3-line ri-xl"></i>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4">2. Использование собранных данных</h2>
+<p class="text-gray-700 mb-4">
+Компания Lulz может собирать и использовать персональные данные пользователей для следующих целей:
+</p>
+<ul class="list-disc pl-6 space-y-2 text-gray-700">
+<li>Для улучшения обслуживания клиентов — предоставляемая информация помогает нам эффективнее реагировать на запросы клиентов и их потребности</li>
+<li>Для персонализации пользовательского опыта — мы можем использовать информацию для понимания, как наши пользователи используют услуги и ресурсы, предоставляемые на нашем сайте</li>
+<li>Для улучшения нашего сайта — мы постоянно стремимся улучшать предложения на нашем сайте на основе информации и отзывов, получаемых от пользователей</li>
+<li>Для обработки платежей — мы можем использовать информацию пользователей при оформлении заказа только для обработки платежей</li>
+<li>Для отправки периодических электронных писем — мы можем использовать адрес электронной почты для отправки информации и обновлений, касающихся заказа пользователя</li>
+</ul>
+</div>
+</div>
+</section>
+<section id="data-protection" class="section-card bg-white rounded-lg p-6 md:p-8 shadow-md opacity-0 animate-scale-in" style="animation-delay: 0.6s;">
+<div class="flex items-start gap-4">
+<div class="w-15 h-6 flex items-center justify-center bg-orange-300 rounded-full text-primary">
+<i class="ri-lock-line ri-xl"></i>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4">3. Защита информации</h2>
+<p class="text-gray-700 mb-4">
+Мы применяем соответствующие меры безопасности для защиты от несанкционированного доступа, изменения, раскрытия или уничтожения персональных данных пользователей, имени пользователя, пароля, информации о транзакциях и данных, хранящихся на нашем сайте.
+</p>
+<p class="text-gray-700">
+Обмен конфиденциальной информацией между сайтом и пользователями происходит через защищенный SSL-канал, который шифруется и защищается цифровыми подписями. Наш сайт также соответствует всем стандартам PCI-DSS, управляемым Советом по стандартам безопасности данных индустрии платежных карт, что является дополнительной гарантией безопасной обработки информации.
+</p>
+</div>
+</div>
+</section>
+<section id="cookies" class="section-card bg-white rounded-lg p-6 md:p-8 shadow-md opacity-0 animate-scale-in" style="animation-delay: 0.7s;">
+<div class="flex items-start gap-4">
+<div class="w-15 h-6 flex items-center justify-center bg-orange-300 rounded-full text-primary">
+<i class="ri-cookie-line ri-xl"></i>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4">4. Использование файлов cookie</h2>
+<p class="text-gray-700 mb-4">
+Наш сайт может использовать файлы cookie для улучшения пользовательского опыта. Веб-браузер пользователя размещает файлы cookie на жестком диске для ведения учета, а иногда для отслеживания информации о них. Пользователь может выбрать настройки в браузере, чтобы отказаться от файлов cookie или получать уведомление перед их принятием.
+</p>
+<p class="text-gray-700">
+Если пользователь отключает файлы cookie в браузере, некоторые функции сайта могут работать некорректно.
+</p>
+</div>
+</div>
+</section>
+<section id="third-party" class="section-card bg-white rounded-lg p-6 md:p-8 shadow-md opacity-0 animate-scale-in" style="animation-delay: 0.8s;">
+<div class="flex items-start gap-4">
+<div class="w-15 h-6 flex items-center justify-center bg-orange-300 rounded-full text-primary">
+<i class="ri-share-line ri-xl"></i>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4">5. Раскрытие информации третьим лицам</h2>
+<p class="text-gray-700 mb-4">
+Мы не продаем, не обмениваем и не передаем в аренду персональные данные пользователей третьим лицам. Мы можем предоставлять общую агрегированную демографическую информацию, не связанную с какой-либо личной информацией, нашим партнерам и рекламодателям для целей, описанных выше.
+</p>
+<p class="text-gray-700">
+Мы можем использовать сторонних поставщиков услуг для помощи в управлении нашим бизнесом и сайтом или для управления деятельностью от нашего имени, например, для рассылки новостных писем или проведения опросов. Мы можем передавать вашу информацию этим третьим лицам для ограниченных целей при условии, что вы дали нам свое разрешение.
+</p>
+</div>
+</div>
+</section>
+<section id="changes" class="section-card bg-white rounded-lg p-6 md:p-8 shadow-md opacity-0 animate-scale-in" style="animation-delay: 0.9s;">
+<div class="flex items-start gap-4">
+<div class="w-15 h-6 flex items-center justify-center bg-orange-300 rounded-full text-primary">
+<i class="ri-refresh-line ri-xl"></i>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4">6. Изменения в политике конфиденциальности</h2>
+<p class="text-gray-700 mb-4">
+Компания Lulz имеет право по своему усмотрению обновлять данную политику конфиденциальности в любое время. Мы рекомендуем пользователям регулярно проверять эту страницу для получения актуальной информации о защите персональных данных.
+</p>
+<p class="text-gray-700">
+Используя сайт, вы соглашаетесь с принятием на себя ответственности за периодическое ознакомление с Политикой конфиденциальности и изменениями в ней.
+</p>
+</div>
+</div>
+</section>
+<section id="consent" class="section-card bg-white rounded-lg p-6 md:p-8 shadow-md opacity-0 animate-scale-in" style="animation-delay: 1s;">
+<div class="flex items-start gap-4">
+<div class="w-15 h-6 flex items-center justify-center bg-orange-300 rounded-full text-primary">
+<i class="ri-check-double-line ri-xl"></i>
+</div>
+<div>
+<h2 class="text-2xl font-bold mb-4">7. Согласие пользователя</h2>
+<p class="text-gray-700 mb-4">
+Используя наш сайт, вы подтверждаете свое согласие с данной Политикой конфиденциальности. Если вы не согласны с этой политикой, пожалуйста, не используйте наш сайт. Ваше дальнейшее использование сайта после внесения изменений в настоящую политику будет рассматриваться как ваше согласие с этими изменениями.
+</p>
+<p class="text-gray-700">
+Если у вас есть вопросы по данной Политике конфиденциальности, вы можете связаться с нами, используя контактную информацию, указанную на нашем сайте.
+</p>
+</div>
+</div>
+</section>
+</div>
+</div>
+<div class="lg:w-1/4 opacity-0 animate-slide-in" style="animation-delay: 1.1s;">
+<div class="sticky top-32">
+<div class="table-of-contents bg-white rounded-lg p-6 shadow-md">
+<h3 class="text-lg font-bold mb-4">Содержание</h3>
+<ul class="space-y-3">
+<li><a href="#personal-data" class="text-gray-600 hover:text-primary transition-colors">1. Персональные данные</a></li>
+<li><a href="#data-usage" class="text-gray-600 hover:text-primary transition-colors">2. Использование данных</a></li>
+<li><a href="#data-protection" class="text-gray-600 hover:text-primary transition-colors">3. Защита информации</a></li>
+<li><a href="#cookies" class="text-gray-600 hover:text-primary transition-colors">4. Файлы cookie</a></li>
+<li><a href="#third-party" class="text-gray-600 hover:text-primary transition-colors">5. Третьи лица</a></li>
+<li><a href="#changes" class="text-gray-600 hover:text-primary transition-colors">6. Изменения в политике</a></li>
+<li><a href="#consent" class="text-gray-600 hover:text-primary transition-colors">7. Согласие пользователя</a></li>
+</ul>
+</div>
+<div class="mt-8 bg-white rounded-lg p-6 shadow-md">
+<h3 class="text-lg font-bold mb-4">Нужна помощь?</h3>
+<p class="text-gray-600 mb-4">Если у вас возникли вопросы по нашей политике конфиденциальности, свяжитесь с нами:</p>
+<div class="space-y-3">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-phone-line"></i>
+</div>
+<span class="text-gray-700">+7 (495) 123-45-67</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-mail-line"></i>
+</div>
+<span class="text-gray-700">murat@stroicompany.com</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<div class="gradient-divider my-10"></div>
+<footer class="container mx-auto px-4 md:px-6 py-10">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+<div>
+<a href="/" class="block mb-4">
+<img src="logoblack.png" alt="Logo" class="h-8 w-auto transition-all duration-300 hover:brightness-100">
+</a>
+<p class="text-gray-600 mb-4">
+Строительная компания с многолетним опытом работы. Мы специализируемся на строительстве жилых и коммерческих объектов высокого качества.
+</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-primary hover:bg-gray-200 transition-colors">
+<i class="ri-vk-fill"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-primary hover:bg-gray-200 transition-colors">
+<i class="ri-instagram-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-primary hover:bg-gray-200 transition-colors">
+<i class="ri-telegram-line"></i>
+</a>
+<a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-gray-100 text-primary hover:bg-gray-200 transition-colors">
+<i class="ri-youtube-line"></i>
+</a>
+</div>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-4">Наши услуги</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-600 hover:text-primary transition-colors">Жилищное строительство</a></li>
+<li><a href="#" class="text-gray-600 hover:text-primary transition-colors">Коммерческое строительство</a></li>
+<li><a href="#" class="text-gray-600 hover:text-primary transition-colors">Ремонт и отделка</a></li>
+<li><a href="#" class="text-gray-600 hover:text-primary transition-colors">Проектирование</a></li>
+<li><a href="#" class="text-gray-600 hover:text-primary transition-colors">Инженерные системы</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-4">Документы</h3>
+<ul class="space-y-2">
+<li><a href="#" class="text-gray-600 hover:text-primary transition-colors">Политика конфиденциальности</a></li>
+<li><a href="#" class="text-gray-600 hover:text-primary transition-colors">Пользовательское соглашение</a></li>
+<li><a href="#" class="text-gray-600 hover:text-primary transition-colors">Договор оферты</a></li>
+<li><a href="#" class="text-gray-600 hover:text-primary transition-colors">Лицензии и сертификаты</a></li>
+</ul>
+</div>
+<div>
+<h3 class="text-lg font-bold mb-4">Контакты</h3>
+<ul class="space-y-3">
+<li class="flex items-start gap-2">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-map-pin-line"></i>
+</div>
+<span class="text-gray-600">г. Казань, ул. Строителей, д. 15, офис 777</span>
+</li>
+<li class="flex items-start gap-2">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-phone-line"></i>
+</div>
+<span class="text-gray-600">+7 (495) 123-45-67</span>
+</li>
+<li class="flex items-start gap-2">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-mail-line"></i>
+</div>
+<span class="text-gray-600">
+murat@stroicompany.com</span>
+</li>
+<li class="flex items-start gap-2">
+<div class="w-8 h-8 flex items-center justify-center text-primary">
+<i class="ri-time-line"></i>
+</div>
+<span class="text-gray-600">Пн-Пт: 9:00-18:00<br>Сб-Вс: выходной</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="gradient-divider my-8"></div>
+<div class="flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm mb-4 md:mb-0">© <span id="currentYear">2025</span> Lulz. Все права защищены.</p>
+<div class="flex items-center space-x-4">
+<a href="privacy.html" class="text-gray-500 hover:text-primary transition-colors text-sm">Политика конфиденциальности</a>
+<span class="text-gray-300">|</span>
+<a href="ConditionOfUse.html" class="text-gray-500 hover:text-primary transition-colors text-sm">Условия использования</a>
+</div>
+</div>
+</footer>
+<button id="backToTop" class="back-to-top fixed bottom-6 right-6 w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center opacity-0 !rounded-button">
+<i class="ri-arrow-up-line ri-lg"></i>
+</button>
+<script id="headerScroll">
+document.addEventListener('DOMContentLoaded', function() {
+const header = document.getElementById('header');
+window.addEventListener('scroll', function() {
+if (window.scrollY > 50) {
+header.classList.add('backdrop-blur-header', 'shadow-md', 'py-2');
+header.classList.remove('py-4');
+} else {
+header.classList.remove('backdrop-blur-header', 'shadow-md', 'py-2');
+header.classList.add('py-4');
+}
+});
+});
+</script>
+<script id="mobileMenuToggle">
+document.addEventListener('DOMContentLoaded', function() {
+const mobileMenuButton = document.getElementById('mobileMenuButton');
+const closeMenuButton = document.getElementById('closeMenuButton');
+const mobileMenu = document.getElementById('mobileMenu');
+mobileMenuButton.addEventListener('click', function() {
+mobileMenu.classList.remove('translate-x-full');
+document.body.style.overflow = 'hidden';
+});
+closeMenuButton.addEventListener('click', function() {
+mobileMenu.classList.add('translate-x-full');
+document.body.style.overflow = '';
+});
+});
+</script>
+<script id="backToTopButton">
+document.addEventListener('DOMContentLoaded', function() {
+const backToTopButton = document.getElementById('backToTop');
+window.addEventListener('scroll', function() {
+if (window.scrollY > 300) {
+backToTopButton.classList.add('visible');
+} else {
+backToTopButton.classList.remove('visible');
+}
+});
+backToTopButton.addEventListener('click', function() {
+window.scrollTo({
+top: 0,
+behavior: 'smooth'
+});
+});
+});
+</script>
+<script id="tableOfContentsHighlight">
+document.addEventListener('DOMContentLoaded', function() {
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.table-of-contents a');
+window.addEventListener('scroll', function() {
+let current = '';
+sections.forEach(section => {
+const sectionTop = section.offsetTop;
+const sectionHeight = section.clientHeight;
+if (pageYOffset >= sectionTop - 200) {
+current = section.getAttribute('id');
+}
+});
+navLinks.forEach(link => {
+link.classList.remove('text-primary', 'font-medium');
+if (link.getAttribute('href').substring(1) === current) {
+link.classList.add('text-primary', 'font-medium');
+}
+});
+});
+navLinks.forEach(link => {
+link.addEventListener('click', function(e) {
+e.preventDefault();
+const targetId = this.getAttribute('href').substring(1);
+const targetSection = document.getElementById(targetId);
+window.scrollTo({
+top: targetSection.offsetTop - 100,
+behavior: 'smooth'
+});
+});
+});
+});
+</script>
+<script id="animateOnScroll">
+document.addEventListener('DOMContentLoaded', function() {
+const animatedElements = document.querySelectorAll('.section-card');
+const observer = new IntersectionObserver((entries) => {
+entries.forEach(entry => {
+if (entry.isIntersecting) {
+entry.target.style.opacity = '1';
+entry.target.style.transform = 'translateY(0)';
+observer.unobserve(entry.target);
+}
+});
+}, { threshold: 0.1 });
+animatedElements.forEach(element => {
+observer.observe(element);
+});
+});
+</script>
+<script id="currentYearUpdate">
+document.addEventListener('DOMContentLoaded', function() {
+document.getElementById('currentYear').textContent = new Date().getFullYear();
+});
+</script>
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "WebPage",
+"name": "Политика конфиденциальности | Lulz",
+"description": "Политика конфиденциальности строительной компании Lulz. Узнайте, как мы защищаем ваши персональные данные при оказании строительных услуг.",
+"publisher": {
+"@type": "Organization",
+"name": "Lulz",
+"logo": {
+"@type": "ImageObject",
+"url": "https://stroyinvest.ru/images/logo.png"
+}
+},
+"inLanguage": "ru-RU",
+"datePublished": "2025-06-14",
+"dateModified": "2025-06-14"
+}
+</script>
+</body>
+</html>

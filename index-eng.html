@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -292,7 +292,7 @@ translatePage(lang);
 </script>
 </head>
 <body class="bg-gray-50">
-<!-- Header/Navbar -->
+<!-- Чердак -->
 <header class="navbar-fixed fixed w-full z-50 transition-all duration-300 bg-transparent">
 <div class="container mx-auto px-4 py-4 flex justify-between items-center">
 <img src="logo.png" alt="logo" class="h-12">
@@ -308,20 +308,19 @@ translatePage(lang);
 <button onclick="location.href='index.html'"
         style="
             padding: 8px 15px;
-            background: white;
-            color: black;
+            background: none;
+            color: white;
             border: none;
             border-radius: 9px;
             font-size: 16px;
             font-weight: 400;
             cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.);
-            transition: all 0.3s ease;
+            box-shadow: ;
+            transition: ;
             font-family: Montserrat, sans-serif;
             letter-spacing: 0.5px;
         "
-        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.1)'"
-        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'">
+>
     РУ
 </button>
 <button class="hidden md:flex items-center bg-primary text-white px-4 py-2 rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">
@@ -336,7 +335,7 @@ translatePage(lang);
 </div>
 </div>
 </header>
-<!-- Mobile Menu -->
+<!-- Чердак для телефонов -->
 <div class="mobile-menu fixed inset-0 bg-gray-900 bg-opacity-95 z-50 hidden flex-col justify-center items-center">
 <button class="absolute top-6 right-6 text-white w-10 h-10 flex items-center justify-center">
 <i class="ri-close-line text-2xl"></i>
@@ -365,7 +364,7 @@ translatePage(lang);
 </button>
 </div>
 </div>
-<!-- Hero Section -->
+<!-- Основной блок -->
 <section class="relative h-screen flex items-center" style="background-image: src=('blank1.png'); background-size: cover; background-position: center;">
 <div class="hero-overlay absolute inset-0"></div>
 <div class="container mx-auto px-4 relative z-10">
@@ -383,7 +382,7 @@ Our projects
 </div>
 </div>
 </section>
-<!-- About Section -->
+<!-- Тут короче о компании -->
 <section id="about" class="py-20 bg-white">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16">
@@ -443,7 +442,7 @@ Learn more about us
 </div>
 </div>
 </section>
-<!-- Services Section -->
+<!-- Услуги -->
 <section id="services" class="py-20 bg-gray-50">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16">
@@ -578,7 +577,7 @@ More detailed
 </div>
 </div>
 </section>
-<!-- Portfolio Section -->
+<!-- Портфолио -->
 <section id="portfolio" class="py-20 bg-white">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16">
@@ -722,7 +721,7 @@ View all projects
 </div>
 </div>
 </section>
-<!-- Calculator Section -->
+<!-- Калькулятор -->
 <section id="calculator" class="py-20 bg-gray-50">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16">
@@ -873,7 +872,7 @@ Download the estimate
 </div>
 </div>
 </section>
-<!-- Partners Section -->
+<!-- Пртнёры -->
 <section class="py-20 bg-white">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16">
@@ -914,11 +913,11 @@ Download the estimate
 </div>
 </div>
 </section>
-<!-- Contact Section -->
+<!-- Контакты -->
 <section id="contacts" class="py-20 bg-gray-50">
 <div class="container mx-auto px-4">
 <div class="text-center mb-16">
-<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Свяжитесь с нами</h2>
+<h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contact with us</h2>
 <p class="text-lg text-gray-600 max-w-3xl mx-auto">Leave a request, and our experts will contact you soon for advice.</p>
 </div>
 <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -928,11 +927,11 @@ Download the estimate
 <form>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
 <div>
-<label for="name" class="block text-sm font-medium text-gray-700 mb-2">Ваше имя</label>
+<label for="name" class="block text-sm font-medium text-gray-700 mb-2">Your name</label>
 <input type="text" id="name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="Иван Петров">
 </div>
 <div>
-<label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Телефон</label>
+<label for="phone" class="block text-sm font-medium text-gray-700 mb-2">Phone</label>
 <input type="tel" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="+7 (___) ___-__-__">
 </div>
 </div>
@@ -941,11 +940,11 @@ Download the estimate
 <input type="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all" placeholder="example@mail.ru">
 </div>
 <div class="mb-6">
-<label for="service" class="block text-sm font-medium text-gray-700 mb-2">Интересующая услуга</label>
+<label for="service" class="block text-sm font-medium text-gray-700 mb-2">Service of interest</label>
 <div class="relative">
 <select id="service" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all appearance-none pr-8">
 <option value="">Choose a service</option>
-<option value="design">Проектирование</option>
+<option value="design">Projection</option>
 <option value="construction">Construction</option>
 <option value="renovation">Renovation and finishing</option>
 <option value="landscape">Landscape design</option>
@@ -965,7 +964,7 @@ Download the estimate
 <label class="custom-checkbox flex items-start">
 <input type="checkbox" checked>
 <span class="checkmark"></span>
-<span class="ml-2 text-sm text-gray-600">I agree to the processing of personal data in accordance with<a href="#" class="text-primary hover:underline">Privacy Policy</a></span>
+<span class="ml-2 text-sm text-gray-600">I agree to the processing of personal data in accordance with<a href="privacy.html" class="text-primary hover:underline">Privacy Policy</a></span>
 </label>
 </div>
 <button type="submit" class="w-full bg-primary text-white px-6 py-3 rounded-button hover:bg-opacity-90 transition-all font-medium whitespace-nowrap">
@@ -989,7 +988,7 @@ Send a request
 <i class="ri-phone-line"></i>
 </div>
 </div>
-<h4 class="font-bold text-gray-900 mb-2">Telephone</h4>
+<h4 class="font-bold text-gray-900 mb-2">Phone</h4>
 <p class="text-gray-600">+7 (495) 123-45-67</p>
 </div>
 <div class="bg-white rounded-lg shadow-sm p-6 text-center">
@@ -1025,7 +1024,7 @@ myMap.geoObjects.add(myPlacemark);
 </div>
 </div>
 </section>
-<!-- Footer -->
+<!-- Почему мы крутые -->
 <footer class="bg-gray-900 text-white pt-16 pb-8">
 <div class="container mx-auto px-4">
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
@@ -1091,17 +1090,16 @@ myMap.geoObjects.add(myPlacemark);
 <div class="flex flex-col md:flex-row justify-between items-center">
 <p class="text-gray-500 mb-4 md:mb-0">© 2025 Lulz. All rights reserved.</p>
 <div class="flex space-x-6">
-<a href="#" class="text-gray-500 hover:text-white transition-colors">Privacy policy</a>
-<a href="#" class="text-gray-500 hover:text-white transition-colors">Terms of use</a>
+<a href="privacy.html" class="text-gray-500 hover:text-white transition-colors">Privacy policy</a>
+<a href="ConditionOfUse.html" class="text-gray-500 hover:text-white transition-colors">Terms of use</a>
 </div>
 </div>
 </div>
 </footer>
-<!-- Back to Top Button -->
+<!-- Кнопка возврата наверх(стрелка короче) -->
 <button class="back-to-top fixed bottom-8 right-8 w-12 h-12 bg-primary text-white rounded-full shadow-lg flex items-center justify-center z-50">
 <i class="ri-arrow-up-line text-xl"></i>
 </button>
-<!-- Service Details Modal -->
 <div class="service-modal fixed inset-0 z-50 flex items-center justify-center hidden">
 <div class="modal-overlay absolute inset-0 bg-black bg-opacity-50"></div>
 <div class="modal-container bg-white w-full max-w-lg mx-auto rounded-lg shadow-lg z-50 overflow-hidden">
@@ -1142,7 +1140,7 @@ closeServiceModal();
 });
 });
 </script>
-<!-- Modal -->
+<!-- Фидбек -->
 <div class="modal fixed inset-0 z-50 flex items-center justify-center hidden">
 <div class="modal-overlay absolute inset-0 bg-black bg-opacity-50"></div>
 <div class="modal-container bg-white w-full max-w-md mx-auto rounded-lg shadow-lg z-50 overflow-hidden">
