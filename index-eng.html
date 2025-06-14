@@ -365,23 +365,79 @@ translatePage(lang);
 </div>
 </div>
 <!-- Основной блок -->
-<section class="relative h-screen flex items-center" style="background-image: src=('blank1.png'); background-size: cover; background-position: center;">
-<div class="hero-overlay absolute inset-0"></div>
-<div class="container mx-auto px-4 relative z-10">
-<div class="max-w-3xl">
-<h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">Modern solutions for your construction</h1>
-<p class="text-xl text-gray-200 mb-8">Professional approach to construction and repair of any complexity. More than 15 years of experience and hundreds of successful projects.</p>
-<div class="flex flex-wrap gap-4">
-<button onclick="openModal()" class="bg-primary text-white px-8 py-4 rounded-button hover:bg-opacity-90 transition-all text-lg font-medium whitespace-nowrap">
-Order a consultation
-</button>
-<a href="#portfolio" class="bg-white bg-opacity-20 text-white border border-white border-opacity-40 px-8 py-4 rounded-button hover:bg-opacity-30 transition-all text-lg font-medium whitespace-nowrap hover:scale-105 transform">
-Our projects
-</a>
-</div>
-</div>
-</div>
+<section class="relative h-screen flex items-center overflow-hidden">
+    <!-- Фоновые изображения с анимацией перехода -->
+    <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-100">
+        <img src="art1.jpg" alt="Строительство" class="w-full h-full object-cover" id="bg-image-1">
+    </div>
+    <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+        <img src="art2.jpg" alt="Строительные работы" class="w-full h-full object-cover" id="bg-image-2">
+    </div>
+    <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out opacity-0">
+        <img src="art33.jpg" alt="Готовый проект" class="w-full h-full object-cover" id="bg-image-3">
+    </div>
+    
+    <!-- Затемнение фона -->
+    <div class="hero-overlay absolute inset-0 bg-black bg-opacity-50"></div>
+    
+    <!-- Контент -->
+    <div class="container mx-auto px-4 relative z-10">
+        <div class="max-w-3xl">
+            <h1 class="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">Modern solutions for your construction</h1>
+            <p class="text-xl text-gray-200 mb-8">Professional approach to construction and repair of any complexity. More than 15 years of experience and hundreds of successful projects.</p>
+            <div class="flex flex-wrap gap-4">
+                <button onclick="openModal()" class="bg-primary text-white px-8 py-4 rounded-button hover:bg-opacity-90 transition-all text-lg font-medium whitespace-nowrap">
+                    Oreder a consultation
+                </button>
+                <a href="#portfolio" class="bg-white bg-opacity-20 text-white border border-white border-opacity-40 px-8 py-4 rounded-button hover:bg-opacity-30 transition-all text-lg font-medium whitespace-nowrap hover:scale-105 transform">
+                    Our projects
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
+
+<script>
+    // Скрипт для плавной смены фоновых изображений
+    document.addEventListener('DOMContentLoaded', function() {
+        const images = [
+            document.getElementById('bg-image-1').parentElement,
+            document.getElementById('bg-image-2').parentElement,
+            document.getElementById('bg-image-3').parentElement
+        ];
+        
+        let current = 0;
+        const imageCount = images.length;
+        
+        // Инициализация - показать первое изображение
+        images[current].classList.remove('opacity-0');
+        images[current].classList.add('opacity-100');
+        
+        function nextImage() {
+            // Скрыть текущее изображение
+            images[current].classList.remove('opacity-100');
+            images[current].classList.add('opacity-0');
+            
+            // Перейти к следующему изображению
+            current = (current + 1) % imageCount;
+            
+            // Показать новое изображение
+            images[current].classList.remove('opacity-0');
+            images[current].classList.add('opacity-100');
+        }
+        
+        // Менять изображения каждые 5 секунд
+        setInterval(nextImage, 5000);
+    });
+</script>
+<style>
+    .rounded-button {
+        border-radius: 50px;
+    }
+    .hero-overlay {
+        background: rgba(0, 0, 0, 0.5);
+    }
+</style>
 <!-- Тут короче о компании -->
 <section id="about" class="py-20 bg-white">
 <div class="container mx-auto px-4">
