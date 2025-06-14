@@ -291,7 +291,6 @@ translatePage(lang);
 });
 </script>
 </head>
-<body class="bg-gray-50">
 <!-- Header/Navbar -->
 <header class="navbar-fixed fixed w-full z-50 transition-all duration-300 bg-transparent">
 <div class="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -304,18 +303,25 @@ translatePage(lang);
 <a href="#contacts" class="text-white hover:text-primary font-medium transition-colors">Контакты</a>
 </nav>
 <div class="flex items-center space-x-4">
-<div class="language-switcher">
-<button id="langToggle" class="flex items-center text-white hover:text-primary transition-colors">
-<span id="currentLang">RU</span>
-<div class="w-6 h-6 flex items-center justify-center ml-1">
-<i class="ri-arrow-down-s-line"></i>
-</div>
+<button onclick="location.href='index-eng.html'"
+        style="
+            padding: 8px 15px;
+            background: white;
+            color: black;
+            border: none;
+            border-radius: 9px;
+            font-size: 16px;
+            font-weight: 400;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.);
+            transition: all 0.3s ease;
+            font-family: Montserrat, sans-serif;
+            letter-spacing: 0.5px;
+        "
+        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 12px rgba(0, 0, 0, 0.1)'"
+        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'">
+    ENG
 </button>
-<div class="language-options py-2 w-24">
-<a href="index.html" data-lang="ru" class="block px-4 py-2 hover:bg-gray-100 text-gray-800">RU</a>
-<a href="index-eng.html" data-lang="en" class="block px-4 py-2 hover:bg-gray-100 text-gray-800">ENG</a>
-</div>
-</div>
 <button class="hidden md:flex items-center bg-primary text-white px-4 py-2 rounded-button hover:bg-opacity-90 transition-all whitespace-nowrap">
 <div class="w-5 h-5 flex items-center justify-center mr-2">
 <i class="ri-phone-line"></i>
@@ -358,7 +364,7 @@ translatePage(lang);
 </div>
 </div>
 <!-- Hero Section -->
-<section class="relative h-screen flex items-center" style="background-image: src=('https://readdy.ai/api/search-image?query=modern%20construction%20site%20with%20workers%20in%20safety%20helmets%2C%20cranes%20and%20scaffolding%2C%20dramatic%20lighting%2C%20professional%20high-quality%20architectural%20photography%2C%20wide%20angle%20shot%20showing%20scale%20of%20construction%2C%20urban%20development%2C%20blue%20sky%20with%20clouds&width=1920&height=1080&seq=1&orientation=landscape'); background-size: cover; background-position: center;">
+<section class="relative h-screen flex items-center" style="background-image: src=('art1.jpg'); background-size: cover; background-position: center;">
 <div class="hero-overlay absolute inset-0"></div>
 <div class="container mx-auto px-4 relative z-10">
 <div class="max-w-3xl">
@@ -770,7 +776,7 @@ translatePage(lang);
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 <label class="custom-checkbox flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary transition-all">
 <input type="checkbox" checked>
-<span class="checkmark"></span>
+<span class="checkmark  rounded-lg"></span>
 <div class="ml-2">
 <span class="font-medium text-gray-900">Проектирование</span>
 <p class="text-sm text-gray-600 mt-1">Разработка проектной документации</p>
@@ -778,7 +784,7 @@ translatePage(lang);
 </label>
 <label class="custom-checkbox flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary transition-all">
 <input type="checkbox" checked>
-<span class="checkmark"></span>
+<span class="checkmark  rounded-lg"></span>
 <div class="ml-2">
 <span class="font-medium text-gray-900">Строительство</span>
 <p class="text-sm text-gray-600 mt-1">Возведение конструкций</p>
@@ -786,7 +792,7 @@ translatePage(lang);
 </label>
 <label class="custom-checkbox flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary transition-all">
 <input type="checkbox">
-<span class="checkmark"></span>
+<span class="checkmark  rounded-lg"></span>
 <div class="ml-2">
 <span class="font-medium text-gray-900">Отделочные работы</span>
 <p class="text-sm text-gray-600 mt-1">Внутренняя и внешняя отделка</p>
@@ -794,7 +800,7 @@ translatePage(lang);
 </label>
 <label class="custom-checkbox flex items-center p-4 border border-gray-200 rounded-lg cursor-pointer hover:border-primary transition-all">
 <input type="checkbox">
-<span class="checkmark"></span>
+<span class="checkmark  rounded-lg"></span>
 <div class="ml-2">
 <span class="font-medium text-gray-900">Инженерные системы</span>
 <p class="text-sm text-gray-600 mt-1">Монтаж коммуникаций</p>
